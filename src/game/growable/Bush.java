@@ -12,6 +12,7 @@ public class Bush extends Growable {
     /**
      * Constructor.
      * Bush will have a display character of w.
+     * Has SHORT enum, to be used by behaviours or actions
      */
     public Bush() {
         super('w');

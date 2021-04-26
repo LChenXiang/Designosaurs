@@ -20,6 +20,7 @@ public class Tree extends Growable {
      * Constructor.
      * New tree starts with character +.
      * As they grow, it will turn into t, then T.
+     * Has TALL enum, to be used by behaviours or actions.
      */
     public Tree() {
         super('+');

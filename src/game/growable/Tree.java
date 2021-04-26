@@ -23,6 +23,7 @@ public class Tree extends Growable {
      */
     public Tree() {
         super('+');
+        addCapability(GrowableStatus.TALL);
     }
 
     /**

@@ -52,7 +52,7 @@ public class Tree extends Growable {
         // RNGesus
         double chance = Math.random();
         boolean res = false;
-        if (numberOfRipeFruit == 0){
+        if (getNumberOfRipeFruit() == 0){
             res = false;
         }
         if (chance < dropFruitChance()) {

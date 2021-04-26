@@ -16,7 +16,7 @@ public abstract class Growable extends Ground {
     /**
      * The number of fruits this Growable currently holds.
      */
-    protected int numberOfRipeFruit = 0;
+    private int numberOfRipeFruit = 0;
 
     /**
      * Constructor.
@@ -41,6 +41,7 @@ public abstract class Growable extends Ground {
         double chance = Math.random();
         if (chance < growFruitChance()) {
             numberOfRipeFruit++;
+            // TODO: Increment EcoPoints
         }
     }
 
@@ -50,6 +51,14 @@ public abstract class Growable extends Ground {
      */
     public void decrementNumberOfRipeFruit() {
         numberOfRipeFruit--;
+    }
+
+    /**
+     *
+     * @return The number of fruits currently held by the Growable.
+     */
+    public int getNumberOfRipeFruit(){
+        return numberOfRipeFruit;
     }
 
     /**

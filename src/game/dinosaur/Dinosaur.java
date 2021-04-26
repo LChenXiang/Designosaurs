@@ -192,6 +192,8 @@ public abstract class Dinosaur extends Actor {
             unConsciousElapsed++;
             if (unConsciousElapsed >= getUnConsciousThreshold()) {
                 return new DoNothingAction(); // Placeholder
+            } else {
+                return new DoNothingAction();
             }
         } else {
             // Keep resetting it to 0

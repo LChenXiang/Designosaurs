@@ -1,7 +1,6 @@
 package game;
 
 import edu.monash.fit2099.engine.*;
-import game.dinosaur.Brachiosaur;
 import game.dinosaur.DinosaurStatus;
 import game.growable.Bush;
 import game.growable.Tree;

@@ -28,6 +28,7 @@ public class Brachiosaur extends HerbivoreDinosaur {
         addCapability(DinosaurStatus.LONG_NECK);
         addCapability(DinosaurStatus.BAD_DIGESTION);
         addCapability(DinosaurStatus.BIG_EATER_TREE);
+        addCapability(DinosaurStatus.STOMP_BUSH);
     }
 
     /**
@@ -43,6 +44,7 @@ public class Brachiosaur extends HerbivoreDinosaur {
         addCapability(DinosaurStatus.LONG_NECK);
         addCapability(DinosaurStatus.BAD_DIGESTION);
         addCapability(DinosaurStatus.BIG_EATER_TREE);
+        addCapability(DinosaurStatus.STOMP_BUSH);
     }
 
     /**

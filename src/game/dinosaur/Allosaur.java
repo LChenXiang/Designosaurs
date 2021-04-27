@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Representa a Carnivore Allosaur.
@@ -117,7 +118,7 @@ public class Allosaur extends CarnivoreDinosaur {
      * @return Length of an Allosaur pregnancy
      */
     @Override
-    public int getBirthThreshold() {
+    public int getPregnancyLength() {
         return 20;
     }
 
@@ -139,12 +140,27 @@ public class Allosaur extends CarnivoreDinosaur {
     }
 
     /**
-     *
      * @return The damage an Allosaur would do.
      */
     @Override
     protected IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(20, "bites");
+    }
+
+    /**
+     * @return A new instance of this dinosaur
+     */
+    @Override
+    public Dinosaur getNewDinosaur() {
+        Random random = new Random();
+        boolean res = random.nextBoolean();
+        Enum<Gender> gender;
+        if (!res) {
+            gender = Gender.MALE;
+        } else {
+            gender = Gender.FEMALE;
+        }
+        return new Allosaur("Allosaur", gender, 0);
     }
 
     /**

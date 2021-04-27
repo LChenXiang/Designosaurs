@@ -1,5 +1,7 @@
 package game.dinosaur;
 
+import java.util.Random;
+
 /**
  * Representa a Herbivore Brachiosaur.
  *
@@ -44,7 +46,6 @@ public class Brachiosaur extends HerbivoreDinosaur {
     }
 
     /**
-     *
      * @return How long a Brachiosaur corpse should stay before rotting.
      */
     @Override
@@ -53,7 +54,6 @@ public class Brachiosaur extends HerbivoreDinosaur {
     }
 
     /**
-     *
      * @return The HP(Hunger) where a Brachiosaur is considered hungry.
      */
     @Override
@@ -62,7 +62,6 @@ public class Brachiosaur extends HerbivoreDinosaur {
     }
 
     /**
-     *
      * @return Age that a Brachiosaur starts being an adult.
      */
     @Override
@@ -71,7 +70,6 @@ public class Brachiosaur extends HerbivoreDinosaur {
     }
 
     /**
-     *
      * @return How long it takes for an Brachiosaur egg to hatch.
      */
     @Override
@@ -80,7 +78,6 @@ public class Brachiosaur extends HerbivoreDinosaur {
     }
 
     /**
-     *
      * @return How much starting HP should a baby Brachiosaur have.
      */
     @Override
@@ -89,7 +86,6 @@ public class Brachiosaur extends HerbivoreDinosaur {
     }
 
     /**
-     *
      * @return How much starting HP should an adult Brachiosaur have.
      */
     @Override
@@ -98,7 +94,6 @@ public class Brachiosaur extends HerbivoreDinosaur {
     }
 
     /**
-     *
      * @return At what hunger the Brachiosaur is considered well fed.
      */
     @Override
@@ -107,7 +102,6 @@ public class Brachiosaur extends HerbivoreDinosaur {
     }
 
     /**
-     *
      * @return How long until an unconscious Brachiosaur is considered dead.
      */
     @Override
@@ -116,11 +110,26 @@ public class Brachiosaur extends HerbivoreDinosaur {
     }
 
     /**
-     *
      * @return Length of a Brachiosaur pregnancy.
      */
     @Override
-    public int getBirthThreshold() {
+    public int getPregnancyLength() {
         return 30;
+    }
+
+    /**
+     * @return A new instance of this dinosaur
+     */
+    @Override
+    public Dinosaur getNewDinosaur() {
+        Random random = new Random();
+        boolean res = random.nextBoolean();
+        Enum<Gender> gender;
+        if (!res) {
+            gender = Gender.MALE;
+        } else {
+            gender = Gender.FEMALE;
+        }
+        return new Brachiosaur("Brachiosaur", gender, 0);
     }
 }

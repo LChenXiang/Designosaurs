@@ -11,6 +11,8 @@ import game.AttackAction;
 import game.Behaviour;
 import game.WanderBehaviour;
 
+import java.util.Random;
+
 /**
  * A herbivorous dinosaur.
  * Represents a Stegosaur.
@@ -117,8 +119,24 @@ public class Stegosaur extends HerbivoreDinosaur {
      * @return Length of a Stegosaur pregnancy.
      */
     @Override
-    public int getBirthThreshold() {
+    public int getPregnancyLength() {
         return 10;
+    }
+
+    /**
+     * @return A new instance of this dinosaur
+     */
+    @Override
+    public Dinosaur getNewDinosaur() {
+        Random random = new Random();
+        boolean res = random.nextBoolean();
+        Enum<Gender> gender;
+        if (!res) {
+            gender = Gender.MALE;
+        } else {
+            gender = Gender.FEMALE;
+        }
+        return new Stegosaur("Stegosaur", gender, 0);
     }
 
     //	/**

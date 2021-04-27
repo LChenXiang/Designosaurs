@@ -136,7 +136,7 @@ public abstract class Dinosaur extends Actor {
     /**
      * @return how long does the pregnancy of this dinosaur last.
      */
-    public abstract int getBirthThreshold();
+    public abstract int getPregnancyLength();
 
     /**
      * @return The integer where this dinosaur is considered well fed.
@@ -149,6 +149,21 @@ public abstract class Dinosaur extends Actor {
     public boolean isHungry() {
         return (hitPoints < getHungerThreshold());
     }
+
+    /**
+     * Override this for each unique dinosaur so that
+     * we can generate a new dinosaur from a dinosaur object
+     * Will be useful when a dinosaur lays an egg, we create
+     * a new dinosaur and put the dinosaur in there.
+     * An egg will still be ticked every turn but since the dinosaur is
+     * not referenced by the world yet, its turn will not be processed.
+     * The dinosaur will then only be placed onto the map, into the game
+     * when the egg successfully hatches. If the egg doesn't hatch and gets
+     * destroyed (not referenced anymore), so does the dinosaur.
+     *
+     * @return A new instance of this dinosaur
+     */
+    public abstract Dinosaur getNewDinosaur();
 
 
     /**
@@ -203,7 +218,7 @@ public abstract class Dinosaur extends Actor {
         // Pregnancy code
         if (hasCapability(DinosaurStatus.PREGNANT)) {
             pregnantAge++;
-            if (pregnantAge >= getBirthThreshold()) {
+            if (pregnantAge >= getPregnancyLength()) {
                 pregnantAge = 0;
                 return new DoNothingAction(); // Placeholder
             }

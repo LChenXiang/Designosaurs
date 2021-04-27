@@ -1,9 +1,6 @@
 package game.dinosaur;
 
-import edu.monash.fit2099.engine.Action;
-import edu.monash.fit2099.engine.Actions;
-import edu.monash.fit2099.engine.Display;
-import edu.monash.fit2099.engine.GameMap;
+import edu.monash.fit2099.engine.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -139,6 +136,15 @@ public class Allosaur extends CarnivoreDinosaur {
      */
     public void insertStegosaurAttacked(Stegosaur target) {
         attackedStegosaur.put(target, 0);
+    }
+
+    /**
+     *
+     * @return The damage an Allosaur would do.
+     */
+    @Override
+    protected IntrinsicWeapon getIntrinsicWeapon() {
+        return new IntrinsicWeapon(20, "bites");
     }
 
     /**

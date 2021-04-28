@@ -37,11 +37,14 @@ public abstract class Growable extends Ground {
     /**
      * Used to check if a Fruit would grow.
      */
-    public void checkGrowFruit() {
+    protected boolean checkGrowFruit() {
         double chance = Math.random();
+        boolean res = false;
         if (chance < growFruitChance()) {
             numberOfRipeFruit++;
+            res = true;
         }
+        return res;
     }
 
     /**

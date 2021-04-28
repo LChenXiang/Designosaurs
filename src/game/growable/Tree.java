@@ -65,12 +65,13 @@ public class Tree extends Growable {
      * Used to check if a Fruit would grow.
      */
     @Override
-    public void checkGrowFruit() {
-        double chance = Math.random();
-        if (chance < growFruitChance()) {
-            incrementNumberOfRipeFruit();
-            // TODO: ecopoint increment
+    protected boolean checkGrowFruit() {
+        boolean res = super.checkGrowFruit();
+        if (res){
+            res = true;
+            // TODO: Increment ecopoint
         }
+        return res;
     }
 
     /**

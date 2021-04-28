@@ -39,7 +39,7 @@ public abstract class Dinosaur extends Actor {
      * List of behaviours the dinosaur can do.
      * Will be looped through from start to end, representing behaviours with more priority at the front
      */
-    private final ArrayList<Behaviour> behaviourList = new ArrayList<>();
+    protected final ArrayList<Behaviour> behaviourList = new ArrayList<>();
 
     /**
      * Constructor to initialise a dinosaur to the adult age. Requires gender input

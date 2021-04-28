@@ -16,5 +16,7 @@ public enum DinosaurStatus {
     ALLOSAUR_CAN_ATTACK,
     STOMP_BUSH,
     BABY,
-    BIG_EATER_TREE
+    BIG_EATER_TREE,
+    TEAM_HERBIVORE,
+    TEAM_CARNIVORE
 }

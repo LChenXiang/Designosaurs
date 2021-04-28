@@ -41,7 +41,6 @@ public abstract class Growable extends Ground {
         double chance = Math.random();
         if (chance < growFruitChance()) {
             numberOfRipeFruit++;
-            // TODO: Increment EcoPoints
         }
     }
 
@@ -51,6 +50,14 @@ public abstract class Growable extends Ground {
      */
     public void decrementNumberOfRipeFruit() {
         numberOfRipeFruit--;
+    }
+
+    /**
+     * Used to increment number of ripe fruits. Should only
+     * be allowed in package.
+     */
+    protected void incrementNumberOfRipeFruit() {
+        numberOfRipeFruit++;
     }
 
     /**

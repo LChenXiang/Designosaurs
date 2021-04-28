@@ -25,7 +25,8 @@ public abstract class CarnivoreDinosaur extends Dinosaur {
      */
     public CarnivoreDinosaur(String name, char displayChar, int hitPoints, Enum<Gender> gender) {
         super(name, displayChar, hitPoints, gender);
-        // Add needed behaviours here
+        addCapability(DinosaurStatus.TEAM_CARNIVORE);
+        //TODO: Add needed behaviours here
     }
 
     /**
@@ -39,7 +40,8 @@ public abstract class CarnivoreDinosaur extends Dinosaur {
      */
     public CarnivoreDinosaur(String name, char displayChar, int hitPoints, Enum<Gender> gender, int newAge) {
         super(name, displayChar, hitPoints, gender, newAge);
-        // Add needed behaviours here
+        addCapability(DinosaurStatus.TEAM_CARNIVORE);
+        //TODO: Add needed behaviours here
     }
 
     /**
@@ -53,6 +55,7 @@ public abstract class CarnivoreDinosaur extends Dinosaur {
     @Override
     public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
         Actions actions = super.getAllowableActions(otherActor, direction, map);
+        // TODO: Replace placeholder once other parts are done
         if (otherActor instanceof Player) {
             for (Item item : otherActor.getInventory()) {
                 if (item instanceof Item) { // Placeholder

@@ -26,7 +26,8 @@ public abstract class HerbivoreDinosaur extends Dinosaur {
      */
     public HerbivoreDinosaur(String name, char displayChar, int hitPoints, Enum<Gender> gender) {
         super(name, displayChar, hitPoints, gender);
-        // Add other behaviour here
+        addCapability(DinosaurStatus.TEAM_HERBIVORE);
+        //TODO: Add other behaviour here
     }
 
     /**
@@ -40,7 +41,8 @@ public abstract class HerbivoreDinosaur extends Dinosaur {
      */
     public HerbivoreDinosaur(String name, char displayChar, int hitPoints, Enum<Gender> gender, int newAge) {
         super(name, displayChar, hitPoints, gender, newAge);
-        // Add other behaviour here
+        addCapability(DinosaurStatus.TEAM_HERBIVORE);
+        //TODO: Add other behaviour here
     }
 
 
@@ -54,6 +56,7 @@ public abstract class HerbivoreDinosaur extends Dinosaur {
      */
     public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
         Actions actions = super.getAllowableActions(otherActor, direction, map);
+        // TODO: Replace placeholder once other parts are done
         if (otherActor instanceof Player) {
             for (Item item : otherActor.getInventory()) {
                 if (item instanceof Item) { // Placeholder

@@ -64,7 +64,7 @@ public class JurassicParkLocation extends Location {
         if (getGround() instanceof Bush) {
             // Check if the dinosaur has the ability to kill a bush
             Actor dinosaur = getActor();
-            if (dinosaur != null && getActor().hasCapability(DinosaurStatus.STOMP_BUSH)) {
+            if (dinosaur != null && dinosaur.hasCapability(DinosaurStatus.STOMP_BUSH)) {
                 // Run RNGesus
                 double chance = Math.random();
                 if (chance < chanceBushDeath) {

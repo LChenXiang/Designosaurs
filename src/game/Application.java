@@ -63,6 +63,7 @@ public class Application {
 		// Place a pair of Brachiosaur
 		gameMap.at(20,12).addActor(new Brachiosaur("Brachiosaur", Gender.MALE));
 		gameMap.at(19,12).addActor(new Brachiosaur("Brachiosaur", Gender.FEMALE));
+
 		world.run();
 	}
 }

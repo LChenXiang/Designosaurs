@@ -3,6 +3,7 @@ package game;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.GroundFactory;
 import edu.monash.fit2099.engine.Location;
+import game.dinosaur.Dinosaur;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,6 +26,7 @@ public class JurassicParkGameMap extends GameMap {
      */
     public JurassicParkGameMap(GroundFactory groundFactory, char groundChar, int width, int height) {
         super(groundFactory, groundChar, width, height);
+        initialBushGrowth();
     }
 
     /**
@@ -35,6 +37,7 @@ public class JurassicParkGameMap extends GameMap {
      */
     public JurassicParkGameMap(GroundFactory groundFactory, List<String> lines) {
         super(groundFactory, lines);
+        initialBushGrowth();
     }
 
     /**
@@ -47,6 +50,7 @@ public class JurassicParkGameMap extends GameMap {
      */
     public JurassicParkGameMap(GroundFactory groundFactory, String mapFile) throws IOException {
         super(groundFactory, mapFile);
+        initialBushGrowth();
     }
 
     /**
@@ -62,4 +66,16 @@ public class JurassicParkGameMap extends GameMap {
     protected Location makeNewLocation(int x, int y) {
         return new JurassicParkLocation(this, x, y);
     }
+
+    private void initialBushGrowth(){
+        for (int y : heights) {
+            for (int x : widths) {
+                JurassicParkLocation location = (JurassicParkLocation) this.at(x,y);
+                if (location.getGround() instanceof Dirt){
+                    location.checkBushGrowth();
+                }
+            }
+        }
+    }
+
 }

@@ -22,7 +22,7 @@ public class JurassicParkLocation extends Location {
     /**
      * Used to check if a bush can grow in the current location.
      */
-    private void checkBushGrowth() {
+    public void checkBushGrowth() {
         double chance;
         int numberOfTree = 0;
         int numberOfBush = 0;
@@ -85,7 +85,7 @@ public class JurassicParkLocation extends Location {
         if (getGround() instanceof Dirt) {
             checkBushGrowth();
         }
-            checkBushDeath();
+        checkBushDeath();
         super.tick();
     }
 }

@@ -28,7 +28,6 @@ public class Tree extends Growable {
     }
 
     /**
-     *
      * @return Chance that a fruit will grow every turn in a tree.
      */
     @Override
@@ -37,7 +36,6 @@ public class Tree extends Growable {
     }
 
     /**
-     *
      * @return Chance that a fruit will drop from a tree every turn.
      */
     public double dropFruitChance() {
@@ -45,21 +43,21 @@ public class Tree extends Growable {
     }
 
     /**
-     *
-     * @return Used to check if a fruit will drop from a tree.
+     * Checks each fruit the tree has if it would drop.
      */
-    public boolean canDropFruit() {
+    private void canDropFruit(Location location) {
         // RNGesus
-        double chance = Math.random();
-        boolean res = false;
-        if (getNumberOfRipeFruit() == 0){
-            res = false;
+        int temp = getNumberOfRipeFruit(); // use a temp variable since it might change
+        for (int i = 0; i < temp; i++) {
+            double chance = Math.random();
+            if (chance < dropFruitChance()) {
+                decrementNumberOfRipeFruit();
+                location.addItem(new PortableItem("Fruit", 'a')); // Placeholder4
+            }
         }
-        if (chance < dropFruitChance()) {
-            res = true;
-        }
-        return res;
+
     }
+
 
     /**
      * Used to check if a Fruit would grow.
@@ -67,7 +65,7 @@ public class Tree extends Growable {
     @Override
     protected boolean checkGrowFruit() {
         boolean res = super.checkGrowFruit();
-        if (res){
+        if (res) {
             res = true;
             // TODO: Increment ecopoint
         }
@@ -83,6 +81,7 @@ public class Tree extends Growable {
     @Override
     public void tick(Location location) {
         super.tick(location);
+        canDropFruit(location);
 
         age++;
         if (age == 10)
@@ -90,9 +89,5 @@ public class Tree extends Growable {
         if (age == 20)
             displayChar = 'T';
 
-        if (canDropFruit()) {
-            decrementNumberOfRipeFruit();
-            location.addItem(new PortableItem("Fruit", 'a')); // Placeholder
-        }
     }
 }

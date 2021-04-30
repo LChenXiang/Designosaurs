@@ -1,9 +1,9 @@
 package game.dinosaur;
 
 import edu.monash.fit2099.engine.*;
-import game.AttackAction;
-import game.Behaviour;
-import game.WanderBehaviour;
+import game.actions.AttackAction;
+import game.behaviours.Behaviour;
+import game.behaviours.WanderBehaviour;
 
 import java.util.ArrayList;
 

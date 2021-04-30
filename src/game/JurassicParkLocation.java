@@ -22,7 +22,7 @@ public class JurassicParkLocation extends Location {
     /**
      * Used to check if a bush can grow in the current location.
      */
-    public void checkBushGrowth() {
+    protected void checkBushGrowth() {
         double chance;
         int numberOfTree = 0;
         int numberOfBush = 0;

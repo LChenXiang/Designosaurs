@@ -3,6 +3,7 @@ package game;
 import edu.monash.fit2099.engine.*;
 import game.dinosaur.DinosaurStatus;
 import game.growable.Bush;
+import game.growable.GrowableStatus;
 import game.growable.Tree;
 
 public class JurassicParkLocation extends Location {
@@ -24,28 +25,26 @@ public class JurassicParkLocation extends Location {
      */
     protected void checkBushGrowth() {
         double chance;
-        int numberOfTree = 0;
-        int numberOfBush = 0;
+        int badGrowthNumber = 0;
+        int goodGrowthNumber = 0;
         // Get all 8 tiles and note down the number of trees and bushes
         for (Exit exit : getExits()) {
             Location there = exit.getDestination();
             Ground ground = there.getGround();
-            if (ground instanceof Tree) {
-                numberOfTree++;
-            } else if (ground instanceof Bush) {
-                numberOfBush++;
+            if (ground.hasCapability(GrowableStatus.OBSTRUCT_GROWTH)) {
+                badGrowthNumber++;
+            } else if (ground.hasCapability(GrowableStatus.ENCOURAGE_GROWTH)) {
+                goodGrowthNumber++;
             }
         }
 
-        // If there's even a tree, no chance
-        // If there's at least 2 bushes, 10%
-        // Else, 1% (Default dirt chance)
-        if (numberOfTree > 0) {
+        // Calculate chance
+        if (badGrowthNumber > 0) {
             chance = 0;
-        } else if (numberOfBush >= 2) {
-            chance = 0.1;
-        } else {
+        } else if (goodGrowthNumber >= 2) {
             chance = 0.01;
+        } else {
+            chance = 0.005;
         }
 
         // Run RNGesus

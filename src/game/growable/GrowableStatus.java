@@ -7,5 +7,7 @@ package game.growable;
  */
 public enum GrowableStatus {
     SHORT,
-    TALL
+    TALL,
+    OBSTRUCT_GROWTH,
+    ENCOURAGE_GROWTH
 }

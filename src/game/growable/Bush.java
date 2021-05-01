@@ -17,6 +17,7 @@ public class Bush extends Growable {
     public Bush() {
         super('w');
         addCapability(GrowableStatus.SHORT);
+        addCapability(GrowableStatus.ENCOURAGE_GROWTH);
     }
 
     /**

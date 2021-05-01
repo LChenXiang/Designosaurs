@@ -25,6 +25,7 @@ public class Tree extends Growable {
     public Tree() {
         super('+');
         addCapability(GrowableStatus.TALL);
+        addCapability(GrowableStatus.OBSTRUCT_GROWTH);
     }
 
     /**

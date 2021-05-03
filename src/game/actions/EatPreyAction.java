@@ -34,9 +34,16 @@ public class EatPreyAction extends AttackAction {
      * @param map the current world map
      * @return description of what happened during execute (missed, killed target etc.)
      */
-    public String execute(Allosaur actor, GameMap map) {
+    @Override
+    public String execute(Actor actor, GameMap map) {
+
         String[] output;
         String result;
+
+        // check if actor and target are correct types
+        if (!(actor instanceof Allosaur) || !(target instanceof Stegosaur))
+            return null;
+
         // Allosaur tries attacking target
         result = super.execute(actor, map);
         output = result.split(" ");
@@ -54,7 +61,7 @@ public class EatPreyAction extends AttackAction {
 
         // target Stegosaur survives, add to hashMap to ensure Allosaur can't attack it for 20 turns
         if (target.isConscious())
-            actor.insertStegosaurAttacked((Stegosaur) target);
+            ((Allosaur)actor).insertStegosaurAttacked((Stegosaur) target);
 
         return result;
     }

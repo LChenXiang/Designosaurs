@@ -23,10 +23,10 @@ import game.items.Egg;
 public class LayEggAction extends Action {
 
     /**
-     *
+     * Creates an Egg of that Dinosaur type and removes PREGNANT enum from Dinosaur
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
-     * @return a description stating that the actor laid an egg
+     * @return a description stating that the dinosaur laid an egg
      */
 
     @Override

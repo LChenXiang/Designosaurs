@@ -1,6 +1,7 @@
 package game.behaviours;
 
 import edu.monash.fit2099.engine.*;
+import game.PortableItem;
 import game.actions.BreedAction;
 import game.dinosaur.Dinosaur;
 import game.dinosaur.DinosaurStatus;
@@ -49,7 +50,7 @@ public class BreedBehaviour implements Behaviour{
         Action action;
 
         // check if Dinosaur has enough hitpoints to breed
-        if (dinosaur.isWellFed()) {
+        if (dinosaur.isWellFed() && wantsToBreed()) {
 
             // innermost radius -- if partner found immediately breed
             for (Exit exit : here.getExits()) {
@@ -63,14 +64,14 @@ public class BreedBehaviour implements Behaviour{
                         // if target is not underage nor pregnant
                         if (!(destination.getActor().hasCapability(DinosaurStatus.BABY)
                                 || destination.getActor().hasCapability(DinosaurStatus.PREGNANT)))
-                            return new BreedAction();
+                            return new BreedAction(destination.getActor());
 
                             // swapped opposite gender
                         else if (dinosaur.hasCapability(Gender.FEMALE) && destination.getActor().hasCapability(Gender.MALE))
                             // if target is not underage nor pregnant
                             if (!(destination.getActor().hasCapability(DinosaurStatus.BABY)
                                     || destination.getActor().hasCapability(DinosaurStatus.PREGNANT)))
-                                return new BreedAction();
+                                return new BreedAction(destination.getActor());
                 }
             }
 
@@ -174,7 +175,7 @@ public class BreedBehaviour implements Behaviour{
                 // if target is not underage nor pregnant
                 if (!(there.getActor().hasCapability(DinosaurStatus.BABY)
                         || there.getActor().hasCapability(DinosaurStatus.PREGNANT))) {
-                    follow = new FollowBehaviour(there.getActor(), new BreedAction());
+                    follow = new FollowBehaviour(there.getActor(), new BreedAction(there.getActor()));
                     return follow.getAction(there.getActor(), map); // start following
                 }
             }
@@ -184,11 +185,27 @@ public class BreedBehaviour implements Behaviour{
                 // if target is not underage nor pregnant
                 if (!(there.getActor().hasCapability(DinosaurStatus.BABY)
                         || there.getActor().hasCapability(DinosaurStatus.PREGNANT))) {
-                    follow = new FollowBehaviour(there.getActor(), new BreedAction());
+                    follow = new FollowBehaviour(there.getActor(), new BreedAction(there.getActor()));
                     return follow.getAction(there.getActor(), map); // start following
                 }
             }
         }
         return null; // no partner found
     }
+
+    /**
+     * Dinosaur has a 70% chance of wanting to breed
+     * @return 0.7 which is the chance of wanting to breed
+     */
+    public double breedChance() {return 0.7;}
+
+    /**
+     * See whether Dinosaur feels like breeding
+     * @return true if Dinosaur wants to breed, false otherwise
+     */
+    public boolean wantsToBreed() {
+        double chance = Math.random();
+        return chance <= breedChance();
+    }
+
 }

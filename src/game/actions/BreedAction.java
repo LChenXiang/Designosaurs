@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import game.behaviours.BreedBehaviour;
+import game.dinosaur.Dinosaur;
 import game.dinosaur.DinosaurStatus;
 import game.dinosaur.Gender;
 
@@ -22,10 +23,14 @@ import game.dinosaur.Gender;
 
 public class  BreedAction extends Action {
 
+    private Actor target;
+
     /**
      * Empty Constructor
      */
-    public BreedAction() {}
+    public BreedAction(Actor target) {
+        this.target = target;
+    }
 
 
     /**
@@ -37,13 +42,27 @@ public class  BreedAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
 
-        if (actor.hasCapability(Gender.FEMALE)) {
-            actor.addCapability(DinosaurStatus.PREGNANT);
-            return actor + "is pregnant";
-        }
+        String result="";
 
-        return null;
+        if (actor.hasCapability(Gender.FEMALE)) {
+            result += actor + " is ";
+            if (actor.hasCapability(DinosaurStatus.PREGNANT))
+                result += "already ";
+            else
+                actor.addCapability(DinosaurStatus.PREGNANT);
+            return result + "pregnant.";
+
+        } else {
+            result += target + " is ";
+            if (target.hasCapability(DinosaurStatus.PREGNANT))
+                result += "already ";
+            else
+                target.addCapability(DinosaurStatus.PREGNANT);
+
+            return result + "pregnant.";
+        }
     }
+
 
     /**
      * indicates that actor is mating on log
@@ -52,6 +71,6 @@ public class  BreedAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + "mates";
+        return actor + " mates with " + target;
     }
 }

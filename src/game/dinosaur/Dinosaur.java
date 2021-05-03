@@ -188,11 +188,6 @@ public abstract class Dinosaur extends Actor {
      */
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-        // Handle multi-turn actions
-        if (lastAction.getNextAction() != null) {
-            return lastAction.getNextAction();
-        }
-
         // Turn-related attribute change
         hitPoints--;
         age++;
@@ -227,6 +222,11 @@ public abstract class Dinosaur extends Actor {
         // Remove baby status if adult age
         if (hasCapability(DinosaurStatus.BABY) && (age >= getAdultAge())) {
             removeCapability(DinosaurStatus.BABY);
+        }
+
+        // Handle multi-turn actions
+        if (lastAction.getNextAction() != null) {
+            return lastAction.getNextAction();
         }
 
         // If passed everything, find something to do

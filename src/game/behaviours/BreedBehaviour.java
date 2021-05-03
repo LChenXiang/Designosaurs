@@ -177,7 +177,7 @@ public class BreedBehaviour implements Behaviour{
                 if (!(there.getActor().hasCapability(DinosaurStatus.BABY)
                         || there.getActor().hasCapability(DinosaurStatus.PREGNANT))) {
                     follow = new FollowBehaviour(there.getActor(), new BreedAction(there.getActor()));
-                    return follow.getAction(there.getActor(), map); // start following
+                    return follow.getAction(dinosaur, map); // start following
                 }
             }
 
@@ -187,7 +187,7 @@ public class BreedBehaviour implements Behaviour{
                 if (!(there.getActor().hasCapability(DinosaurStatus.BABY)
                         || there.getActor().hasCapability(DinosaurStatus.PREGNANT))) {
                     follow = new FollowBehaviour(there.getActor(), new BreedAction(there.getActor()));
-                    return follow.getAction(there.getActor(), map); // start following
+                    return follow.getAction(dinosaur, map); // start following
                 }
             }
         }

@@ -42,9 +42,9 @@ public class JurassicParkLocation extends Location {
         if (badGrowthNumber > 0) {
             chance = 0;
         } else if (goodGrowthNumber >= 2) {
-            chance = 0.01;
-        } else {
             chance = 0.005;
+        } else {
+            chance = 0.001;
         }
 
         // Run RNGesus

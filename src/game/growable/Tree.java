@@ -33,7 +33,7 @@ public class Tree extends Growable {
      */
     @Override
     public double growFruitChance() {
-        return 0.5;
+        return 0.2;
     }
 
     /**

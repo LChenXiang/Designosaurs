@@ -5,7 +5,7 @@ import game.behaviours.Behaviour;
 
 /**
  * A class that figures out a MoveAction that will move the actor one step 
- * closer to a target Actor.
+ * closer to a target Actor, or does something when it reaches the target
  *
  * @author Lin Chen Xiang
  * @see Behaviour

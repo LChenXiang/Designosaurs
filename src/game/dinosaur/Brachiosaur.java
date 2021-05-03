@@ -3,7 +3,7 @@ package game.dinosaur;
 import java.util.Random;
 
 /**
- * Representa a Herbivore Brachiosaur.
+ * Represents a Herbivore Brachiosaur.
  *
  * @author NgYuKang
  * @see DinosaurStatus

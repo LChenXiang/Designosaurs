@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * Representa a Carnivore Allosaur.
+ * Represents a Carnivore Allosaur.
  *
  * @author NgYuKang
  * @see DinosaurStatus

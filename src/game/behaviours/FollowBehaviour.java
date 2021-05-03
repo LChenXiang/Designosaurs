@@ -24,7 +24,7 @@ public class FollowBehaviour implements Behaviour {
 
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 * @param subject the Actor to follow
 	 * @param action the Action to be done when reached target
 	 */
@@ -45,7 +45,7 @@ public class FollowBehaviour implements Behaviour {
 	public Action getAction(Actor actor, GameMap map) {
 		if(!map.contains(target) || !map.contains(actor))
 			return null;
-		
+
 		Location here = map.locationOf(actor);
 		Location there = map.locationOf(target);
 
@@ -65,13 +65,22 @@ public class FollowBehaviour implements Behaviour {
 			}
 		}
 
-		// actor is already beside target, do action
-		return action;
+		if (currentDistance>1) {
+			// actor not beside target, continue to follow
+			return (new DoNothingAction() {
+				@Override
+				public Action getNextAction() { // override next action as current action to chain follow
+					return self.getAction(actor,map);}
+			});
+		}
+
+		else
+			return action; // actor is already beside target, do action
 	}
 
 	/**
 	 * Compute the Manhattan distance between two locations.
-	 * 
+	 *
 	 * @param a the first location
 	 * @param b the first location
 	 * @return the number of steps between a and b if you only move in the four cardinal directions.

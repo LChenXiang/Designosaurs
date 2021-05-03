@@ -71,7 +71,8 @@ public class BreedBehaviour implements Behaviour{
                             // if target is not underage nor pregnant
                             if (!(destination.getActor().hasCapability(DinosaurStatus.BABY)
                                     || destination.getActor().hasCapability(DinosaurStatus.PREGNANT)))
-                                return new BreedAction(destination.getActor());
+                                return new BreedAction(dinosaur);
+                            // TODO BUG FIX
                 }
             }
 

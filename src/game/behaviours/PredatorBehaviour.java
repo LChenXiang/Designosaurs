@@ -2,7 +2,9 @@ package game.behaviours;
 
 import edu.monash.fit2099.engine.*;
 import game.actions.EatPreyAction;
+import game.dinosaur.Allosaur;
 import game.dinosaur.DinosaurStatus;
+import game.dinosaur.Stegosaur;
 
 /**
  * A class that decides whether the Actor can attack a nearby prey
@@ -11,6 +13,7 @@ import game.dinosaur.DinosaurStatus;
  * @see Behaviour
  * @see Actor
  * @see EatPreyAction
+ * @see Allosaur
  * @see game.dinosaur.Stegosaur
  * @see GameMap
  * @see Location
@@ -34,17 +37,29 @@ public class PredatorBehaviour implements Behaviour {
     @Override
     public Action getAction(Actor actor, GameMap map) {
 
+        // not Allosaur, shouldn't have this behaviour
+        if (!(actor instanceof Allosaur))
+            return null;
+
         Location here = map.locationOf(actor);
 
+        // find surrounding prey
         for (Exit exit : here.getExits()) {
             Location destination = exit.getDestination();
 
+            // if this exit contains an Actor that can be attacked by Allosaur
             if (destination.containsAnActor() && destination.getActor().hasCapability(DinosaurStatus.ALLOSAUR_CAN_ATTACK)) {
-                return new EatPreyAction(destination.getActor());
+//                try {int hasAttacked = ((Allosaur)actor).getTimeElapsedSinceAttack((Stegosaur) destination.getActor());}
+                Integer hasAttacked = ((Allosaur)actor).getTimeElapsedSinceAttack((Stegosaur) destination.getActor());
+//                 if hasAttacked is null means not attacked before
+                if (hasAttacked==null)
+                    return new EatPreyAction(destination.getActor());
+
             }
 
         }
 
+        // no prey found
         return null;
 
     }

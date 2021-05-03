@@ -41,7 +41,7 @@ public class EatPreyAction extends AttackAction {
         String result;
 
         // check if actor and target are correct types
-        if (!(actor instanceof Allosaur) || !(target instanceof Stegosaur))
+        if (!(target instanceof Stegosaur))
             return null;
 
         // Allosaur tries attacking target
@@ -49,7 +49,7 @@ public class EatPreyAction extends AttackAction {
         output = result.split(" ");
 
         // missed, nothing else happens
-        if (output[1] == "misses")
+        if (output[1].equals("misses"))
             return result;
 
         Weapon weapon = actor.getWeapon();

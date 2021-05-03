@@ -2,6 +2,8 @@ package game.dinosaur;
 
 import edu.monash.fit2099.engine.*;
 import game.Player;
+import game.behaviours.BreedBehaviour;
+import game.behaviours.CarniHungerBehaviour;
 
 /**
  * Represents a Carnivore dinosaur.
@@ -27,6 +29,7 @@ public abstract class CarnivoreDinosaur extends Dinosaur {
         super(name, displayChar, hitPoints, gender);
         addCapability(DinosaurStatus.TEAM_CARNIVORE);
         //TODO: Add needed behaviours here
+        behaviourList.add(1, new CarniHungerBehaviour());
     }
 
     /**
@@ -42,6 +45,8 @@ public abstract class CarnivoreDinosaur extends Dinosaur {
         super(name, displayChar, hitPoints, gender, newAge);
         addCapability(DinosaurStatus.TEAM_CARNIVORE);
         //TODO: Add needed behaviours here
+        behaviourList.add(1, new CarniHungerBehaviour());
+
     }
 
     /**

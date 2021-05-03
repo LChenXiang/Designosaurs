@@ -3,6 +3,7 @@ package game.dinosaur;
 import edu.monash.fit2099.engine.*;
 import game.actions.AttackAction;
 import game.behaviours.Behaviour;
+import game.behaviours.BreedBehaviour;
 import game.behaviours.WanderBehaviour;
 
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ import java.util.ArrayList;
  * Represents a dinosaur. This class is abstract and should still be extended into Herbivore and Carnivore dinosaurs.
  * Contains all the codes to check hunger, pregnancy progression, baby growth.
  * Also contains code to know what the player can do to ALL dinosaurs (dinosaur specific will be in their own classes)
+ * Override abstract methods here to give the dinosaur its stats.
+ * Add needed behaviour in constructor in extended classes as needed to give it other behaviours.
  *
  * @author NgYuKang
  * @version 1.0
@@ -56,6 +59,7 @@ public abstract class Dinosaur extends Actor {
         addCapability(gender);
         // Insert all behaviour
         behaviourList.add(0, new WanderBehaviour());
+        behaviourList.add(0, new BreedBehaviour());
         hitPoints = getStartingHP();
     }
 

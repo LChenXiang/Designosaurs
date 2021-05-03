@@ -2,6 +2,8 @@ package game.dinosaur;
 
 import edu.monash.fit2099.engine.*;
 import game.Player;
+import game.behaviours.BreedBehaviour;
+import game.behaviours.HerbHungerBehaviour;
 
 
 /**
@@ -28,6 +30,7 @@ public abstract class HerbivoreDinosaur extends Dinosaur {
         super(name, displayChar, hitPoints, gender);
         addCapability(DinosaurStatus.TEAM_HERBIVORE);
         //TODO: Add other behaviour here
+        behaviourList.add(1, new HerbHungerBehaviour());
     }
 
     /**
@@ -43,6 +46,7 @@ public abstract class HerbivoreDinosaur extends Dinosaur {
         super(name, displayChar, hitPoints, gender, newAge);
         addCapability(DinosaurStatus.TEAM_HERBIVORE);
         //TODO: Add other behaviour here
+        behaviourList.add(1, new HerbHungerBehaviour());
     }
 
 

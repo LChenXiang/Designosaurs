@@ -131,7 +131,7 @@ public class Allosaur extends CarnivoreDinosaur {
      */
     public boolean canAttack(Stegosaur target) {
         boolean ret;
-        if (attackedStegosaur.get(target) != null) {
+        if (attackedStegosaur.get(target) == null) {
             ret = true;
         } else {
             ret = false;

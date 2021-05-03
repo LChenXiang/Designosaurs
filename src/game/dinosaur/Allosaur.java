@@ -1,6 +1,7 @@
 package game.dinosaur;
 
 import edu.monash.fit2099.engine.*;
+import game.behaviours.PredatorBehaviour;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -126,7 +127,7 @@ public class Allosaur extends CarnivoreDinosaur {
      * @param target the Stegosaur to check
      * @return the time elapsed since the Stegosaur was attacked, null if not found
      */
-    public int getTimElapsedSinceAttack(Stegosaur target) {
+    public int getTimeElapsedSinceAttack(Stegosaur target) {
         return attackedStegosaur.get(target);
     }
 
@@ -188,6 +189,12 @@ public class Allosaur extends CarnivoreDinosaur {
             } else {
                 attackedStegosaur.put(stegosaur, timeElapsed);
             }
+        }
+        // Regardless of whatever is happening, check if we can attack
+        // any Stegosaur nearby (Or anything that is attackable
+        Action action = new PredatorBehaviour().getAction(this,map);
+        if (action != null){
+            return action;
         }
         return super.playTurn(actions, lastAction, map, display);
     }

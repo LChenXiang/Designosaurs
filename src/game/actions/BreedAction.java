@@ -20,7 +20,7 @@ import game.dinosaur.Gender;
  * @since 03/05/2021
  */
 
-public class BreedAction extends Action {
+public class  BreedAction extends Action {
 
     /**
      * Empty Constructor

@@ -12,6 +12,6 @@ public class LaserGun extends WeaponItem {
      * @param verb        verb to use for this weapon, e.g. "hits", "zaps"
      */
     public LaserGun(String name, char displayChar, int damage, String verb) {
-        super(name, 'F', 160, "zaps");
+        super("Laser Gun", 'F', 160, "zaps");
     }
 }

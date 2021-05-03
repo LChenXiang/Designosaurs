@@ -3,6 +3,7 @@ package game.dinosaur;
 import edu.monash.fit2099.engine.*;
 import game.behaviours.PredatorBehaviour;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -178,6 +179,8 @@ public class Allosaur extends CarnivoreDinosaur {
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
         // Loop through all attacked stegosaur
+        // Temp Array: Can't remove while in this loop
+        ArrayList<Stegosaur> dinosaurToRemove = new ArrayList<>();
         for (Map.Entry<Stegosaur, Integer> stegosaurIntegerEntry : attackedStegosaur.entrySet()) {
             Stegosaur stegosaur = stegosaurIntegerEntry.getKey();
             int timeElapsed = stegosaurIntegerEntry.getValue();
@@ -185,11 +188,19 @@ public class Allosaur extends CarnivoreDinosaur {
             // Remove if is 20 turns or more already
             // else update value
             if (timeElapsed >= 20) {
-                attackedStegosaur.remove(stegosaur);
+                dinosaurToRemove.add(stegosaur);
             } else {
                 attackedStegosaur.put(stegosaur, timeElapsed);
+                System.out.println("Updated " + timeElapsed);
             }
         }
+
+        // Remove operation
+        for(Stegosaur stegosaur: dinosaurToRemove){
+            attackedStegosaur.remove(stegosaur);
+            System.out.println("Removed " + stegosaur);
+        }
+
         // Regardless of whatever is happening, check if we can attack
         // any Stegosaur nearby (Or anything that is attackable
         Action action = new PredatorBehaviour().getAction(this,map);

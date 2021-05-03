@@ -38,8 +38,9 @@ public class PredatorBehaviour implements Behaviour {
     public Action getAction(Actor actor, GameMap map) {
 
         // not Allosaur, shouldn't have this behaviour
-        if (!(actor instanceof Allosaur))
+        if (!(actor instanceof Allosaur)) {
             return null;
+        }
 
         Location here = map.locationOf(actor);
 
@@ -53,8 +54,9 @@ public class PredatorBehaviour implements Behaviour {
                 // false if Allosaur already attacked this Actor within 20 turns, true otherwise
                 boolean canAttack = ((Allosaur)actor).canAttack((Stegosaur) destination.getActor());
                 // if canAttack is true means not attacked before
-                if (canAttack)
+                if (canAttack) {
                     return new EatPreyAction(destination.getActor());
+                }
             }
         }
 

@@ -79,11 +79,13 @@ public class GoToLocation implements Behaviour{
                         flag = true;
                     break;
                 }
-            if (!flag) // item doesn't exist, reset behaviour
+            if (!flag) { // item doesn't exist, reset behaviour
                 return null;
+            }
         }
-        else // actor missing, can't do anything
+        else { // actor missing, can't do anything
             return null;
+        }
 
         Location here = map.locationOf(actor);
 

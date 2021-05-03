@@ -41,16 +41,18 @@ public class EatPreyAction extends AttackAction {
         String result;
 
         // check if actor and target are correct types
-        if (!(target instanceof Stegosaur))
+        if (!(target instanceof Stegosaur)) {
             return null;
+        }
 
         // Allosaur tries attacking target
         result = super.execute(actor, map);
         output = result.split(" ");
 
         // missed, nothing else happens
-        if (output[1].equals("misses"))
+        if (output[1].equals("misses")) {
             return result;
+        }
 
         Weapon weapon = actor.getWeapon();
         int healPoints = weapon.damage();
@@ -60,8 +62,9 @@ public class EatPreyAction extends AttackAction {
         result += System.lineSeparator() + actor + " heals for " + healPoints + " HitPoints.";
 
         // target Stegosaur survives, add to hashMap to ensure Allosaur can't attack it for 20 turns
-        if (target.isConscious())
+        if (target.isConscious()) {
             ((Allosaur)actor).insertStegosaurAttacked((Stegosaur) target);
+        }
 
         return result;
     }

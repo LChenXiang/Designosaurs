@@ -46,18 +46,23 @@ public class  BreedAction extends Action {
 
         if (actor.hasCapability(Gender.FEMALE)) {
             result += actor + " is ";
-            if (actor.hasCapability(DinosaurStatus.PREGNANT))
+            if (actor.hasCapability(DinosaurStatus.PREGNANT)) {
                 result += "already ";
-            else
+            }
+            else {
                 actor.addCapability(DinosaurStatus.PREGNANT);
+            }
             return result + "pregnant.";
+            }
 
-        } else {
+        else {
             result += target + " is ";
-            if (target.hasCapability(DinosaurStatus.PREGNANT))
+            if (target.hasCapability(DinosaurStatus.PREGNANT)) {
                 result += "already ";
-            else
+            }
+            else {
                 target.addCapability(DinosaurStatus.PREGNANT);
+            }
 
             return result + "pregnant.";
         }

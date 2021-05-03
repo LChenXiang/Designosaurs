@@ -43,8 +43,9 @@ public class BreedBehaviour implements Behaviour{
         Dinosaur dinosaur = (Dinosaur) actor;
 
         // Dinosaur is underage or already pregnant, can't breed
-        if (dinosaur.hasCapability(DinosaurStatus.BABY) || dinosaur.hasCapability(DinosaurStatus.PREGNANT))
+        if (dinosaur.hasCapability(DinosaurStatus.BABY) || dinosaur.hasCapability(DinosaurStatus.PREGNANT)) {
             return null;
+        }
 
         Location here = map.locationOf(dinosaur);
         Action action;
@@ -63,28 +64,31 @@ public class BreedBehaviour implements Behaviour{
                     if (dinosaur.hasCapability(Gender.MALE) && destination.getActor().hasCapability(Gender.FEMALE))
                         // if target is not underage nor pregnant
                         if (!(destination.getActor().hasCapability(DinosaurStatus.BABY)
-                                || destination.getActor().hasCapability(DinosaurStatus.PREGNANT)))
+                                || destination.getActor().hasCapability(DinosaurStatus.PREGNANT))) {
                             return new BreedAction(destination.getActor());
+                        }
 
                             // swapped opposite gender
                         else if (dinosaur.hasCapability(Gender.FEMALE) && destination.getActor().hasCapability(Gender.MALE))
                             // if target is not underage nor pregnant
                             if (!(destination.getActor().hasCapability(DinosaurStatus.BABY)
-                                    || destination.getActor().hasCapability(DinosaurStatus.PREGNANT)))
+                                    || destination.getActor().hasCapability(DinosaurStatus.PREGNANT))) {
                                 return new BreedAction(dinosaur);
-                            // TODO BUG FIX
+                            }
                 }
             }
 
             // innermost radius don't have breed partner, check locations of 2-tile radius
             action = findPartnerInRadius(here, 2, dinosaur, map);
-            if (action!=null) // findPartnerInRadius returns moveactoraction
+            if (action!=null) { // findPartnerInRadius returns moveactoraction
                 return action;
+            }
 
             // 2nd layer also doesn't have breed partner, check locations of 3-tile radius
             action = findPartnerInRadius(here, 3, dinosaur, map);
-            if (action!=null) // action is moveactoraction
+            if (action!=null) { // action is moveactoraction
                 return action;
+            }
         }
 
         // no partner found
@@ -117,7 +121,7 @@ public class BreedBehaviour implements Behaviour{
             counterX = radius*-1;
 
             // if at first or last row of radius, go through all tiles
-            if (counterY == radius || counterY == (radius*-1))
+            if (counterY == radius || counterY == (radius*-1)) {
                 // go through all tiles of that row starting at (radius*-1, counterY)
                 for (int j=0; j<=length; j++) {
                     // see if current tile is accessible
@@ -128,13 +132,15 @@ public class BreedBehaviour implements Behaviour{
                         continue;
                     }
                     follow = hasPartner(there, dinosaur, map); // check if has partner
-                    if (follow!=null) // not null, return the action
+                    if (follow!=null) {// not null, return the action
                         return follow;
+                    }
 
                     counterX++; // no partner at this tile, go to next
                 }
+            }
                 // in between first and last row of radius
-            else
+            else {
                 // go through first and last column of this row
                 for (int j=0; j<=length; j+=length) {
                     counterX += j; // 1st counterX = radius*-1, 2nd counterX = radius
@@ -146,9 +152,11 @@ public class BreedBehaviour implements Behaviour{
                         continue;
                     }
                     follow = hasPartner(there, dinosaur, map); // check if has partner
-                    if (follow!=null) // not null, return the action
+                    if (follow!=null) { // not null, return the action
                         return follow;
+                    }
                 }
+            }
 
             counterY--; // no partner at this row, decrement
         }

@@ -2,6 +2,8 @@ package game.dinosaur;
 
 import edu.monash.fit2099.engine.*;
 import game.actions.AttackAction;
+import game.actions.DieFromHungerAction;
+import game.actions.LayEggAction;
 import game.behaviours.Behaviour;
 import game.behaviours.BreedBehaviour;
 import game.behaviours.WanderBehaviour;
@@ -60,7 +62,7 @@ public abstract class Dinosaur extends Actor {
         // Insert all behaviour
         behaviourList.add(0, new WanderBehaviour());
         behaviourList.add(0, new BreedBehaviour());
-        hitPoints = getStartingHP();
+        this.hitPoints = getStartingHP();
     }
 
     /**
@@ -80,9 +82,9 @@ public abstract class Dinosaur extends Actor {
         age = newAge;
         // Age HP check
         if (newAge > 0) {
-            hitPoints = getStartingHP();
+            this.hitPoints = getStartingHP();
         } else {
-            hitPoints = getBabyStartingHP();
+            this.hitPoints = getBabyStartingHP();
             addCapability(DinosaurStatus.BABY);
         }
         // Insert all behaviour
@@ -223,7 +225,7 @@ public abstract class Dinosaur extends Actor {
         if (!(isConscious())) {
             unConsciousElapsed++;
             if (unConsciousElapsed >= getUnConsciousThreshold()) {
-                return new DoNothingAction(); // Placeholder
+                return new DieFromHungerAction(); // Placeholder
             } else {
                 return new DoNothingAction();
             }
@@ -237,7 +239,7 @@ public abstract class Dinosaur extends Actor {
             pregnantAge++;
             if (pregnantAge >= getPregnancyLength()) {
                 pregnantAge = 0;
-                return new DoNothingAction(); // Placeholder
+                return new LayEggAction(); // Placeholder
             }
         }
 

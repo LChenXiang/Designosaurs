@@ -144,6 +144,14 @@ public abstract class Dinosaur extends Actor {
     public abstract int getWellFeedHunger();
 
     /**
+     *
+     * @return Whether the dinosaur is currently considered well fed
+     */
+    public boolean isWellFed(){
+        return (hitPoints > getWellFeedHunger());
+    }
+
+    /**
      * @return Whether the dinosaur is hungry
      */
     public boolean isHungry() {

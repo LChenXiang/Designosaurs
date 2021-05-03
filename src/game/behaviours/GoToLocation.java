@@ -73,8 +73,9 @@ public class GoToLocation implements Behaviour{
             else
                 // check if item still exists at that location
                 for (Item item : there.getItems()) {
-                    if (item == this.item)
-//                    if (item.getClass() == this.item.getClass()) // check if such and item still exists
+//                    if (item == this.item)
+                    if (item.getClass() == this.item.getClass()) // check if such and item still exists
+                        this.item = item;
                         flag = true;
                     break;
                 }

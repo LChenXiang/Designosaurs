@@ -49,14 +49,13 @@ public class PredatorBehaviour implements Behaviour {
 
             // if this exit contains an Actor that can be attacked by Allosaur
             if (destination.containsAnActor() && destination.getActor().hasCapability(DinosaurStatus.ALLOSAUR_CAN_ATTACK)) {
-//                try {int hasAttacked = ((Allosaur)actor).getTimeElapsedSinceAttack((Stegosaur) destination.getActor());}
-                Integer hasAttacked = ((Allosaur)actor).getTimeElapsedSinceAttack((Stegosaur) destination.getActor());
-//                 if hasAttacked is null means not attacked before
-                if (hasAttacked==null)
+
+                // true if Allosaur already attacked this Actor within 20 turns, false otherwise
+                boolean hasAttacked = ((Allosaur)actor).canAttack((Stegosaur) destination.getActor());
+//                 if hasAttacked is false means not attacked before
+                if (!hasAttacked)
                     return new EatPreyAction(destination.getActor());
-
             }
-
         }
 
         // no prey found

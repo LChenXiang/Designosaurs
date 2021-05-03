@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Location;
 import game.dinosaur.DinosaurStatus;
+import game.items.EdibleItem;
 import game.items.Egg;
 
 /**
@@ -32,7 +33,8 @@ public class LayEggAction extends Action {
     public String execute(Actor actor, GameMap map) {
 
         Location here = map.locationOf(actor);
-        here.addItem(new Egg("Egg", 'O'));
+        EdibleItem egg = new Egg("Egg", 'O');
+        here.addItem(egg);
         // TODO: MAY NEED TO ADD ENUM OR SMTH TO INDICATE WHICH DINOSAUR
 
         actor.removeCapability(DinosaurStatus.PREGNANT); // no longer pregnant

@@ -10,7 +10,6 @@ import edu.monash.fit2099.engine.GameMap;
  * @author Lin Chen Xiang
  * @see Actor
  * @see edu.monash.fit2099.engine.Location
- * @see game.items.EdibleItem
  * @see game.dinosaur.DinosaurStatus
  * @see GameMap
  * @since 03/05/2021

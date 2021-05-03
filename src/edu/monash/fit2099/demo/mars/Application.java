@@ -50,9 +50,10 @@ public class Application {
         world.addPlayer(player, gameMap.at(2, 3));
 
         Bug bug = new Bug();
+        DoNothingAction doNothing = new DoNothingAction();
         bug.addItemToInventory(new MartianItem("rock", '*', true));
         bug.actionFactories.add(new SpitBehaviour(player));
-        bug.actionFactories.add(new FollowBehaviour(player));
+        bug.actionFactories.add(new FollowBehaviour(player,doNothing));
         gameMap.at(0, 2).addActor(bug);
 
         world.run();

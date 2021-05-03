@@ -6,19 +6,40 @@ import game.behaviours.Behaviour;
 /**
  * A class that figures out a MoveAction that will move the actor one step 
  * closer to a target Actor.
+ *
+ * @author Lin Chen Xiang
+ * @see Behaviour
+ * @see Actor
+ * @see Action
+ * @see GameMap
+ * @see Location
+ * @since 03/05/2021
  */
 public class FollowBehaviour implements Behaviour {
 
 	private Actor target;
+	private Action action;
+
+	private Behaviour self = this;
 
 	/**
 	 * Constructor.
 	 * 
 	 * @param subject the Actor to follow
+	 * @param action the Action to be done when reached target
 	 */
-	public FollowBehaviour(Actor subject) {
+	public FollowBehaviour(Actor subject, Action action) {
 		this.target = subject;
+		this.action = action;
 	}
+
+	/**
+	 * Decides the current Action for this Actor
+	 *
+	 * @param actor the Actor acting
+	 * @param map the GameMap containing the Actor
+	 * @return MoveActorAction if Actor has not reached target, or action if Actor reached target
+	 */
 
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
@@ -34,12 +55,18 @@ public class FollowBehaviour implements Behaviour {
 			if (destination.canActorEnter(actor)) {
 				int newDistance = distance(destination, there);
 				if (newDistance < currentDistance) {
-					return new MoveActorAction(destination, exit.getName());
+					// actor not beside target, continue to follow
+					return (new MoveActorAction(destination, exit.getName()) {
+						@Override
+						public Action getNextAction() { // override next action as current action to chain follow
+							return self.getAction(actor,map);}
+					});
 				}
 			}
 		}
 
-		return null;
+		// actor is already beside target, do action
+		return action;
 	}
 
 	/**

@@ -18,5 +18,6 @@ public enum DinosaurStatus {
     BABY,
     BIG_EATER_TREE,
     TEAM_HERBIVORE,
-    TEAM_CARNIVORE
+    TEAM_CARNIVORE,
+    HUNGRY
 }

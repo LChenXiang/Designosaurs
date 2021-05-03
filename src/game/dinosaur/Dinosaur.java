@@ -193,10 +193,20 @@ public abstract class Dinosaur extends Actor {
         age++;
 
         // Check hunger
+        // Makes sure to print it only once when it becomes hungry
+        // When it is no longer hungry, it is indicated via enum so the hunger message is printed again
         if (isHungry()) {
+            if (!(hasCapability(DinosaurStatus.HUNGRY))) {
             Location here = map.locationOf(this);
             display.println(String.format("%s at (%s,%s) is getting hungry!", name, here.x(), here.y()));
+            addCapability(DinosaurStatus.HUNGRY);
+            }
+        } else {
+            if(hasCapability(DinosaurStatus.HUNGRY)){
+                removeCapability(DinosaurStatus.HUNGRY);
+            }
         }
+
         // Check if starving to death
         if (!(isConscious())) {
             unConsciousElapsed++;

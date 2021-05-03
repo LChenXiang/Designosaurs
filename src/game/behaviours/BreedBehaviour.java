@@ -65,12 +65,12 @@ public class BreedBehaviour implements Behaviour{
                                 || destination.getActor().hasCapability(DinosaurStatus.PREGNANT)))
                             return new BreedAction();
 
-                    // swapped opposite gender
-                    else if (dinosaur.hasCapability(Gender.FEMALE) && destination.getActor().hasCapability(Gender.MALE))
-                        // if target is not underage nor pregnant
-                        if (!(destination.getActor().hasCapability(DinosaurStatus.BABY)
-                                || destination.getActor().hasCapability(DinosaurStatus.PREGNANT)))
-                            return new BreedAction();
+                            // swapped opposite gender
+                        else if (dinosaur.hasCapability(Gender.FEMALE) && destination.getActor().hasCapability(Gender.MALE))
+                            // if target is not underage nor pregnant
+                            if (!(destination.getActor().hasCapability(DinosaurStatus.BABY)
+                                    || destination.getActor().hasCapability(DinosaurStatus.PREGNANT)))
+                                return new BreedAction();
                 }
             }
 
@@ -118,19 +118,31 @@ public class BreedBehaviour implements Behaviour{
             if (counterY == radius || counterY == (radius*-1))
                 // go through all tiles of that row starting at (radius*-1, counterY)
                 for (int j=0; j<=length; j++) {
-                    there = map.at(here.x() + counterX, here.y() + counterY); // current tile
+                    // see if current tile is accessible
+                    try {
+                        there = map.at(here.x() + counterX, here.y() + counterY);
+                    }
+                    catch(ArrayIndexOutOfBoundsException e) {
+                        continue;
+                    }
                     follow = hasPartner(there, dinosaur, map); // check if has partner
                     if (follow!=null) // not null, return the action
                         return follow;
 
                     counterX++; // no partner at this tile, go to next
                 }
-            // in between first and last row of radius
+                // in between first and last row of radius
             else
                 // go through first and last column of this row
                 for (int j=0; j<=length; j+=length) {
                     counterX += j; // 1st counterX = radius*-1, 2nd counterX = radius
-                    there = map.at(here.x() + counterX, here.y() + counterY); // current tile
+                    // see if current tile is accessible
+                    try {
+                        there = map.at(here.x() + counterX, here.y() + counterY);
+                    }
+                    catch(ArrayIndexOutOfBoundsException e) {
+                        continue;
+                    }
                     follow = hasPartner(there, dinosaur, map); // check if has partner
                     if (follow!=null) // not null, return the action
                         return follow;

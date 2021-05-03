@@ -125,11 +125,18 @@ public class Allosaur extends CarnivoreDinosaur {
     }
 
     /**
+     *
      * @param target the Stegosaur to check
-     * @return the time elapsed since the Stegosaur was attacked, null if not found
+     * @return Whether this Allosaur can attack the target (Is it in the list of attacked stegosaur?)
      */
-    public int getTimeElapsedSinceAttack(Stegosaur target) {
-        return attackedStegosaur.get(target);
+    public boolean canAttack(Stegosaur target) {
+        boolean ret;
+        if (attackedStegosaur.get(target) != null) {
+            ret = true;
+        } else {
+            ret = false;
+        }
+        return ret;
     }
 
     /**
@@ -196,15 +203,15 @@ public class Allosaur extends CarnivoreDinosaur {
         }
 
         // Remove operation
-        for(Stegosaur stegosaur: dinosaurToRemove){
+        for (Stegosaur stegosaur : dinosaurToRemove) {
             attackedStegosaur.remove(stegosaur);
             System.out.println("Removed " + stegosaur);
         }
 
         // Regardless of whatever is happening, check if we can attack
         // any Stegosaur nearby (Or anything that is attackable
-        Action action = new PredatorBehaviour().getAction(this,map);
-        if (action != null){
+        Action action = new PredatorBehaviour().getAction(this, map);
+        if (action != null) {
             return action;
         }
         return super.playTurn(actions, lastAction, map, display);

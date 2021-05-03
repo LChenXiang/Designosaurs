@@ -1,4 +1,7 @@
 package game.items;
 
-public class Fruit {
+public class Fruit extends EdibleItem{
+    public Fruit(String name, char displayChar) {
+        super(name, displayChar);
+    }
 }

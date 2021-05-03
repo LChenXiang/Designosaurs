@@ -1,4 +1,6 @@
 package game;
 
-public class VendingMachine {
+public class VendingMachine extends Floor {
+    private int EcoPoints;
+
 }

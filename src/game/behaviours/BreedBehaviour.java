@@ -216,7 +216,7 @@ public class BreedBehaviour implements Behaviour{
      */
     public boolean wantsToBreed() {
         double chance = Math.random();
-        return chance <= breedChance();
+        return chance < breedChance();
     }
 
 }

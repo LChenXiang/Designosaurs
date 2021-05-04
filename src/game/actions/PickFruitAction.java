@@ -36,7 +36,7 @@ public class PickFruitAction extends Action {
     }
 
     /**
-     *
+     * Adds one Fruit into Player's inventory and decrement fruit count of growable if Player succeeds
      * @param actor Player picking fruit
      * @param map The map the actor is on.
      * @return description of process of player picking fruit

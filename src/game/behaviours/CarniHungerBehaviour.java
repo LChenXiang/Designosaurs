@@ -12,12 +12,17 @@ import game.items.Egg;
  * Class that decides whether a carnivore is hungry and finds food if so
  *
  * @author Lin Chen Xiang
+ * @see Behaviour
  * @see Actor
+ * @see Action
  * @see Location
  * @see HungerBehaviour
+ * @see Dinosaur
  * @see DinosaurStatus
  * @see Corpse
  * @see Egg
+ * @see EatPreyAction
+ * @see EatItemAction
  * @see GameMap
  * @since 03/05/2021
  */

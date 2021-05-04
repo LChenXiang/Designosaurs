@@ -3,14 +3,9 @@ package game.behaviours;
 import edu.monash.fit2099.engine.*;
 import game.actions.EatItemAction;
 import game.actions.EatPreyAction;
-import game.dinosaur.CarnivoreDinosaur;
-import game.dinosaur.Dinosaur;
 import game.dinosaur.DinosaurStatus;
 import game.items.Corpse;
-import game.items.EdibleItem;
 import game.items.Egg;
-
-import java.util.ArrayList;
 
 /**
  * Class that decides whether a carnivore is hungry and finds food if so
@@ -18,8 +13,10 @@ import java.util.ArrayList;
  * @author Lin Chen Xiang
  * @see Actor
  * @see Location
- * @see game.dinosaur.CarnivoreDinosaur
+ * @see HungerBehaviour
  * @see DinosaurStatus
+ * @see Corpse
+ * @see Egg
  * @see GameMap
  * @since 03/05/2021
  */
@@ -91,9 +88,9 @@ public class CarniHungerBehaviour extends HungerBehaviour {
         Item closestItem = null; // closest found food
         int distance; // calculated distance between here and there
         int[] closestDist = {Integer.MAX_VALUE, -1}; // index 0 represents the calculated distance
-                                                     // index 1 represents: -1 -> no food source
-                                                     //                      0 -> found Actor to follow
-                                                     //                      1 -> found Item to go to
+        // index 1 represents: -1 -> no food source
+        //                      0 -> found Actor to follow
+        //                      1 -> found Item to go to
 
         // go through entire map
         for (int y : map.getYRange()) {

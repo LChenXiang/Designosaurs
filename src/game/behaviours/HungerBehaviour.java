@@ -9,8 +9,10 @@ import game.dinosaur.DinosaurStatus;
  *
  * @author Lin Chen Xiang
  * @see Actor
+ * @see Action
  * @see Location
  * @see GameMap
+ * @see Behaviour
  * @see CarniHungerBehaviour
  * @see HerbHungerBehaviour
  * @since 05/05/2021

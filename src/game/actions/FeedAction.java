@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.*;
 import game.items.Fruit;
 
 /**
- * Action that allows a Dinosaur to eat an Item from the Ground and heals a certain amount of hitpoints
+ * Action that allows Player to feed an Item to a Dinosaur and heal it
  *
  * @author Lin Chen Xiang
  * @see Actor

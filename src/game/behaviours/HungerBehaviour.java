@@ -1,9 +1,6 @@
 package game.behaviours;
 
-import edu.monash.fit2099.engine.Action;
-import edu.monash.fit2099.engine.Actor;
-import edu.monash.fit2099.engine.GameMap;
-import edu.monash.fit2099.engine.Location;
+import edu.monash.fit2099.engine.*;
 import game.dinosaur.Dinosaur;
 import game.dinosaur.DinosaurStatus;
 
@@ -13,18 +10,21 @@ import game.dinosaur.DinosaurStatus;
  * @author Lin Chen Xiang
  * @see Actor
  * @see Location
- * @see Dinosaur
- * @see DinosaurStatus
  * @see GameMap
- * @since 03/05/2021
+ * @see CarniHungerBehaviour
+ * @see HerbHungerBehaviour
+ * @since 05/05/2021
  */
 
-abstract public class HungerBehaviour implements Behaviour{
+public abstract class HungerBehaviour implements Behaviour{
 
     /**
-     * Find a suitable food
-     * @return action to be done
+     * Finds the nearest suitable food source in the map.
+     * @param here location of this actor
+     * @param actor the actor looking for food
+     * @param map World map
+     * @return null if no food source found, Action to start moving towards food
      */
-    abstract Action findFood();
+    public abstract Action findFood(Location here, Actor actor, GameMap map);
 
 }

@@ -3,6 +3,7 @@ package game.behaviours;
 import edu.monash.fit2099.engine.*;
 import game.actions.EatItemAction;
 import game.actions.EatPreyAction;
+import game.dinosaur.Dinosaur;
 import game.dinosaur.DinosaurStatus;
 import game.items.Corpse;
 import game.items.Egg;
@@ -41,7 +42,7 @@ public class CarniHungerBehaviour extends HungerBehaviour {
     public Action getAction(Actor actor, GameMap map) {
 
         // check if it is a carnivore
-        if (actor.hasCapability(DinosaurStatus.TEAM_CARNIVORE)) {
+        if (actor.hasCapability(DinosaurStatus.TEAM_CARNIVORE)  && ((Dinosaur) actor).isHungry()) {
 
             Location here = map.locationOf(actor);
 

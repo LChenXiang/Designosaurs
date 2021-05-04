@@ -13,14 +13,15 @@ import game.items.Fruit;
  * Class that decides whether a herbivore is hungry and finds food if so
  *
  * @author Lin Chen Xiang
+ * @see Behaviour
  * @see Actor
  * @see Action
  * @see Dinosaur
+ * @see game.dinosaur.HerbivoreDinosaur
  * @see Growable
  * @see Action
  * @see Location
  * @see HungerBehaviour
- * @see game.dinosaur.HerbivoreDinosaur
  * @see DinosaurStatus
  * @see GrowableStatus
  * @see EatFromGrowableAction

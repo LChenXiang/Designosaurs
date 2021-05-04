@@ -18,11 +18,14 @@ import game.items.Egg;
  * @see Location
  * @see HungerBehaviour
  * @see Dinosaur
+ * @see game.dinosaur.CarnivoreDinosaur
  * @see DinosaurStatus
  * @see Corpse
  * @see Egg
  * @see EatPreyAction
  * @see EatItemAction
+ * @see FollowBehaviour
+ * @see GoToLocation
  * @see GameMap
  * @since 03/05/2021
  */

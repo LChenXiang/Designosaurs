@@ -11,13 +11,15 @@ import game.dinosaur.Gender;
  * Class that decides whether an actor is ready to breed and find a breed partner
  *
  * @author Lin Chen Xiang
+ * @see Behaviour
  * @see Actor
+ * @see Action
  * @see Location
  * @see Dinosaur
  * @see DinosaurStatus
  * @see Gender
  * @see FollowBehaviour
- * @see game.actions.BreedAction
+ * @see BreedAction
  * @see GameMap
  * @since 03/05/2021
  */

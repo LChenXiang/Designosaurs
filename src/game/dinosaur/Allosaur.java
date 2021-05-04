@@ -36,6 +36,7 @@ public class Allosaur extends CarnivoreDinosaur {
     public Allosaur(String name, Enum<Gender> gender) {
         super(name, 'A', 100, gender);
         attackedStegosaur = new HashMap<>();
+        behaviourList.add(new PredatorBehaviour());
     }
 
     /**
@@ -50,6 +51,7 @@ public class Allosaur extends CarnivoreDinosaur {
     public Allosaur(String name, Enum<Gender> gender, int newAge) {
         super(name, 'A', 100, gender, newAge);
         attackedStegosaur = new HashMap<>();
+        behaviourList.add(new PredatorBehaviour());
     }
 
     /**
@@ -125,7 +127,6 @@ public class Allosaur extends CarnivoreDinosaur {
     }
 
     /**
-     *
      * @param target the Stegosaur to check
      * @return Whether this Allosaur can attack the target (Is it in the list of attacked stegosaur?)
      */
@@ -208,12 +209,6 @@ public class Allosaur extends CarnivoreDinosaur {
             System.out.println("Removed " + stegosaur);
         }
 
-        // Regardless of whatever is happening, check if we can attack
-        // any Stegosaur nearby (Or anything that is attackable
-        Action action = new PredatorBehaviour().getAction(this, map);
-        if (action != null) {
-            return action;
-        }
         return super.playTurn(actions, lastAction, map, display);
     }
 }

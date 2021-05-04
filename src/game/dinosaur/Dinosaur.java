@@ -150,10 +150,9 @@ public abstract class Dinosaur extends Actor {
     public abstract int getWellFeedHunger();
 
     /**
-     *
      * @return Whether the dinosaur is currently considered well fed
      */
-    public boolean isWellFed(){
+    public boolean isWellFed() {
         return (hitPoints > getWellFeedHunger());
     }
 
@@ -211,12 +210,12 @@ public abstract class Dinosaur extends Actor {
         // When it is no longer hungry, it is indicated via enum so the hunger message is printed again
         if (isHungry()) {
             if (!(hasCapability(DinosaurStatus.HUNGRY))) {
-            Location here = map.locationOf(this);
-            display.println(String.format("%s at (%s,%s) is getting hungry!", name, here.x(), here.y()));
-            addCapability(DinosaurStatus.HUNGRY);
+                Location here = map.locationOf(this);
+                display.println(String.format("%s at (%s,%s) is getting hungry!", name, here.x(), here.y()));
+                addCapability(DinosaurStatus.HUNGRY);
             }
         } else {
-            if(hasCapability(DinosaurStatus.HUNGRY)){
+            if (hasCapability(DinosaurStatus.HUNGRY)) {
                 removeCapability(DinosaurStatus.HUNGRY);
             }
         }

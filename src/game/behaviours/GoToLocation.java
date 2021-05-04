@@ -18,7 +18,7 @@ import game.growable.Growable;
  * @since 03/05/2021
  */
 
-public class GoToLocation implements Behaviour{
+public class GoToLocation implements Behaviour {
 
     private Location there = null;
     private Growable growable = null;
@@ -29,9 +29,10 @@ public class GoToLocation implements Behaviour{
 
     /**
      * Constructor that takes in Growable
-     * @param there the Location of the Growable
+     *
+     * @param there    the Location of the Growable
      * @param growable the Growable to be reached
-     * @param action the Action to be done when reaching there
+     * @param action   the Action to be done when reaching there
      */
     public GoToLocation(Location there, Growable growable, Action action) {
         this.there = there;
@@ -41,8 +42,9 @@ public class GoToLocation implements Behaviour{
 
     /**
      * Constructor that takes in Item
-     * @param there the Location of the Item
-     * @param item the Item to be reached
+     *
+     * @param there  the Location of the Item
+     * @param item   the Item to be reached
      * @param action the Action to be done when reaching there
      */
     public GoToLocation(Location there, Item item, Action action) {
@@ -55,7 +57,7 @@ public class GoToLocation implements Behaviour{
      * Decides the current Action for this Actor
      *
      * @param actor the Actor acting
-     * @param map the GameMap containing the Actor
+     * @param map   the GameMap containing the Actor
      * @return MoveActorAction if Actor has not reached target, or action if Actor reached target
      */
     @Override
@@ -64,26 +66,25 @@ public class GoToLocation implements Behaviour{
         if (map.contains(actor)) {
             boolean flag = false;
             // check if growable is set in constructor, if it is null means item is set
-            if (growable!=null) {
+            if (growable != null) {
                 // check if growable still exists at that location, if so check if it still has any fruit on it
                 if (there.getGround() != growable || growable.getNumberOfRipeFruit() < 1) {
                     return null; // no such growable/no more fruit, reset behaviour
                 }
-            }
-            else
+            } else
                 // check if item still exists at that location
                 for (Item item : there.getItems()) {
-//                    if (item == this.item)
-                    if (item.getClass() == this.item.getClass()) // check if such an item still exists
-                        this.item = item;
+                    if (item == this.item) {
+//                    if (item.getClass() == this.item.getClass()) // check if such an item still exists
+//                        this.item = item;
                         flag = true;
-                    break;
+                        break;
+                    }
                 }
             if (!flag) { // item doesn't exist, reset behaviour
                 return null;
             }
-        }
-        else { // actor missing, can't do anything
+        } else { // actor missing, can't do anything
             return null;
         }
 

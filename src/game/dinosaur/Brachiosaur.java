@@ -134,4 +134,12 @@ public class Brachiosaur extends HerbivoreDinosaur {
         }
         return new Brachiosaur("Brachiosaur", gender, 0);
     }
+
+    /**
+     * @return How much HP does the corpse of this dinosaur heals
+     */
+    @Override
+    public int getCorpseHealAmount() {
+        return 100;
+    }
 }

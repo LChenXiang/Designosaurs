@@ -174,6 +174,14 @@ public class Allosaur extends CarnivoreDinosaur {
     }
 
     /**
+     * @return How much HP does the corpse of this dinosaur heals
+     */
+    @Override
+    public int getCorpseHealAmount() {
+        return 50;
+    }
+
+    /**
      * Lets an Allosaur have its turn.
      * Will iterate through the entire hashmap to make update how long since
      * last attack on Stegosaur it has attacked.

@@ -129,17 +129,12 @@ public class Stegosaur extends HerbivoreDinosaur {
         return new Stegosaur("Stegosaur", gender, 0);
     }
 
-    //	/**
-//	 * Figure out what to do next.
-//	 *
-//	 * FIXME: Stegosaur wanders around at random, or if no suitable MoveActions are available, it
-//	 * just stands there.  That's boring.
-//	 *
-//	 * @see edu.monash.fit2099.engine.Actor#playTurn(Actions, Action, GameMap, Display)
-//	 */
-//	@Override
-//	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-//		super.playTurn(actions, lastAction, map, display);
-//	}
+    /**
+     * @return How much HP does the corpse of this dinosaur heals
+     */
+    @Override
+    public int getCorpseHealAmount() {
+        return 50;
+    }
 
 }

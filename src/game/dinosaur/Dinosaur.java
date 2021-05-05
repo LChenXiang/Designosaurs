@@ -178,6 +178,12 @@ public abstract class Dinosaur extends Actor {
      */
     public abstract Dinosaur getNewDinosaur();
 
+    /**
+     *
+     * @return How much HP does the corpse of this dinosaur heals
+     */
+    public abstract int getCorpseHealAmount();
+
 
     /**
      * Allow the dinosaur to have its turn.

@@ -1,33 +1,36 @@
 package game.items;
 
-import edu.monash.fit2099.engine.Location;
+import edu.monash.fit2099.engine.Actor;
 
-public class Corpse extends EdibleItem{
-    private int corpseRotAge;
-    private int corpseRotTime;
-    private int corpseHealAmount;
+/**
+ * Represents a corpse.
+ * Our version of corpse will not rot in inventory. We treat inventory as a portable fridge.
+ *
+ * @author NgYuKang, Amos Leong Zheng Khang
+ * @version 1.0
+ * @see PerishableFoodItem
+ * @since 05/05/2021
+ */
+public class Corpse extends PerishableFoodItem {
 
-    public Corpse(String name, int corpseRotTime, int corpseHealAmount) {
-        super(name, 'X');
+    /**
+     * How much the corpse can heal. Taken from dinosaur, since it varies.
+     */
+    private final int healAmount;
+
+    public Corpse(String name, int rotTime, int healAmount) {
+        super(name, 'X', rotTime);
+        addCapability(ItemStats.CARNIVORE_CAN_EAT);
+        this.healAmount = healAmount;
     }
+
+    /**
+     * @param actor Target of who we are healing
+     * @return How much can we heal based on the target
+     */
     @Override
-    public void addCapability(Enum<?> capability) {
-        super.addCapability(ItemStats.CARNIVORE_CAN_EAT);
-    }
-    @Override
-    public void tick(Location currentLocation) {
-        super.tick(currentLocation);
-        corpseRotAge++;
-        if (corpseRotAge > corpseRotTime) {
-            currentLocation.removeItem(this);
-
-        }
-    }
-    private void setCorpseRotTime(int newCorpseRotTime){
-        this.corpseRotTime = newCorpseRotTime;
-    }
-    private void setCorpseHealAmount(int newCorpseHealAmount){
-        this.corpseHealAmount = newCorpseHealAmount;
+    public int getHealAmount(Actor actor) {
+        return healAmount;
     }
 
 }

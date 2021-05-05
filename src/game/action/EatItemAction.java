@@ -38,8 +38,7 @@ public class EatItemAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
 
-        // TODO: CHANGE TO HEALPOINTS BASED ON ITEM
-        int healPoints = 0; // placeholder
+        int healPoints = edibleItem.getHealAmount(actor);
         actor.heal(healPoints);
 
         String result = actor + " eats " + edibleItem + " and heals for " + healPoints + " hitpoints.";

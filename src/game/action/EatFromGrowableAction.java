@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.GameMap;
 import game.dinosaur.Dinosaur;
 import game.dinosaur.DinosaurStatus;
 import game.growable.Growable;
+import game.items.Fruit;
 
 /**
  * Action that allows a Dinosaur to eat from a Growable
@@ -44,7 +45,9 @@ public class EatFromGrowableAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
 
-        int healPoints=0;
+        Fruit fruit = new Fruit(); // create fruit to get access to getHealAmount
+        int healing = fruit.getHealAmount(actor); // get healing amount based on dinosaur traits
+        int healPoints=0; // total healing
         String result = actor + " feeds from " + growable;
 
         // if actor is a big eater, let it keep eating until it is full or growable runs out of fruits
@@ -53,19 +56,15 @@ public class EatFromGrowableAction extends Action {
                 if (!(((Dinosaur) actor).isHungry())) {
                     break;
                 }
-                // doesn't really make a difference right now, but will be useful if other types of BIG EATERS get introduced
-                if (actor.hasCapability(DinosaurStatus.BAD_DIGESTION)) {
-                    int healing = 5;
-                    healPoints += healing;
-                    actor.heal(healing);
-                }
+                healPoints += healing;
+                actor.heal(healing);
                 growable.decrementNumberOfRipeFruit();
             }
         }
         // actor has a short neck, eat one fruit
         else if (actor.hasCapability(DinosaurStatus.SHORT_NECK)) {
-            healPoints = 10;
-            actor.heal(healPoints);
+            healPoints = healing;
+            actor.heal(healing);
             growable.decrementNumberOfRipeFruit();
         }
 

@@ -49,7 +49,7 @@ public class PickFruitAction extends Action {
         }
 
         // FIXME: Constructor should be empty
-        actor.addItemToInventory(new Fruit("Fruit", 'a'));
+        actor.addItemToInventory(new Fruit());
         growable.decrementNumberOfRipeFruit();
         //TODO: +10 ecopoints
 

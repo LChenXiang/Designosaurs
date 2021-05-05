@@ -52,6 +52,8 @@ public class Application {
 
 		Actor player = new Player("Player", '@', 100);
 		world.addPlayer(player, gameMap.at(9, 4));
+
+
 		
 
 

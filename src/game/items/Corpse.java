@@ -3,7 +3,9 @@ package game.items;
 import edu.monash.fit2099.engine.Location;
 
 public class Corpse extends EdibleItem{
-    public Corpse(String name, char displayChar) {
+    private int corpseRotTime;
+
+    public Corpse(String name, char displayChar ) {
         super("Corpse", 'X');
     }
     @Override
@@ -14,5 +16,6 @@ public class Corpse extends EdibleItem{
     public void tick(Location currentLocation) {
         super.tick(currentLocation);
     }
+
 
 }

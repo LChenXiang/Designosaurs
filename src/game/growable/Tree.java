@@ -2,6 +2,8 @@ package game.growable;
 
 import edu.monash.fit2099.engine.Location;
 import game.PortableItem;
+import game.items.EdibleItem;
+import game.items.Fruit;
 
 /**
  * Represents a Tree.
@@ -53,7 +55,8 @@ public class Tree extends Growable {
             double chance = Math.random();
             if (chance < dropFruitChance()) {
                 decrementNumberOfRipeFruit();
-                location.addItem(new PortableItem("Fruit", 'a')); // Placeholder4
+                location.addItem(new Fruit() {
+                }); // Placeholder4
             }
         }
 

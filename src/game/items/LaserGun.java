@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.WeaponItem;
 
 public class LaserGun extends WeaponItem {
     /**
-     * Constructor.
+     * Constructor for Laser Gun
      *
      * @param name        name of the item
      * @param displayChar character to use for display when item is on the ground

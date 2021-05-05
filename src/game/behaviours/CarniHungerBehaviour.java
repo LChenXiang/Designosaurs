@@ -30,7 +30,7 @@ import game.items.Egg;
  * @since 03/05/2021
  */
 
-public class CarniHungerBehaviour extends HungerBehaviour {
+public class CarniHungerBehaviour implements HungerBehaviour {
 
     /**
      * Empty Constructor

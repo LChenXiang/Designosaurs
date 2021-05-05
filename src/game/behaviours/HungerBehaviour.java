@@ -18,7 +18,7 @@ import game.dinosaur.DinosaurStatus;
  * @since 05/05/2021
  */
 
-public abstract class HungerBehaviour implements Behaviour{
+public interface HungerBehaviour extends Behaviour{
 
     /**
      * Finds the nearest suitable food source in the map.
@@ -27,6 +27,6 @@ public abstract class HungerBehaviour implements Behaviour{
      * @param map World map
      * @return null if no food source found, Action to start moving towards food
      */
-    public abstract Action findFood(Location here, Actor actor, GameMap map);
+    Action findFood(Location here, Actor actor, GameMap map);
 
 }

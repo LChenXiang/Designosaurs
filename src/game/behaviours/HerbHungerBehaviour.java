@@ -32,7 +32,7 @@ import game.items.Fruit;
  * @since 03/05/2021
  */
 
-public class HerbHungerBehaviour extends HungerBehaviour{
+public class HerbHungerBehaviour implements HungerBehaviour{
 
     /**
      * Empty Constructor

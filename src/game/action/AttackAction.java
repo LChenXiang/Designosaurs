@@ -1,4 +1,4 @@
-package game.actions;
+package game.action;
 
 import java.util.Random;
 
@@ -8,7 +8,8 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Weapon;
-import game.PortableItem;
+import game.dinosaur.Dinosaur;
+import game.items.Corpse;
 
 /**
  * Special Action for attacking other Actors.
@@ -47,9 +48,9 @@ public class AttackAction extends Action {
 
 		target.hurt(damage);
 		if (!target.isConscious()) {
-			// FIXME: CHANGE TO CORPSE
-			Item corpse = new PortableItem("dead " + target, '%');
-			map.locationOf(target).addItem(corpse);
+			// target died, create its corpse
+			map.locationOf(target).addItem(new Corpse("dead" + target.toString(),
+					((Dinosaur)target).getCorpseRotTime(), ((Dinosaur)target).getCorpseHealAmount()));
 			
 			Actions dropActions = new Actions();
 			for (Item item : target.getInventory())

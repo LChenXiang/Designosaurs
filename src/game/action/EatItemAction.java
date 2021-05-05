@@ -1,4 +1,4 @@
-package game.actions;
+package game.action;
 
 import edu.monash.fit2099.engine.*;
 import game.items.EdibleItem;

@@ -1,8 +1,7 @@
 package game.behaviours;
 
 import edu.monash.fit2099.engine.*;
-import game.PortableItem;
-import game.actions.BreedAction;
+import game.action.BreedAction;
 import game.dinosaur.Dinosaur;
 import game.dinosaur.DinosaurStatus;
 import game.dinosaur.Gender;

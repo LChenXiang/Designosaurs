@@ -1,10 +1,8 @@
-package game.actions;
+package game.action;
 
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
-import game.behaviours.BreedBehaviour;
-import game.dinosaur.Dinosaur;
 import game.dinosaur.DinosaurStatus;
 import game.dinosaur.Gender;
 

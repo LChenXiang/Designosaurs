@@ -1,7 +1,7 @@
 package game;
 
 import edu.monash.fit2099.engine.*;
-import game.actions.BuyItemAction;
+import game.action.BuyItemAction;
 import game.dinosaur.Allosaur;
 import game.dinosaur.Brachiosaur;
 import game.dinosaur.Stegosaur;
@@ -9,8 +9,6 @@ import game.items.*;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class VendingMachine extends Ground {
     private static int EcoPoints = 20000;

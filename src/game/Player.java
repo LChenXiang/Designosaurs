@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Menu;
-import game.actions.PickFruitAction;
+import game.action.PickFruitAction;
 import game.growable.Growable;
 
 /**

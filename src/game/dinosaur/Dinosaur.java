@@ -1,9 +1,9 @@
 package game.dinosaur;
 
 import edu.monash.fit2099.engine.*;
-import game.actions.AttackAction;
-import game.actions.DieFromHungerAction;
-import game.actions.LayEggAction;
+import game.action.AttackAction;
+import game.action.DieFromHungerAction;
+import game.action.LayEggAction;
 import game.behaviours.Behaviour;
 import game.behaviours.BreedBehaviour;
 import game.behaviours.WanderBehaviour;

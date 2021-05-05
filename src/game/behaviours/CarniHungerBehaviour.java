@@ -1,12 +1,10 @@
 package game.behaviours;
 
 import edu.monash.fit2099.engine.*;
-import game.actions.EatItemAction;
-import game.actions.EatPreyAction;
+import game.action.EatItemAction;
+import game.action.EatPreyAction;
 import game.dinosaur.Dinosaur;
 import game.dinosaur.DinosaurStatus;
-import game.items.Corpse;
-import game.items.Egg;
 import game.items.ItemStats;
 
 /**

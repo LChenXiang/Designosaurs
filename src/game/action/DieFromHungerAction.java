@@ -1,9 +1,8 @@
-package game.actions;
+package game.action;
 
 import edu.monash.fit2099.engine.*;
 import game.dinosaur.Dinosaur;
 import game.items.Corpse;
-import game.items.EdibleItem;
 
 /**
  * Special Action that shows a Dinosaur starving to death.

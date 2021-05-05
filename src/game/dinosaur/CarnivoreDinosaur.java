@@ -2,8 +2,10 @@ package game.dinosaur;
 
 import edu.monash.fit2099.engine.*;
 import game.Player;
+import game.actions.FeedAction;
 import game.behaviours.BreedBehaviour;
 import game.behaviours.CarniHungerBehaviour;
+import game.items.ItemStats;
 
 /**
  * Represents a Carnivore dinosaur.
@@ -63,8 +65,8 @@ public abstract class CarnivoreDinosaur extends Dinosaur {
         // TODO: Replace placeholder once other parts are done
         if (otherActor instanceof Player) {
             for (Item item : otherActor.getInventory()) {
-                if (item instanceof Item) { // Placeholder
-                    actions.add(new DoNothingAction()); // Placeholder, replace with feed.
+                if (item.hasCapability(ItemStats.CARNIVORE_CAN_EAT)) { // Placeholder
+                    actions.add(new FeedAction(this, item)); // Placeholder, replace with feed.
                 }
             }
         }

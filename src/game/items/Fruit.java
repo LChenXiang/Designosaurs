@@ -19,7 +19,7 @@ public class Fruit extends EdibleItem {
     public void tick(Location currentLocation) {
         super.tick(currentLocation);
         rotTime++;
-        if(rotTime > 15){
+        if(rotTime > 10){
             currentLocation.removeItem(this);
 
         }

@@ -106,8 +106,17 @@ public class GoToLocation implements Behaviour {
                 }
             }
         }
-        // actor reached location, do action
-        return this.action;
+        if (currentDistance>1) {
+            // actor still not at goal, continue moving towards it
+            return (new DoNothingAction() {
+                @Override
+                public Action getNextAction() { // override next action as current action continue moving
+                    return self.getAction(actor,map);}
+            });
+        }
+
+        else
+            return action; // actor is already beside target, do action
     }
 
     /**

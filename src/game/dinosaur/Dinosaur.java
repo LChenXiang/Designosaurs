@@ -184,7 +184,11 @@ public abstract class Dinosaur extends Actor {
      */
     public abstract int getCorpseHealAmount();
 
-    public abstract int eggPurchasePrice();
+    /**
+     *
+     * @return How much this dinosaur's egg should cost.
+     */
+    public abstract int getEggPurchasePrice();
 
 
     /**

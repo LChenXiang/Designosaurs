@@ -33,6 +33,7 @@ public class LayEggAction extends Action {
     public String execute(Actor actor, GameMap map) {
 
         Location here = map.locationOf(actor);
+        // FIXME: Constructor should be empty
         EdibleItem egg = new Egg("Egg", 'O');
         here.addItem(egg);
         // TODO: MAY NEED TO ADD ENUM OR SMTH TO INDICATE WHICH DINOSAUR

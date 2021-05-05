@@ -48,6 +48,7 @@ public class PickFruitAction extends Action {
             return actor + " searches the " + growable + " for fruit, but can't find any ripe ones.";
         }
 
+        // FIXME: Constructor should be empty
         actor.addItemToInventory(new Fruit("Fruit", 'a'));
         growable.decrementNumberOfRipeFruit();
         //TODO: +10 ecopoints

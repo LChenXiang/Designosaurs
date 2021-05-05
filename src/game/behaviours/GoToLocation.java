@@ -71,7 +71,9 @@ public class GoToLocation implements Behaviour {
                 if (there.getGround() != growable || growable.getNumberOfRipeFruit() < 1) {
                     return null; // no such growable/no more fruit, reset behaviour
                 }
-            } else
+                else {flag = true;}
+            }
+            else {
                 // check if item still exists at that location
                 for (Item item : there.getItems()) {
                     if (item == this.item) {
@@ -81,6 +83,7 @@ public class GoToLocation implements Behaviour {
                         break;
                     }
                 }
+            }
             if (!flag) { // item doesn't exist, reset behaviour
                 return null;
             }

@@ -1,7 +1,10 @@
 package game.action;
 
 import edu.monash.fit2099.engine.*;
+import game.VendingMachine;
+import game.items.EdibleItem;
 import game.items.Fruit;
+import game.items.ItemStats;
 
 /**
  * Action that allows Player to feed an Item to a Dinosaur and heal it
@@ -47,16 +50,19 @@ public class FeedAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
 
+        if (!(item.hasCapability(ItemStats.IS_EDIBLE))) {
+            return actor + " cannot feed with this " + item;
+        }
+
         String result = actor + " feeds " + target + " with " + item;
-        // TODO: Get heal points from Item
-        int healPoints = 0; // placeholder
+        int healPoints = ((EdibleItem)item).getHealAmount(null); // for Fruit, feeding is always +20
         target.heal(healPoints);
         result += System.lineSeparator() + target + " heals for " + healPoints + " hitpoints.";
 
         // add EcoPoints if item being fed is a fruit
         if (item instanceof Fruit) {
-            // TODO: EcoPoints += 10
-            // sysmsg player gains 10 ecopoints
+            VendingMachine.increaseEcoPoint(10);
+            result += System.lineSeparator() + actor + " gains 10 EcoPoints.";
         }
 
         result += System.lineSeparator() + actor + " loses one " + item + ".";

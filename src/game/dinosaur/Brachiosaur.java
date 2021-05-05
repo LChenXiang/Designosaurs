@@ -16,15 +16,14 @@ public class Brachiosaur extends HerbivoreDinosaur {
 
 
     /**
-     * Constructor to initialise a Brachiosaur with a specific gender.
+     * Constructor to initialise an adult Brachiosaur with a specific gender.
      * All Brachiosaur are represented by a 'b' and have 160 hit points.
      * They should start with 100 hit points.
      *
-     * @param name   the name of this Brachiosaur
      * @param gender the gender this Brachiosaur should have.
      */
-    public Brachiosaur(String name, Enum<Gender> gender) {
-        super(name, 'b', 160, gender);
+    public Brachiosaur(Enum<Gender> gender) {
+        super("Brachiosaur", 'b', 160, gender);
         addCapability(DinosaurStatus.LONG_NECK);
         addCapability(DinosaurStatus.BAD_DIGESTION);
         addCapability(DinosaurStatus.BIG_EATER_TREE);
@@ -32,15 +31,13 @@ public class Brachiosaur extends HerbivoreDinosaur {
     }
 
     /**
-     * Constructor to initialise a Brachiosaur with a specific gender and age.
-     * All Brachiosaur are represented by a 'b' and have 160 hit points.
-     * They should start with 100 hit points.
+     * Constructor to initialise a baby Brachiosaur
+     * All Brachiosaur are represented by a 'b' and have 160 max hit points.
+     * Starts with 10 hp.
      *
-     * @param name   the name of this Brachiosaur
-     * @param gender the gender this Brachiosaur should have.
      */
-    public Brachiosaur(String name, Enum<Gender> gender, int newAge) {
-        super(name, 'b', 160, gender, newAge);
+    public Brachiosaur() {
+        super("Brachiosaur", 'b', 160);
         addCapability(DinosaurStatus.LONG_NECK);
         addCapability(DinosaurStatus.BAD_DIGESTION);
         addCapability(DinosaurStatus.BIG_EATER_TREE);
@@ -124,15 +121,7 @@ public class Brachiosaur extends HerbivoreDinosaur {
      */
     @Override
     public Dinosaur getNewDinosaur() {
-        Random random = new Random();
-        boolean res = random.nextBoolean();
-        Enum<Gender> gender;
-        if (!res) {
-            gender = Gender.MALE;
-        } else {
-            gender = Gender.FEMALE;
-        }
-        return new Brachiosaur("Brachiosaur", gender, 0);
+        return new Brachiosaur();
     }
 
     /**
@@ -144,7 +133,7 @@ public class Brachiosaur extends HerbivoreDinosaur {
     }
 
     @Override
-    public int eggPurchasePrice() {
+    public int getEggPurchasePrice() {
         return 500;
     }
 }

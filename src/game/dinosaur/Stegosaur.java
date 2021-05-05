@@ -18,28 +18,25 @@ public class Stegosaur extends HerbivoreDinosaur {
     // Will need to change this to a collection if Stegosaur gets additional Behaviours.
 
     /**
-     * Constructor to initialise a Stegosaur with a specific gender.
-     * All Stegosaurs are represented by a 'd' and have 100 hit points.
+     * Constructor to initialise an adult Stegosaur with a specific gender.
+     * All Stegosaurs are represented by a 'd' and have 100 max hit points.
      * They should start with 50 hit points.
      *
-     * @param name   the name of this Stegosaur
      * @param gender the gender this dinosaur should have.
      */
-    public Stegosaur(String name, Enum<Gender> gender) {
-        super(name, 's', 100, gender);
+    public Stegosaur(Enum<Gender> gender) {
+        super("Stegosaur", 's', 100, gender);
         addCapability(DinosaurStatus.ALLOSAUR_CAN_ATTACK);
         addCapability(DinosaurStatus.SHORT_NECK);
     }
 
     /**
-     * Constructor to initialise a Stegosaur with a specific gender and age.
+     * Constructor to initialise a baby stegosaur with randomised gender.
+     * Starts with 10 hp.
      *
-     * @param name   the name of this Stegosaur
-     * @param gender the gender this dinosaur should have.
-     * @param newAge the age the dinosaur should have
      */
-    public Stegosaur(String name, Enum<Gender> gender, int newAge) {
-        super(name, 'd', 100, gender, newAge);
+    public Stegosaur() {
+        super("Stegosaur", 'd', 100);
         addCapability(DinosaurStatus.ALLOSAUR_CAN_ATTACK);
         addCapability(DinosaurStatus.SHORT_NECK);
     }
@@ -118,15 +115,7 @@ public class Stegosaur extends HerbivoreDinosaur {
      */
     @Override
     public Dinosaur getNewDinosaur() {
-        Random random = new Random();
-        boolean res = random.nextBoolean();
-        Enum<Gender> gender;
-        if (!res) {
-            gender = Gender.MALE;
-        } else {
-            gender = Gender.FEMALE;
-        }
-        return new Stegosaur("Stegosaur", gender, 0);
+        return new Stegosaur();
     }
 
     /**
@@ -138,7 +127,7 @@ public class Stegosaur extends HerbivoreDinosaur {
     }
 
     @Override
-    public int eggPurchasePrice() {
+    public int getEggPurchasePrice() {
         return 200;
     }
 }

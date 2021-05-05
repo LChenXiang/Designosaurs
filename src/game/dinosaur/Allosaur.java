@@ -26,30 +26,26 @@ public class Allosaur extends CarnivoreDinosaur {
     private final Map<Stegosaur, Integer> attackedStegosaur;
 
     /**
-     * Constructor to initialise an Allosaur with a specific gender.
-     * All Allosaurs are represented by a 'A' and have 100 hit points.
+     * Constructor to initialise an adult Allosaur with a specific gender.
+     * All Allosaurs are represented by a 'A' and have max 100 hit points.
      * They should start with 50 hit points.
      *
-     * @param name   the name of this Allosaur
      * @param gender the gender this Allosaur should have.
      */
-    public Allosaur(String name, Enum<Gender> gender) {
-        super(name, 'A', 100, gender);
+    public Allosaur(Enum<Gender> gender) {
+        super("Allosaur", 'A', 100, gender);
         attackedStegosaur = new HashMap<>();
         behaviourList.add(new PredatorBehaviour());
     }
 
     /**
-     * Constructor to initialise an Allsaur with a specific gender and age
-     * All Allosaurs are represented by a 'A' and have 100 hit points.
-     * They should start with 50 hit points.
+     * Constructor to initialise a baby Allosaur with a specific gender and age
+     * All Allosaurs are represented by a 'A' and have max 100 hit points.
+     * They should start with 10 hit points.
      *
-     * @param name   the name of this Allosaur
-     * @param gender the gender this Allosaur should have.
-     * @param newAge the age this Allosaur should have.
      */
-    public Allosaur(String name, Enum<Gender> gender, int newAge) {
-        super(name, 'A', 100, gender, newAge);
+    public Allosaur() {
+        super("Allosaur", 'A', 100);
         attackedStegosaur = new HashMap<>();
         behaviourList.add(new PredatorBehaviour());
     }
@@ -162,15 +158,7 @@ public class Allosaur extends CarnivoreDinosaur {
      */
     @Override
     public Dinosaur getNewDinosaur() {
-        Random random = new Random();
-        boolean res = random.nextBoolean();
-        Enum<Gender> gender;
-        if (!res) {
-            gender = Gender.MALE;
-        } else {
-            gender = Gender.FEMALE;
-        }
-        return new Allosaur("Allosaur", gender, 0);
+        return new Allosaur();
     }
 
     /**
@@ -182,7 +170,7 @@ public class Allosaur extends CarnivoreDinosaur {
     }
 
     @Override
-    public int eggPurchasePrice() {
+    public int getEggPurchasePrice() {
         return 1000;
     }
 

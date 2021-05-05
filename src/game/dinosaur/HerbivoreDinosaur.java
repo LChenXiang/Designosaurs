@@ -21,7 +21,7 @@ import game.items.ItemStats;
 public abstract class HerbivoreDinosaur extends Dinosaur {
 
     /**
-     * Constructor for a Herbivore Dinosaur.
+     * Constructor for an adult Herbivore Dinosaur.
      *
      * @param name        Name of the dinosaur.
      * @param displayChar Character used to represent the dinosaur on the map.
@@ -36,16 +36,14 @@ public abstract class HerbivoreDinosaur extends Dinosaur {
     }
 
     /**
-     * Constructor for a Herbivore Dinosaur.
+     * Constructor for a baby Herbivore Dinosaur.
      *
      * @param name        Name of the dinosaur.
      * @param displayChar Character used to represent the dinosaur on the map.
      * @param hitPoints   Max HP of the dinosaur.
-     * @param gender      Gender of the dinosaur.
-     * @param newAge      Age of the dinosaur to be initialised with
      */
-    public HerbivoreDinosaur(String name, char displayChar, int hitPoints, Enum<Gender> gender, int newAge) {
-        super(name, displayChar, hitPoints, gender, newAge);
+    public HerbivoreDinosaur(String name, char displayChar, int hitPoints) {
+        super(name, displayChar, hitPoints);
         addCapability(DinosaurStatus.TEAM_HERBIVORE);
         //TODO: Add other behaviour here
         behaviourList.add(1, new HerbHungerBehaviour());

@@ -20,7 +20,7 @@ import game.items.ItemStats;
 public abstract class CarnivoreDinosaur extends Dinosaur {
 
     /**
-     * Constructor for a Carnivore Dinosaur.
+     * Constructor for an adult Carnivore Dinosaur.
      *
      * @param name        Name of the dinosaur.
      * @param displayChar Character used to represent the dinosaur on the map.
@@ -35,18 +35,15 @@ public abstract class CarnivoreDinosaur extends Dinosaur {
     }
 
     /**
-     * Constructor for a Carnivore Dinosaur, initialises it to a specific age.
+     * Constructor for a baby Carnivore Dinosaur, randomised gender.
      *
      * @param name        Name of the dinosaur.
      * @param displayChar Character used to represent the dinosaur on the map.
      * @param hitPoints   Max HP of the dinosaur.
-     * @param gender      Gender of the dinosaur.
-     * @param newAge      Age of the dinosaur to be initialised with
      */
-    public CarnivoreDinosaur(String name, char displayChar, int hitPoints, Enum<Gender> gender, int newAge) {
-        super(name, displayChar, hitPoints, gender, newAge);
+    public CarnivoreDinosaur(String name, char displayChar, int hitPoints) {
+        super(name, displayChar, hitPoints);
         addCapability(DinosaurStatus.TEAM_CARNIVORE);
-        //TODO: Add needed behaviours here
         behaviourList.add(1, new CarniHungerBehaviour());
 
     }

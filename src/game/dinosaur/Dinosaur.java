@@ -9,6 +9,7 @@ import game.behaviours.BreedBehaviour;
 import game.behaviours.WanderBehaviour;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Represents a dinosaur. This class is abstract and should still be extended into Herbivore and Carnivore dinosaurs.
@@ -51,7 +52,7 @@ public abstract class Dinosaur extends Actor {
      *
      * @param name        the name of the Actor
      * @param displayChar the character that will represent the Actor in the display
-     * @param hitPoints   the Actor's starting hit points
+     * @param hitPoints   the Actor's max hit points
      * @param gender      Gender of the dinosaur.
      */
     public Dinosaur(String name, char displayChar, int hitPoints, Enum<Gender> gender) {
@@ -59,6 +60,7 @@ public abstract class Dinosaur extends Actor {
         // We will initialise the starting hp via another method.
         super(name, displayChar, hitPoints);
         addCapability(gender);
+        age = getAdultAge();
         // Insert all behaviour
         behaviourList.add(0, new WanderBehaviour());
         behaviourList.add(0, new BreedBehaviour());
@@ -66,27 +68,30 @@ public abstract class Dinosaur extends Actor {
     }
 
     /**
-     * Constructor to initialise a dinosaur to a specific age. Baby enum will be added if below adult age.
+     * Constructor to initialise a baby dinosaur
      *
      * @param name        the name of the Actor
      * @param displayChar the character that will represent the Actor in the display
      * @param hitPoints   the Actor's starting hit points
-     * @param gender      gender of the dinosaur
-     * @param newAge      age of the dinosaur
      */
-    public Dinosaur(String name, char displayChar, int hitPoints, Enum<Gender> gender, int newAge) {
+    public Dinosaur(String name, char displayChar, int hitPoints) {
         // hitPoints here is used to initialise the character's max hp.
         // We will initialise the starting hp via another method.
         super(name, displayChar, hitPoints);
-        addCapability(gender);
-        age = newAge;
-        // Age HP check
-        if (newAge > 0) {
-            this.hitPoints = getStartingHP();
+
+        Random random = new Random();
+        boolean res = random.nextBoolean();
+        Enum<Gender> gender;
+        if (!res) {
+            gender = Gender.MALE;
         } else {
-            this.hitPoints = getBabyStartingHP();
-            addCapability(DinosaurStatus.BABY);
+            gender = Gender.FEMALE;
         }
+
+        addCapability(gender);
+        age = 0;
+        this.hitPoints = getBabyStartingHP();
+        addCapability(DinosaurStatus.BABY);
         // Insert all behaviour
         behaviourList.add(0, new WanderBehaviour());
     }
@@ -173,6 +178,8 @@ public abstract class Dinosaur extends Actor {
      * The dinosaur will then only be placed onto the map, into the game
      * when the egg successfully hatches. If the egg doesn't hatch and gets
      * destroyed (not referenced anymore), so does the dinosaur.
+     *
+     * This will just run the second constructor, basically. Easier polymorphism.
      *
      * @return A new instance of this dinosaur
      */

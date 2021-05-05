@@ -56,11 +56,11 @@ public class Application {
 
 
 		// Place a pair of stegosaurs in the middle of the map
-		gameMap.at(30, 12).addActor(new Stegosaur("Stegosaur", Gender.MALE));
-		gameMap.at(32, 12).addActor(new Stegosaur("Stegosaur", Gender.FEMALE));
+		gameMap.at(30, 12).addActor(new Stegosaur(Gender.MALE));
+		gameMap.at(32, 12).addActor(new Stegosaur(Gender.FEMALE));
 		// Place a pair of Brachiosaur
-		gameMap.at(20,12).addActor(new Brachiosaur("Brachiosaur", Gender.MALE));
-		gameMap.at(19,12).addActor(new Brachiosaur("Brachiosaur", Gender.FEMALE));
+		gameMap.at(20,12).addActor(new Brachiosaur(Gender.MALE));
+		gameMap.at(19,12).addActor(new Brachiosaur(Gender.FEMALE));
 
 		world.run();
 	}

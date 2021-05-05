@@ -78,7 +78,6 @@ public class HerbHungerBehaviour implements HungerBehaviour{
                 else if (actor.hasCapability(DinosaurStatus.SHORT_NECK)) { // Dinosaur with SHORT NECK can Item from ground
                     // access all items on this location
                     for (Item item : destination.getItems()) {
-                        // TODO: MIGHT CHANGE TO ENUM FOR CHECKING CONDITIONS
                         // found fruit, immediately eat
                         if (item.hasCapability(ItemStats.HERBIVORE_CAN_EAT)) {
                             return new EatItemAction(item);
@@ -149,7 +148,6 @@ public class HerbHungerBehaviour implements HungerBehaviour{
                 }
                 else if (dinosaur.hasCapability(DinosaurStatus.SHORT_NECK)){ // Dinosaur with SHORT NECK can eat Item from ground
                     for (Item item : there.getItems()) {
-                        // TODO: CHANGE TO ENUM
                         if (item.hasCapability(ItemStats.HERBIVORE_CAN_EAT)) {
                             distance = distance(here, there);
                             // if this food Item is nearer than current nearest goal, overwrite nearest target to this

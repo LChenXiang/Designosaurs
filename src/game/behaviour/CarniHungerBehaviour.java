@@ -61,7 +61,6 @@ public class CarniHungerBehaviour implements HungerBehaviour {
                 } else {
                     // access all items on this location
                     for (Item item : destination.getItems()) {
-                        // TODO: MIGHT CHANGE TO ENUM FOR CHECKING CONDITIONS
                         // found food, immediately eat
                         if (item.hasCapability(ItemStats.CARNIVORE_CAN_EAT)) {
                             return new EatItemAction(item);
@@ -115,7 +114,6 @@ public class CarniHungerBehaviour implements HungerBehaviour {
                     }
                 } else { // no potential prey on this tile, find potential food Item
                     for (Item item : there.getItems()) {
-                        // TODO: CHANGE TO ENUM
                         if (item.hasCapability(ItemStats.CARNIVORE_CAN_EAT)) {
                             distance = distance(here, there);
                             // if this food Item is nearer than current nearest target, overwrite nearest target to this

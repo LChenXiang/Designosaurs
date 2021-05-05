@@ -36,8 +36,8 @@ public class PredatorBehaviour implements Behaviour {
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {
-
         // not Allosaur, shouldn't have this behaviour
+        // TODO: Check for corpse too?
         if (!(actor instanceof Allosaur)) {
             return null;
         }

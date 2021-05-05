@@ -31,7 +31,10 @@ public class Player extends Actor {
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		// TODO: Add pick fruit action here if location is growable
 		if (map.locationOf(this).getGround() instanceof Growable){
-			actions.add(new PickFruitAction((Growable) map.locationOf(this).getGround()));
+			Growable growable = (Growable) map.locationOf(this).getGround();
+			if (growable.getNumberOfRipeFruit() > 0){
+				actions.add(new PickFruitAction(growable));
+			}
 		}
 
 		// Handle multi-turn Actions

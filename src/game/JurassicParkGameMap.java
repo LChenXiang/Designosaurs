@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.GroundFactory;
 import edu.monash.fit2099.engine.Location;
 import game.dinosaur.Dinosaur;
+import game.growable.GrowableStatus;
 
 import java.io.IOException;
 import java.util.List;
@@ -71,7 +72,7 @@ public class JurassicParkGameMap extends GameMap {
         for (int y : heights) {
             for (int x : widths) {
                 JurassicParkLocation location = (JurassicParkLocation) this.at(x,y);
-                if (location.getGround() instanceof Dirt){
+                if (location.getGround().hasCapability(GrowableStatus.DIRT)){
                     location.checkBushGrowth();
                 }
             }

@@ -63,11 +63,9 @@ public abstract class HerbivoreDinosaur extends Dinosaur {
     public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
         Actions actions = super.getAllowableActions(otherActor, direction, map);
         // TODO: Replace placeholder once other parts are done
-        if (otherActor instanceof Player) {
-            for (Item item : otherActor.getInventory()) {
-                if (item.hasCapability(ItemStats.HERBIVORE_CAN_EAT)) { // Placeholder
-                    actions.add(new FeedAction(this, item)); // Placeholder, replace with feed.
-                }
+        for (Item item : otherActor.getInventory()) {
+            if (item.hasCapability(ItemStats.HERBIVORE_CAN_EAT)) { // Placeholder
+                actions.add(new FeedAction(this, item)); // Placeholder, replace with feed.
             }
         }
         return actions;

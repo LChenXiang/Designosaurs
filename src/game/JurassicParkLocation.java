@@ -60,7 +60,7 @@ public class JurassicParkLocation extends Location {
     private void checkBushDeath() {
         double chanceBushDeath = 0.5; // Chance of stomping the bush to death
         // Check if bush in the first place
-        if (getGround() instanceof Bush) {
+        if (getGround().hasCapability(GrowableStatus.FRAGILE)) {
             // Check if the dinosaur has the ability to kill a bush
             Actor dinosaur = getActor();
             if (dinosaur != null && dinosaur.hasCapability(DinosaurStatus.STOMP_BUSH)) {
@@ -81,7 +81,7 @@ public class JurassicParkLocation extends Location {
      */
     @Override
     public void tick() {
-        if (getGround() instanceof Dirt) {
+        if (getGround().hasCapability(GrowableStatus.DIRT)) {
             checkBushGrowth();
         }
         checkBushDeath();

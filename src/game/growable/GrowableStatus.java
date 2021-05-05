@@ -9,5 +9,7 @@ public enum GrowableStatus {
     SHORT,
     TALL,
     OBSTRUCT_GROWTH,
-    ENCOURAGE_GROWTH
+    ENCOURAGE_GROWTH,
+    FRAGILE,
+    DIRT
 }

@@ -27,7 +27,7 @@ public class DieFromHungerAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         // FIXME: Constructor should be empty
-        Corpse corpse = new Corpse("dead " + actor, 'X');
+        Corpse corpse = new Corpse();
         map.locationOf(actor).addItem(corpse);
 
         Actions dropActions = new Actions();

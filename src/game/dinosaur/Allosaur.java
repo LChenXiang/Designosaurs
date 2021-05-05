@@ -10,6 +10,8 @@ import java.util.Random;
 
 /**
  * Represents a Carnivore Allosaur.
+ * Allosaurs will continue on its previous actions even if there are
+ * nearby corpses or Stegosaurs. They are focused being.
  *
  * @author NgYuKang
  * @version 1.0
@@ -150,7 +152,11 @@ public class Allosaur extends CarnivoreDinosaur {
      */
     @Override
     protected IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(20, "bites");
+        if (hasCapability(DinosaurStatus.BABY)){
+            return new IntrinsicWeapon(10, "bites");
+        } else {
+            return new IntrinsicWeapon(20, "bites");
+        }
     }
 
     /**

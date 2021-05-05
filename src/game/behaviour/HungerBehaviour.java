@@ -1,8 +1,6 @@
-package game.behaviours;
+package game.behaviour;
 
 import edu.monash.fit2099.engine.*;
-import game.dinosaur.Dinosaur;
-import game.dinosaur.DinosaurStatus;
 
 /**
  * Class that decides whether an actor is hungry and finds food if so

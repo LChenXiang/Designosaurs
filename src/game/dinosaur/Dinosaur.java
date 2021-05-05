@@ -4,9 +4,9 @@ import edu.monash.fit2099.engine.*;
 import game.action.AttackAction;
 import game.action.DieFromHungerAction;
 import game.action.LayEggAction;
-import game.behaviours.Behaviour;
-import game.behaviours.BreedBehaviour;
-import game.behaviours.WanderBehaviour;
+import game.behaviour.Behaviour;
+import game.behaviour.BreedBehaviour;
+import game.behaviour.WanderBehaviour;
 
 import java.util.ArrayList;
 import java.util.Random;

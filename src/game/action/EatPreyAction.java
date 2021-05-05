@@ -8,7 +8,7 @@ import game.dinosaur.Stegosaur;
  * Special Action that attacks an Actor, and heals the attacker Actor
  *
  * @author Lin Chen Xiang
- * @see game.behaviours.PredatorBehaviour
+ * @see game.behaviour.PredatorBehaviour
 // * @see carnihungerbehaviour
  * @see Actor
  * @see Allosaur

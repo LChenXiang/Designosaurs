@@ -12,7 +12,7 @@ import game.dinosaur.Gender;
  * @author Lin Chen Xiang
  * @see Actor
  * @see Action
- * @see game.behaviours.BreedBehaviour
+ * @see game.behaviour.BreedBehaviour
  * @see DinosaurStatus
  * @see Gender
  * @see GameMap

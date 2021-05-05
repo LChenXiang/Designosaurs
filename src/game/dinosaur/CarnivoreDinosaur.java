@@ -2,7 +2,7 @@ package game.dinosaur;
 
 import edu.monash.fit2099.engine.*;
 import game.action.FeedAction;
-import game.behaviours.CarniHungerBehaviour;
+import game.behaviour.CarniHungerBehaviour;
 import game.items.ItemStats;
 
 /**

@@ -15,7 +15,7 @@ import game.growable.Growable;
  * @see Growable
  * @see Dinosaur
  * @see DinosaurStatus
- * @see game.behaviours.HerbHungerBehaviour
+ * @see game.behaviour.HerbHungerBehaviour
  * @see GameMap
  * @since 03/05/2021
  */

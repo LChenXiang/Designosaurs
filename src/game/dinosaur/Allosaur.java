@@ -1,12 +1,11 @@
 package game.dinosaur;
 
 import edu.monash.fit2099.engine.*;
-import game.behaviours.PredatorBehaviour;
+import game.behaviour.PredatorBehaviour;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * Represents a Carnivore Allosaur.

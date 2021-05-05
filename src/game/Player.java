@@ -6,6 +6,8 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Menu;
+import game.actions.PickFruitAction;
+import game.growable.Growable;
 
 /**
  * Class representing the Player.
@@ -29,6 +31,10 @@ public class Player extends Actor {
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		// TODO: Add pick fruit action here if location is growable
 		// Handle multi-turn Actions
+		if (map.locationOf(this).getGround() instanceof Growable){
+			actions.add(new PickFruitAction((Growable) map.locationOf(this).getGround()));
+		}
+
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
 		return menu.showMenu(this, actions, display);

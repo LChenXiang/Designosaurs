@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.Location;
 public class Fruit extends EdibleItem {
     private int rotTime;
 
-    public Fruit(String name, char displayChar) {
+    public Fruit() {
         super("Fruit", 'a');
 
     }
@@ -18,9 +18,9 @@ public class Fruit extends EdibleItem {
     @Override
     public void tick(Location currentLocation) {
         super.tick(currentLocation);
-        Fruit fruit = new Fruit("Fruit", 'a');
+        rotTime++;
         if(rotTime > 15){
-            currentLocation.removeItem(fruit);
+            currentLocation.removeItem(this);
 
         }
     }

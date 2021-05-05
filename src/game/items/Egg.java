@@ -20,4 +20,6 @@ public class Egg extends PortableItem {
         super.tick(currentLocation);
 
     }
+
+
 }

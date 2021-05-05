@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Location;
 import game.PortableItem;
+import game.dinosaur.Dinosaur;
 import game.dinosaur.DinosaurStatus;
 import game.items.EdibleItem;
 import game.items.Egg;
@@ -34,8 +35,9 @@ public class LayEggAction extends Action {
     public String execute(Actor actor, GameMap map) {
 
         Location here = map.locationOf(actor);
-        // FIXME: Constructor should be empty
-        PortableItem egg = new Egg("Egg", 'O');
+        // FIXME: MAKE THIS BETTER: CHECK IF IS DINOSAUR FIRST BEFORE CASTING
+        Dinosaur dinosaur = ((Dinosaur)actor);
+        PortableItem egg = new Egg(dinosaur.getNewDinosaur());
         here.addItem(egg);
         // TODO: MAY NEED TO ADD ENUM OR SMTH TO INDICATE WHICH DINOSAUR
 

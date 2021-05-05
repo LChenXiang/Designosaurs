@@ -1,6 +1,7 @@
 package game.actions;
 
 import edu.monash.fit2099.engine.*;
+import game.dinosaur.Dinosaur;
 import game.items.Corpse;
 import game.items.EdibleItem;
 
@@ -26,8 +27,15 @@ public class DieFromHungerAction extends Action {
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        // FIXME: Constructor should be empty
-        Corpse corpse = new Corpse();
+        // FIXME: MAKE THIS BETTER RATHER THAN USING DINOSAUR
+        Corpse corpse;
+        if (actor instanceof Dinosaur){
+            Dinosaur dinosaur = ((Dinosaur)actor);
+            corpse = new Corpse(dinosaur.toString(), dinosaur.getCorpseRotTime(), dinosaur.getCorpseHealAmount());
+        } else {
+            // Backup code just in case it isn't a dinosaur
+            corpse = new Corpse(actor.toString(), 20, 20);
+        }
         map.locationOf(actor).addItem(corpse);
 
         Actions dropActions = new Actions();

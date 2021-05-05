@@ -7,6 +7,7 @@ import game.dinosaur.Dinosaur;
 import game.dinosaur.DinosaurStatus;
 import game.items.Corpse;
 import game.items.Egg;
+import game.items.ItemStats;
 
 /**
  * Class that decides whether a carnivore is hungry and finds food if so
@@ -20,8 +21,7 @@ import game.items.Egg;
  * @see Dinosaur
  * @see game.dinosaur.CarnivoreDinosaur
  * @see DinosaurStatus
- * @see Corpse
- * @see Egg
+ * @see ItemStats
  * @see EatPreyAction
  * @see EatItemAction
  * @see FollowBehaviour
@@ -65,7 +65,7 @@ public class CarniHungerBehaviour implements HungerBehaviour {
                     for (Item item : destination.getItems()) {
                         // TODO: MIGHT CHANGE TO ENUM FOR CHECKING CONDITIONS
                         // found food, immediately eat
-                        if (item instanceof Corpse || item instanceof Egg) {
+                        if (item.hasCapability(ItemStats.CARNIVORE_CAN_EAT)) {
                             return new EatItemAction(item);
                         }
                     }
@@ -118,7 +118,7 @@ public class CarniHungerBehaviour implements HungerBehaviour {
                 } else { // no potential prey on this tile, find potential food Item
                     for (Item item : there.getItems()) {
                         // TODO: CHANGE TO ENUM
-                        if (item instanceof Corpse || item instanceof Egg) {
+                        if (item.hasCapability(ItemStats.CARNIVORE_CAN_EAT)) {
                             distance = distance(here, there);
                             // if this food Item is nearer than current nearest target, overwrite nearest target to this
                             if (distance < closestDist[0]) {

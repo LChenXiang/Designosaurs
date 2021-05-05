@@ -8,6 +8,7 @@ import game.dinosaur.DinosaurStatus;
 import game.growable.Growable;
 import game.growable.GrowableStatus;
 import game.items.Fruit;
+import game.items.ItemStats;
 
 /**
  * Class that decides whether a herbivore is hungry and finds food if so
@@ -24,9 +25,9 @@ import game.items.Fruit;
  * @see HungerBehaviour
  * @see DinosaurStatus
  * @see GrowableStatus
+ * @see ItemStats
  * @see EatFromGrowableAction
  * @see EatItemAction
- * @see Fruit
  * @see GoToLocation
  * @see GameMap
  * @since 03/05/2021
@@ -80,7 +81,7 @@ public class HerbHungerBehaviour implements HungerBehaviour{
                     for (Item item : destination.getItems()) {
                         // TODO: MIGHT CHANGE TO ENUM FOR CHECKING CONDITIONS
                         // found fruit, immediately eat
-                        if (item instanceof Fruit) {
+                        if (item.hasCapability(ItemStats.HERBIVORE_CAN_EAT)) {
                             return new EatItemAction(item);
                         }
                     }
@@ -147,10 +148,10 @@ public class HerbHungerBehaviour implements HungerBehaviour{
                         }
                     }
                 }
-                else if (dinosaur.hasCapability(DinosaurStatus.SHORT_NECK)){ // Dinosaur with SHORT NECK can Item from ground
+                else if (dinosaur.hasCapability(DinosaurStatus.SHORT_NECK)){ // Dinosaur with SHORT NECK can eat Item from ground
                     for (Item item : there.getItems()) {
                         // TODO: CHANGE TO ENUM
-                        if (item instanceof Fruit) {
+                        if (item.hasCapability(ItemStats.HERBIVORE_CAN_EAT)) {
                             distance = distance(here, there);
                             // if this food Item is nearer than current nearest goal, overwrite nearest target to this
                             if (distance < closestDist[0]) {

@@ -3,6 +3,7 @@ package game.action;
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
+import game.VendingMachine;
 import game.growable.Growable;
 import game.items.Fruit;
 
@@ -48,12 +49,11 @@ public class PickFruitAction extends Action {
             return actor + " searches the " + growable + " for fruit, but can't find any ripe ones.";
         }
 
-        // FIXME: Constructor should be empty
         actor.addItemToInventory(new Fruit());
         growable.decrementNumberOfRipeFruit();
-        //TODO: +10 ecopoints
+        VendingMachine.increaseEcoPoint(10);
 
-        return actor + " gains one fruit.";
+        return actor + " gains one fruit and 10 EcoPoints.";
     }
 
     /**

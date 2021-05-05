@@ -42,7 +42,7 @@ public class  BreedAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
 
-        String result="";
+        String result=actor + " mates with " + target + System.lineSeparator();
 
         if (actor.hasCapability(Gender.FEMALE)) {
             result += actor + " is ";

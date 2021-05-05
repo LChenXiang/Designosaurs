@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Location;
+import game.PortableItem;
 import game.dinosaur.DinosaurStatus;
 import game.items.EdibleItem;
 import game.items.Egg;
@@ -34,7 +35,7 @@ public class LayEggAction extends Action {
 
         Location here = map.locationOf(actor);
         // FIXME: Constructor should be empty
-        EdibleItem egg = new Egg("Egg", 'O');
+        PortableItem egg = new Egg("Egg", 'O');
         here.addItem(egg);
         // TODO: MAY NEED TO ADD ENUM OR SMTH TO INDICATE WHICH DINOSAUR
 

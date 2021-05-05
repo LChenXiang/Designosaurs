@@ -14,4 +14,8 @@ public class LaserGun extends WeaponItem {
     public LaserGun(String name, char displayChar, int damage, String verb) {
         super("Laser Gun", 'F', 160, "zaps");
     }
+    @Override
+    public void addCapability(Enum<?> capability) {
+        super.addCapability(ItemStats.IS_WEAPON);
+    }
 }

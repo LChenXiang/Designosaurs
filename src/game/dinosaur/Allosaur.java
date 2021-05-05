@@ -181,6 +181,11 @@ public class Allosaur extends CarnivoreDinosaur {
         return 50;
     }
 
+    @Override
+    public int eggPurchasePrice() {
+        return 1000;
+    }
+
     /**
      * Lets an Allosaur have its turn.
      * Will iterate through the entire hashmap to make update how long since

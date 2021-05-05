@@ -142,4 +142,9 @@ public class Brachiosaur extends HerbivoreDinosaur {
     public int getCorpseHealAmount() {
         return 100;
     }
+
+    @Override
+    public int eggPurchasePrice() {
+        return 500;
+    }
 }

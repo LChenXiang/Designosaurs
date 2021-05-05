@@ -184,6 +184,8 @@ public abstract class Dinosaur extends Actor {
      */
     public abstract int getCorpseHealAmount();
 
+    public abstract int eggPurchasePrice();
+
 
     /**
      * Allow the dinosaur to have its turn.

@@ -137,4 +137,8 @@ public class Stegosaur extends HerbivoreDinosaur {
         return 50;
     }
 
+    @Override
+    public int eggPurchasePrice() {
+        return 200;
+    }
 }

@@ -32,10 +32,10 @@ public class PredatorBehaviour implements Behaviour {
     }
 
     /**
-     * Checks all exits of this actor to see if there are prey that can be attacked
+     * Checks all exits of this actor to see if there are prey or corpse to be eaten
      * @param actor the Actor acting
      * @param map the GameMap containing the Actor
-     * @return null if no prey to attack, new EatPreyAction if there are prey that can be attacked
+     * @return null if no prey nor corpse found, new EatPreyAction if there are prey that can be attacked
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {

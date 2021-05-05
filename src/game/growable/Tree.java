@@ -57,8 +57,7 @@ public class Tree extends Growable {
             double chance = Math.random();
             if (chance < dropFruitChance()) {
                 decrementNumberOfRipeFruit();
-                location.addItem(new Fruit() {
-                }); // Placeholder4
+                location.addItem(new Fruit());
             }
         }
 

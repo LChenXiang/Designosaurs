@@ -13,7 +13,11 @@ import java.util.List;
  * An extended version of the original GameMap, to suit the
  * JurassicPark's game needs.
  *
+ * @author NgYuKang
+ * @version 1.0
  * @see GameMap
+ * @see JurassicParkLocation
+ * @since 25/04/2021
  */
 public class JurassicParkGameMap extends GameMap {
 
@@ -56,7 +60,7 @@ public class JurassicParkGameMap extends GameMap {
 
     /**
      * Creates a new Location.
-     *
+     * <p>
      * Overridden to use JurassicParkLocation.
      *
      * @param x X coordinate
@@ -68,11 +72,11 @@ public class JurassicParkGameMap extends GameMap {
         return new JurassicParkLocation(this, x, y);
     }
 
-    private void initialBushGrowth(){
+    private void initialBushGrowth() {
         for (int y : heights) {
             for (int x : widths) {
-                JurassicParkLocation location = (JurassicParkLocation) this.at(x,y);
-                if (location.getGround().hasCapability(GrowableStatus.DIRT)){
+                JurassicParkLocation location = (JurassicParkLocation) this.at(x, y);
+                if (location.getGround().hasCapability(GrowableStatus.DIRT)) {
                     location.checkBushGrowth();
                 }
             }

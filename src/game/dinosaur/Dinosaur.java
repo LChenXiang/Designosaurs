@@ -267,7 +267,7 @@ public abstract class Dinosaur extends Actor {
         }
 
         // Handle multi-turn actions
-        if (lastAction.getNextAction() != null) {
+        if ((lastAction != null) && (lastAction.getNextAction() != null)) {
             return lastAction.getNextAction();
         }
 

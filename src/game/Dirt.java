@@ -8,6 +8,9 @@ import game.growable.GrowableStatus;
  */
 public class Dirt extends Ground {
 
+	/**
+	 * Constructor. Adds an enum.
+	 */
 	public Dirt() {
 		super('.');
 		addCapability(GrowableStatus.DIRT);

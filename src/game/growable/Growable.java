@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.Location;
  * Represents any ground type that can grow fruits, such as a tree, bush, etc.
  *
  * @author NgYuKang
+ * @version 1.0
  * @see Ground
  * @see Location
  * @since 25/04/2021
@@ -64,10 +65,9 @@ public abstract class Growable extends Ground {
     }
 
     /**
-     *
      * @return The number of fruits currently held by the Growable.
      */
-    public int getNumberOfRipeFruit(){
+    public int getNumberOfRipeFruit() {
         return numberOfRipeFruit;
     }
 

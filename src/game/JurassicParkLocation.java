@@ -6,6 +6,17 @@ import game.growable.Bush;
 import game.growable.GrowableStatus;
 import game.growable.Tree;
 
+/**
+ * An extended version of the original location, to suit the
+ * JurassicPark's game needs.
+ *
+ * @author NgYuKang
+ * @version 1.0
+ * @see GameMap
+ * @see JurassicParkGameMap
+ * @see Location
+ * @since 25/04/2021
+ */
 public class JurassicParkLocation extends Location {
     /**
      * Constructor.

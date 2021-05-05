@@ -4,6 +4,7 @@ package game.growable;
  * Represents a bush.
  *
  * @author NgYuKang
+ * @version 1.0
  * @see Growable
  * @since 25/04/2021
  */
@@ -21,7 +22,6 @@ public class Bush extends Growable {
     }
 
     /**
-     *
      * @return chance that a fruit will grow every turn in a bush.
      */
     @Override
@@ -30,7 +30,6 @@ public class Bush extends Growable {
     }
 
     /**
-     *
      * @return Name of this growable
      */
     @Override

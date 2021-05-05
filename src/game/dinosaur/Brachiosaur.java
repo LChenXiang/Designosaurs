@@ -6,6 +6,7 @@ import java.util.Random;
  * Represents a Herbivore Brachiosaur.
  *
  * @author NgYuKang
+ * @version 1.0
  * @see DinosaurStatus
  * @see Gender
  * @see HerbivoreDinosaur
@@ -34,7 +35,6 @@ public class Brachiosaur extends HerbivoreDinosaur {
      * Constructor to initialise a baby Brachiosaur
      * All Brachiosaur are represented by a 'b' and have 160 max hit points.
      * Starts with 10 hp.
-     *
      */
     public Brachiosaur() {
         super("Brachiosaur", 'b', 160);

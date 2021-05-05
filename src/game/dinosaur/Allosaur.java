@@ -12,6 +12,7 @@ import java.util.Random;
  * Represents a Carnivore Allosaur.
  *
  * @author NgYuKang
+ * @version 1.0
  * @see DinosaurStatus
  * @see Gender
  * @see CarnivoreDinosaur
@@ -42,7 +43,6 @@ public class Allosaur extends CarnivoreDinosaur {
      * Constructor to initialise a baby Allosaur with a specific gender and age
      * All Allosaurs are represented by a 'A' and have max 100 hit points.
      * They should start with 10 hit points.
-     *
      */
     public Allosaur() {
         super("Allosaur", 'A', 100);

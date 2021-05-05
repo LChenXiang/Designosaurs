@@ -8,6 +8,7 @@ import java.util.Random;
  * Represents a Stegosaur.
  *
  * @author NgYuKang
+ * @version 1.0
  * @see DinosaurStatus
  * @see Gender
  * @see HerbivoreDinosaur
@@ -33,7 +34,6 @@ public class Stegosaur extends HerbivoreDinosaur {
     /**
      * Constructor to initialise a baby stegosaur with randomised gender.
      * Starts with 10 hp.
-     *
      */
     public Stegosaur() {
         super("Stegosaur", 'd', 100);

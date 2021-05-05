@@ -2,6 +2,7 @@ package game.growable;
 
 import edu.monash.fit2099.engine.Location;
 import game.PortableItem;
+import game.VendingMachine;
 import game.items.EdibleItem;
 import game.items.Fruit;
 
@@ -9,6 +10,7 @@ import game.items.Fruit;
  * Represents a Tree.
  *
  * @author NgYuKang
+ * @version 1.0
  * @see Growable
  * @since 25/04/2021
  */
@@ -70,8 +72,7 @@ public class Tree extends Growable {
     protected boolean checkGrowFruit() {
         boolean res = super.checkGrowFruit();
         if (res) {
-            res = true;
-            // TODO: Increment ecopoint
+            VendingMachine.increaseEcoPoint(1);
         }
         return res;
     }

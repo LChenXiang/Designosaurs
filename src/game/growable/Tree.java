@@ -91,4 +91,9 @@ public class Tree extends Growable {
             displayChar = 'T';
 
     }
+
+    @Override
+    public String toString() {
+        return "Tree";
+    }
 }

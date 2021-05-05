@@ -28,4 +28,14 @@ public class Bush extends Growable {
     public double growFruitChance() {
         return 0.1;
     }
+
+    /**
+     *
+     * @return Name of this growable
+     */
+    @Override
+    public String toString() {
+        return "Bush";
+    }
+
 }

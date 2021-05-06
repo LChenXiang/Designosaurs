@@ -94,14 +94,26 @@ public class VendingMachine extends Ground {
         return actions;
     }
 
+    /**
+     *
+     * @param num How much to increase the ecopoints
+     */
     public static void increaseEcoPoint(int num) {
         EcoPoints += num;
     }
 
+    /**
+     *
+     * @return Current amount of ecopoints
+     */
     public static int getEcoPoint() {
         return EcoPoints;
     }
 
+    /**
+     *
+     * @param num How much to decrease ecopoints
+     */
     public static void decreaseEcoPoint(int num) {
         EcoPoints -= num;
     }

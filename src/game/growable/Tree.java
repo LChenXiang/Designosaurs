@@ -11,10 +11,10 @@ import game.items.Fruit;
  *
  * @author NgYuKang
  * @version 1.0
- * @see Growable
+ * @see DroppableFruitGrowable
  * @since 25/04/2021
  */
-public class Tree extends Growable {
+public class Tree extends DroppableFruitGrowable {
     /**
      * Age of a tree.
      */
@@ -43,24 +43,9 @@ public class Tree extends Growable {
     /**
      * @return Chance that a fruit will drop from a tree every turn.
      */
+    @Override
     public double dropFruitChance() {
         return 0.05;
-    }
-
-    /**
-     * Checks each fruit the tree has if it would drop.
-     */
-    private void canDropFruit(Location location) {
-        // RNGesus
-        int temp = getNumberOfRipeFruit(); // use a temp variable since it might change
-        for (int i = 0; i < temp; i++) {
-            double chance = Math.random();
-            if (chance < dropFruitChance()) {
-                decrementNumberOfRipeFruit();
-                location.addItem(new Fruit());
-            }
-        }
-
     }
 
 
@@ -85,16 +70,17 @@ public class Tree extends Growable {
     @Override
     public void tick(Location location) {
         super.tick(location);
-        canDropFruit(location);
-
         age++;
         if (age == 10)
             displayChar = 't';
         if (age == 20)
             displayChar = 'T';
-
     }
 
+    /**
+     *
+     * @return Name of the tree. Tree.
+     */
     @Override
     public String toString() {
         return "Tree";

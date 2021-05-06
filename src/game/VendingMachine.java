@@ -10,11 +10,36 @@ import game.items.*;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 
+/**
+ * Represents a vending machine that you can buy items from.
+ *
+ * @author NgYuKang, Amos Leong Zheng Khang
+ * @version 1.0
+ * @see BuyItemAction
+ * @see Fruit
+ * @see LaserGun
+ * @see Egg
+ * @see MealKit
+ * @since 05/05/2021
+ */
 public class VendingMachine extends Ground {
+
+    /**
+     * The currency we are dealing with. Static variable, shared across vending machine.
+     */
     private static int EcoPoints = 0;
+
+    /**
+     * Items that we will sell
+     */
     private ArrayList<Item> sellableItem;
 
 
+    /**
+     * Constructor. Insert items into the arraylist here to sell them.
+     * When creating an item to sell, make sure to implement Purchasble and its method.
+     * Extend Portable/Edible/Weapon/Perishable as deem fit.
+     */
     public VendingMachine() {
         super('V');
         sellableItem = new ArrayList<>();
@@ -27,6 +52,12 @@ public class VendingMachine extends Ground {
         sellableItem.add(new CarnivoreMealKit());
     }
 
+    /**
+     * Vending machine is tall. Blocky. No Enter.
+     *
+     * @param actor the Actor to check
+     * @return WE CANT ENTER! False.
+     */
     @Override
     public boolean canActorEnter(Actor actor) {
         return false;
@@ -34,6 +65,7 @@ public class VendingMachine extends Ground {
 
     /**
      * Override this to implement terrain that blocks thrown objects but not movement, or vice versa
+     * Vending machine Tall. Block things.
      *
      * @return true
      */
@@ -45,14 +77,14 @@ public class VendingMachine extends Ground {
     /**
      * Creates an BuyItemAction from the inputs.
      *
-     * @param item Item to put on sale
+     * @param item  Item to put on sale
      * @param price Price of the item
      * @return The action to buy said item
      */
     private Action returnBuyItemAction(Item item, int price) {
         Item freshItem;
         Action action = null;
-        if (item instanceof Egg){
+        if (item instanceof Egg) {
             freshItem = ((Egg) item).getNewCopy();
             action = new BuyItemAction(freshItem, price);
         } else {
@@ -86,7 +118,7 @@ public class VendingMachine extends Ground {
         for (Item item : sellableItem) {
             Purchasable itemPurchase = (Purchasable) (item);
             int price = itemPurchase.getPrice();
-            if (getEcoPoint() >= price){
+            if (getEcoPoint() >= price) {
                 actions.add(returnBuyItemAction(item, price));
             }
         }
@@ -95,7 +127,6 @@ public class VendingMachine extends Ground {
     }
 
     /**
-     *
      * @param num How much to increase the ecopoints
      */
     public static void increaseEcoPoint(int num) {
@@ -103,7 +134,6 @@ public class VendingMachine extends Ground {
     }
 
     /**
-     *
      * @return Current amount of ecopoints
      */
     public static int getEcoPoint() {
@@ -111,7 +141,6 @@ public class VendingMachine extends Ground {
     }
 
     /**
-     *
      * @param num How much to decrease ecopoints
      */
     public static void decreaseEcoPoint(int num) {

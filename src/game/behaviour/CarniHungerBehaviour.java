@@ -3,6 +3,7 @@ package game.behaviour;
 import edu.monash.fit2099.engine.*;
 import game.action.EatItemAction;
 import game.action.EatPreyAction;
+import game.dinosaur.CarnivoreDinosaur;
 import game.dinosaur.Dinosaur;
 import game.dinosaur.DinosaurStatus;
 import game.items.ItemStats;
@@ -55,9 +56,15 @@ public class CarniHungerBehaviour implements HungerBehaviour {
             // check surroundings if there is food source
             for (Exit exit : here.getExits()) {
                 Location destination = exit.getDestination();
-                // found prey, immediately attack
+                // found prey, immediately attack if havent attack before
                 if (destination.containsAnActor() && destination.getActor().hasCapability(DinosaurStatus.ALLOSAUR_CAN_ATTACK)) {
-                    return new EatPreyAction(destination.getActor());
+                    // false if Allosaur already attacked this Dinosaur within 20 turns, true otherwise
+                    boolean canAttack = ((CarnivoreDinosaur)actor).canAttack((Dinosaur) destination.getActor());
+                    // if canAttack is true means not attacked before
+                    if (canAttack) {
+                        return new EatPreyAction(destination.getActor());
+                    }
+
                 } else {
                     // access all items on this location
                     for (Item item : destination.getItems()) {
@@ -105,13 +112,19 @@ public class CarniHungerBehaviour implements HungerBehaviour {
                 there = map.at(x, y);
                 // if found potential prey
                 if (there.containsAnActor() && there.getActor().hasCapability(DinosaurStatus.ALLOSAUR_CAN_ATTACK)) {
-                    distance = distance(here, there);
-                    // if this prey is nearer than current nearest target, overwrite nearest target to this target
-                    if (distance < closestDist[0]) {
-                        closestDist[0] = distance;
-                        closestDist[1] = 0;
-                        currentClosest = there;
+                    // false if Allosaur already attacked this Dinosaur within 20 turns, true otherwise
+                    boolean canAttack = ((CarnivoreDinosaur)dinosaur).canAttack((Dinosaur) there.getActor());
+                    // if canAttack is true means not attacked before
+                    if (canAttack) {
+                        distance = distance(here, there);
+                        // if this prey is nearer than current nearest target, overwrite nearest target to this target
+                        if (distance < closestDist[0]) {
+                            closestDist[0] = distance;
+                            closestDist[1] = 0;
+                            currentClosest = there;
+                        }
                     }
+
                 } else { // no potential prey on this tile, find potential food Item
                     for (Item item : there.getItems()) {
                         if (item.hasCapability(ItemStats.CARNIVORE_CAN_EAT)) {

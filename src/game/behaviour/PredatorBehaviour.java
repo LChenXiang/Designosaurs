@@ -3,9 +3,7 @@ package game.behaviour;
 import edu.monash.fit2099.engine.*;
 import game.action.EatItemAction;
 import game.action.EatPreyAction;
-import game.dinosaur.Allosaur;
-import game.dinosaur.DinosaurStatus;
-import game.dinosaur.Stegosaur;
+import game.dinosaur.*;
 import game.items.Corpse;
 
 /**
@@ -52,8 +50,8 @@ public class PredatorBehaviour implements Behaviour {
             // if this exit contains an Actor that can be attacked by Allosaur
             if (destination.containsAnActor() && destination.getActor().hasCapability(DinosaurStatus.ALLOSAUR_CAN_ATTACK)) {
 
-                // false if Allosaur already attacked this Actor within 20 turns, true otherwise
-                boolean canAttack = ((Allosaur)actor).canAttack((Stegosaur) destination.getActor());
+                // false if Allosaur already attacked this Dinosaur within 20 turns, true otherwise
+                boolean canAttack = ((CarnivoreDinosaur)actor).canAttack((Dinosaur) destination.getActor());
                 // if canAttack is true means not attacked before
                 if (canAttack) {
                     return new EatPreyAction(destination.getActor());

@@ -1,9 +1,7 @@
 package game.action;
 
 import edu.monash.fit2099.engine.*;
-import game.dinosaur.Allosaur;
-import game.dinosaur.DinosaurStatus;
-import game.dinosaur.Stegosaur;
+import game.dinosaur.*;
 
 /**
  * Special Action that attacks an Actor, and heals the attacker Actor
@@ -62,9 +60,9 @@ public class EatPreyAction extends AttackAction {
         actor.heal(healPoints);
         result += System.lineSeparator() + actor + " heals for " + healPoints + " HitPoints.";
 
-        // target Stegosaur survives, add to hashMap to ensure Allosaur can't attack it for 20 turns
+        // target Dinosaur survives, add to hashMap to ensure Allosaur can't attack it for 20 turns
         if (target.isConscious()) {
-            ((Allosaur)actor).insertStegosaurAttacked((Stegosaur) target);
+            ((CarnivoreDinosaur)actor).insertDinosaurAttacked((Dinosaur) target);
         }
 
         return result;

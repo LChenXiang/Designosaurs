@@ -23,11 +23,6 @@ import java.util.Map;
 public class Allosaur extends CarnivoreDinosaur {
 
     /**
-     * Used to store all the Stegosaur that this Allosaur has attacked.
-     */
-    private final Map<Stegosaur, Integer> attackedStegosaur;
-
-    /**
      * Constructor to initialise an adult Allosaur with a specific gender.
      * All Allosaurs are represented by a 'A' and have max 100 hit points.
      * They should start with 50 hit points.
@@ -36,7 +31,6 @@ public class Allosaur extends CarnivoreDinosaur {
      */
     public Allosaur(Enum<Gender> gender) {
         super("Allosaur", 'A', 100, gender);
-        attackedStegosaur = new HashMap<>();
         behaviourList.add(new PredatorBehaviour());
     }
 
@@ -47,7 +41,6 @@ public class Allosaur extends CarnivoreDinosaur {
      */
     public Allosaur() {
         super("Allosaur", 'A', 100);
-        attackedStegosaur = new HashMap<>();
         behaviourList.add(new PredatorBehaviour());
     }
 
@@ -124,34 +117,11 @@ public class Allosaur extends CarnivoreDinosaur {
     }
 
     /**
-     * @param target the Stegosaur to check
-     * @return Whether this Allosaur can attack the target (Is it in the list of attacked stegosaur?)
-     */
-    public boolean canAttack(Stegosaur target) {
-        boolean ret;
-        if (attackedStegosaur.get(target) == null) {
-            ret = true;
-        } else {
-            ret = false;
-        }
-        return ret;
-    }
-
-    /**
-     * Adds the target Stegosaur to the hashmap
-     *
-     * @param target the Stegosaur that was attacked
-     */
-    public void insertStegosaurAttacked(Stegosaur target) {
-        attackedStegosaur.put(target, 0);
-    }
-
-    /**
      * @return The damage an Allosaur would do.
      */
     @Override
     protected IntrinsicWeapon getIntrinsicWeapon() {
-        if (hasCapability(DinosaurStatus.BABY)){
+        if (hasCapability(DinosaurStatus.BABY)) {
             return new IntrinsicWeapon(10, "bites");
         } else {
             return new IntrinsicWeapon(20, "bites");
@@ -175,7 +145,6 @@ public class Allosaur extends CarnivoreDinosaur {
     }
 
     /**
-     *
      * @return How much this dinosaur's egg should cost.
      */
     @Override
@@ -191,42 +160,4 @@ public class Allosaur extends CarnivoreDinosaur {
         return 1000;
     }
 
-    /**
-     * Lets an Allosaur have its turn.
-     * Will iterate through the entire hashmap to make update how long since
-     * last attack on Stegosaur it has attacked.
-     *
-     * @param actions    collection of possible Actions for this Actor
-     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
-     * @param map        the map containing the Actor
-     * @param display    the I/O object to which messages may be written
-     * @return Action to take during this turn, defaults to DoNothingAction if can't find any.
-     */
-    @Override
-    public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-        // Loop through all attacked stegosaur
-        // Temp Array: Can't remove while in this loop
-        ArrayList<Stegosaur> dinosaurToRemove = new ArrayList<>();
-        for (Map.Entry<Stegosaur, Integer> stegosaurIntegerEntry : attackedStegosaur.entrySet()) {
-            Stegosaur stegosaur = stegosaurIntegerEntry.getKey();
-            int timeElapsed = stegosaurIntegerEntry.getValue();
-            timeElapsed++;
-            // Remove if is 20 turns or more already
-            // else update value
-            if (timeElapsed >= 20) {
-                dinosaurToRemove.add(stegosaur);
-            } else {
-                attackedStegosaur.put(stegosaur, timeElapsed);
-                System.out.println("Updated " + timeElapsed);
-            }
-        }
-
-        // Remove operation
-        for (Stegosaur stegosaur : dinosaurToRemove) {
-            attackedStegosaur.remove(stegosaur);
-            System.out.println("Removed " + stegosaur);
-        }
-
-        return super.playTurn(actions, lastAction, map, display);
-    }
 }

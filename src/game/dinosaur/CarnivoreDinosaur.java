@@ -121,7 +121,7 @@ public abstract class CarnivoreDinosaur extends Dinosaur {
             timeElapsed++;
             // Remove if is 20 turns or more already. Current game rule (Allosaur's)
             // else update value
-            if (timeElapsed >= 20) {
+            if (timeElapsed >= 2) {
                 dinosaurToRemove.add(dinosaur);
             } else {
                 attackedDinosaur.put(dinosaur, timeElapsed);
@@ -131,7 +131,7 @@ public abstract class CarnivoreDinosaur extends Dinosaur {
 
         // Remove operation
         for (Dinosaur dinosaur : dinosaurToRemove) {
-            dinosaurToRemove.remove(dinosaur);
+            attackedDinosaur.remove(dinosaur);
         }
 
         return super.playTurn(actions, lastAction, map, display);

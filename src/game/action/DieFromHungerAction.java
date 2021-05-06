@@ -26,7 +26,6 @@ public class DieFromHungerAction extends Action {
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        // FIXME: MAKE THIS BETTER RATHER THAN USING DINOSAUR
         Corpse corpse;
         if (actor instanceof Dinosaur){
             Dinosaur dinosaur = ((Dinosaur)actor);

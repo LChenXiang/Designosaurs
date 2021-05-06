@@ -11,7 +11,7 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 
 public class VendingMachine extends Ground {
-    private static int EcoPoints = 20000;
+    private static int EcoPoints = 0;
     private ArrayList<Item> sellableItem;
 
 
@@ -42,6 +42,13 @@ public class VendingMachine extends Ground {
         return true;
     }
 
+    /**
+     * Creates an BuyItemAction from the inputs.
+     *
+     * @param item Item to put on sale
+     * @param price Price of the item
+     * @return The action to buy said item
+     */
     private Action returnBuyItemAction(Item item, int price) {
         Item freshItem;
         Action action = null;
@@ -63,7 +70,10 @@ public class VendingMachine extends Ground {
     }
 
     /**
-     * Returns an empty Action list.
+     * Returns Actions that others can do to this.
+     * Dinosaurs don't use Actions, so we are not doing a check to give it only
+     * to players.
+     * Will only show items that we can buy with the current points.
      *
      * @param actor     the Actor acting
      * @param location  the current Location
@@ -75,7 +85,10 @@ public class VendingMachine extends Ground {
         Actions actions = super.allowableActions(actor, location, direction);
         for (Item item : sellableItem) {
             Purchasable itemPurchase = (Purchasable) (item);
-            actions.add(returnBuyItemAction(item, itemPurchase.getPrice()));
+            int price = itemPurchase.getPrice();
+            if (getEcoPoint() >= price){
+                actions.add(returnBuyItemAction(item, price));
+            }
         }
 
         return actions;

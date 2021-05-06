@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Location;
 import game.PortableItem;
 
+import game.VendingMachine;
 import game.dinosaur.Dinosaur;
 import game.dinosaur.Stegosaur;
 
@@ -45,6 +46,7 @@ public class Egg extends EdibleItem implements Purchasable {
             if (!(currentLocation.containsAnActor())) {
                 currentLocation.map().addActor(baby, currentLocation);
                 currentLocation.removeItem(this);
+                VendingMachine.increaseEcoPoint(baby.getEggHatchEcoPoint());
             }
 
         }

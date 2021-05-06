@@ -2,6 +2,7 @@ package game.action;
 
 import edu.monash.fit2099.engine.*;
 import game.dinosaur.Allosaur;
+import game.dinosaur.DinosaurStatus;
 import game.dinosaur.Stegosaur;
 
 /**
@@ -41,7 +42,7 @@ public class EatPreyAction extends AttackAction {
         String result;
 
         // check if actor and target are correct types
-        if (!(target instanceof Stegosaur)) {
+        if (!(target.hasCapability(DinosaurStatus.ALLOSAUR_CAN_ATTACK))) {
             return null;
         }
 

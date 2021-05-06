@@ -197,6 +197,12 @@ public abstract class Dinosaur extends Actor {
      */
     public abstract int getEggPurchasePrice();
 
+    /**
+     *
+     * @return How much eco points are gained when a dinosaur of this kind hatches.
+     */
+    public abstract int getEggHatchEcoPoint();
+
 
     /**
      * Allow the dinosaur to have its turn.

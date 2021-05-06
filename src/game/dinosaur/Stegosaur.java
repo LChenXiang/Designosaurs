@@ -126,8 +126,20 @@ public class Stegosaur extends HerbivoreDinosaur {
         return 50;
     }
 
+    /**
+     *
+     * @return How much this dinosaur's egg should cost.
+     */
     @Override
     public int getEggPurchasePrice() {
         return 200;
+    }
+
+    /**
+     * @return How much eco points are gained when a dinosaur of this kind hatches.
+     */
+    @Override
+    public int getEggHatchEcoPoint() {
+        return 100;
     }
 }

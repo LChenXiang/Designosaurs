@@ -81,7 +81,7 @@ public class Brachiosaur extends HerbivoreDinosaur {
      */
     @Override
     public int getBabyStartingHP() {
-        return 10;
+        return 15;
     }
 
     /**

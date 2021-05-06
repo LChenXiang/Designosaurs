@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.*;
 import game.dinosaur.Brachiosaur;
 import game.dinosaur.Gender;
 import game.dinosaur.Stegosaur;
+import game.growable.Bush;
 import game.growable.Tree;
 
 /**
@@ -19,7 +20,7 @@ public class Application {
 		World world = new World(new Display());
 
 		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Tree(),
-				new VendingMachine());
+				new VendingMachine(), new Bush());
 		
 		List<String> map = Arrays.asList(
 		"................................................................................",

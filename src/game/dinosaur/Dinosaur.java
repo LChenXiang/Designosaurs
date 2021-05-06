@@ -94,6 +94,7 @@ public abstract class Dinosaur extends Actor {
         addCapability(DinosaurStatus.BABY);
         // Insert all behaviour
         behaviourList.add(0, new WanderBehaviour());
+        behaviourList.add(0, new BreedBehaviour());
     }
 
     /**

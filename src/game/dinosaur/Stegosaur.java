@@ -36,7 +36,7 @@ public class Stegosaur extends HerbivoreDinosaur {
      * Starts with 10 hp.
      */
     public Stegosaur() {
-        super("Stegosaur", 'd', 100);
+        super("Stegosaur", 's', 100);
         addCapability(DinosaurStatus.ALLOSAUR_CAN_ATTACK);
         addCapability(DinosaurStatus.SHORT_NECK);
     }
@@ -83,7 +83,7 @@ public class Stegosaur extends HerbivoreDinosaur {
      */
     @Override
     public int getBabyStartingHP() {
-        return 10;
+        return 15;
     }
 
     /**

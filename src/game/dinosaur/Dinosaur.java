@@ -229,6 +229,14 @@ public abstract class Dinosaur extends Actor {
         // Turn-related attribute change
         hitPoints--;
         age++;
+        // Pregnancy Progression
+        if (hasCapability(DinosaurStatus.PREGNANT)) {
+            pregnantAge++;
+        }
+        // Remove baby status if adult age
+        if (hasCapability(DinosaurStatus.BABY) && (age >= getAdultAge())) {
+            removeCapability(DinosaurStatus.BABY);
+        }
 
         // Check hunger
         // Makes sure to print it only once when it becomes hungry
@@ -249,7 +257,7 @@ public abstract class Dinosaur extends Actor {
         if (!(isConscious())) {
             unConsciousElapsed++;
             if (unConsciousElapsed >= getUnConsciousThreshold()) {
-                return new DieFromHungerAction(); // Placeholder
+                return new DieFromHungerAction();
             } else {
                 return new DoNothingAction();
             }
@@ -258,21 +266,15 @@ public abstract class Dinosaur extends Actor {
             unConsciousElapsed = 0;
         }
 
-        // Pregnancy code
+        // Pregnancy egg laying code
         if (hasCapability(DinosaurStatus.PREGNANT)) {
-            pregnantAge++;
             if (pregnantAge >= getPregnancyLength()) {
                 pregnantAge = 0;
                 return new LayEggAction(); // Placeholder
             }
         }
 
-        // Remove baby status if adult age
-        if (hasCapability(DinosaurStatus.BABY) && (age >= getAdultAge())) {
-            removeCapability(DinosaurStatus.BABY);
-        }
-
-        // Handle multi-turn actions
+        // Handle multi-turn actions from behaviours
         if ((lastAction != null) && (lastAction.getNextAction() != null)) {
             return lastAction.getNextAction();
         }

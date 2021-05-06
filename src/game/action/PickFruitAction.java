@@ -73,7 +73,7 @@ public class PickFruitAction extends Action {
     public double failChance() {return 0.6;}
 
     /**
-     * See whether Dinosaur feels like breeding
+     * See whether Player failed to pick fruit
      * @return true if Dinosaur wants to breed, false otherwise
      */
     public boolean failed() {

@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.Location;
 import game.PortableItem;
 import game.dinosaur.Dinosaur;
 import game.dinosaur.DinosaurStatus;
+import game.items.EdibleItem;
 import game.items.Egg;
 
 /**
@@ -14,9 +15,10 @@ import game.items.Egg;
  *
  * @author Lin Chen Xiang
  * @see Actor
- * @see edu.monash.fit2099.engine.Location
+ * @see Location
  * @see Egg
- * @see game.dinosaur.DinosaurStatus
+ * @see Dinosaur
+ * @see DinosaurStatus
  * @see GameMap
  * @since 03/05/2021
  */
@@ -34,11 +36,12 @@ public class LayEggAction extends Action {
     public String execute(Actor actor, GameMap map) {
 
         Location here = map.locationOf(actor);
-        // FIXME: MAKE THIS BETTER: CHECK IF IS DINOSAUR FIRST BEFORE CASTING
+        if (!(actor.hasCapability(DinosaurStatus.PREGNANT))) {
+            return actor + " cannot lay eggs.";
+        }
         Dinosaur dinosaur = ((Dinosaur)actor);
         PortableItem egg = new Egg(dinosaur.getNewDinosaur());
         here.addItem(egg);
-        // TODO: MAY NEED TO ADD ENUM OR SMTH TO INDICATE WHICH DINOSAUR
 
         actor.removeCapability(DinosaurStatus.PREGNANT); // no longer pregnant
         return actor + " lays an egg.";

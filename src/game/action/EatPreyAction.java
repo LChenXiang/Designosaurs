@@ -43,7 +43,7 @@ public class EatPreyAction extends AttackAction {
 
         // check if actor and target are correct types
         if (!(target.hasCapability(DinosaurStatus.ALLOSAUR_CAN_ATTACK))) {
-            return null;
+            return actor + " cannot attack " + target;
         }
 
         // Allosaur tries attacking target

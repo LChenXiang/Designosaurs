@@ -125,7 +125,6 @@ public abstract class CarnivoreDinosaur extends Dinosaur {
                 dinosaurToRemove.add(dinosaur);
             } else {
                 attackedDinosaur.put(dinosaur, timeElapsed);
-                System.out.println("Updated " + timeElapsed);
             }
         }
 

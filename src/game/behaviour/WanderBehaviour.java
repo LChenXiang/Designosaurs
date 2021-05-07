@@ -10,7 +10,10 @@ import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Location;
 
 public class WanderBehaviour implements Behaviour {
-	
+
+	/**
+	 * Used in calculating chances
+	 */
 	private Random random = new Random();
 
 

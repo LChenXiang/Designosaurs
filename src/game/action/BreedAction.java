@@ -21,10 +21,14 @@ import game.dinosaur.Gender;
 
 public class  BreedAction extends Action {
 
+    /**
+     * Target to breed with.
+     */
     private Actor target;
 
     /**
-     * Empty Constructor
+     * Constructor.
+     * @param target target to breed with
      */
     public BreedAction(Actor target) {
         this.target = target;

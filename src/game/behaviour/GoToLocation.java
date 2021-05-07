@@ -20,11 +20,25 @@ import game.growable.Growable;
 
 public class GoToLocation implements Behaviour {
 
+    /**
+     * The place we are going
+     */
     private Location there = null;
+    /**
+     * The target we might eat
+     */
     private Growable growable = null;
+    /**
+     * The target we might eat
+     */
     private Item item = null;
+    /**
+     * What we do to the target
+     */
     private Action action = null;
-
+    /**
+     * Used in overriding getNextAction
+     */
     private Behaviour self = this;
 
     /**
@@ -70,10 +84,10 @@ public class GoToLocation implements Behaviour {
                 // check if growable still exists at that location, if so check if it still has any fruit on it
                 if (there.getGround() != growable || growable.getNumberOfRipeFruit() < 1) {
                     return null; // no such growable/no more fruit, reset behaviour
+                } else {
+                    flag = true;
                 }
-                else {flag = true;}
-            }
-            else {
+            } else {
                 // check if item still exists at that location
                 for (Item item : there.getItems()) {
                     if (item == this.item) {
@@ -109,16 +123,15 @@ public class GoToLocation implements Behaviour {
                 }
             }
         }
-        if (currentDistance>1) {
+        if (currentDistance > 1) {
             // actor still not at goal, continue moving towards it
             return (new DoNothingAction() {
                 @Override
                 public Action getNextAction() { // override next action as current action continue moving
-                    return self.getAction(actor,map);}
+                    return self.getAction(actor, map);
+                }
             });
-        }
-
-        else
+        } else
             return action; // actor is already beside target, do action
     }
 

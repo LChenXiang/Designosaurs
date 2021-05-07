@@ -16,9 +16,17 @@ import edu.monash.fit2099.engine.*;
  */
 public class FollowBehaviour implements Behaviour {
 
+	/**
+	 * Target we are following
+	 */
 	private Actor target;
+	/**
+	 * Action we are going to perform after we next to the target.
+	 */
 	private Action action;
-
+	/**
+	 * Used to refer to this object, used in overwriting getNextAction
+	 */
 	private Behaviour self = this;
 
 	/**

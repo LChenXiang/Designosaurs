@@ -22,5 +22,9 @@ public enum DinosaurStatus {
     BIG_EATER_TREE,
     TEAM_HERBIVORE,
     TEAM_CARNIVORE,
-    HUNGRY
+    HUNGRY,
+    WANTS_TO_BREED,
+    CAN_FLY,
+    ON_LAND
+
 }

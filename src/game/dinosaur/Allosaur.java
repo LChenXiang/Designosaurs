@@ -30,7 +30,7 @@ public class Allosaur extends CarnivoreDinosaur {
      * @param gender the gender this Allosaur should have.
      */
     public Allosaur(Enum<Gender> gender) {
-        super("Allosaur", 'A', 100, gender);
+        super("Allosaur", 'A', 100, gender, 100);
         behaviourList.add(new PredatorBehaviour());
     }
 
@@ -40,7 +40,7 @@ public class Allosaur extends CarnivoreDinosaur {
      * They should start with 10 hit points.
      */
     public Allosaur() {
-        super("Allosaur", 'A', 100);
+        super("Allosaur", 'A', 100, 100);
         behaviourList.add(new PredatorBehaviour());
     }
 
@@ -158,6 +158,16 @@ public class Allosaur extends CarnivoreDinosaur {
     @Override
     public int getEggHatchEcoPoint() {
         return 1000;
+    }
+
+    @Override
+    public int getStartingThirst() {
+        return 60;
+    }
+
+    @Override
+    public int getMaxDrinkAmount() {
+        return 30;
     }
 
 }

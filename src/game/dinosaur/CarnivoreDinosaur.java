@@ -35,8 +35,8 @@ public abstract class CarnivoreDinosaur extends Dinosaur {
      * @param hitPoints   Max HP of the dinosaur.
      * @param gender      Gender of the dinosaur.
      */
-    public CarnivoreDinosaur(String name, char displayChar, int hitPoints, Enum<Gender> gender) {
-        super(name, displayChar, hitPoints, gender);
+    public CarnivoreDinosaur(String name, char displayChar, int hitPoints, Enum<Gender> gender, int thirstMax) {
+        super(name, displayChar, hitPoints, gender, thirstMax);
         attackedDinosaur = new HashMap<>();
         addCapability(DinosaurStatus.TEAM_CARNIVORE);
         behaviourList.add(1, new CarniHungerBehaviour());
@@ -49,8 +49,8 @@ public abstract class CarnivoreDinosaur extends Dinosaur {
      * @param displayChar Character used to represent the dinosaur on the map.
      * @param hitPoints   Max HP of the dinosaur.
      */
-    public CarnivoreDinosaur(String name, char displayChar, int hitPoints) {
-        super(name, displayChar, hitPoints);
+    public CarnivoreDinosaur(String name, char displayChar, int hitPoints, int thirstMax) {
+        super(name, displayChar, hitPoints, thirstMax);
         attackedDinosaur = new HashMap<>();
         addCapability(DinosaurStatus.TEAM_CARNIVORE);
         behaviourList.add(1, new CarniHungerBehaviour());

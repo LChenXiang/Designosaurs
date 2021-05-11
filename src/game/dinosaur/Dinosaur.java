@@ -1,12 +1,15 @@
 package game.dinosaur;
 
 import edu.monash.fit2099.engine.*;
+import game.JurassicParkGameMap;
 import game.action.AttackAction;
 import game.action.DieFromHungerAction;
 import game.action.LayEggAction;
 import game.behaviour.Behaviour;
 import game.behaviour.BreedBehaviour;
 import game.behaviour.WanderBehaviour;
+import game.watertile.WaterTile;
+import game.watertile.WaterTileStatus;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -47,6 +50,10 @@ public abstract class Dinosaur extends Actor {
      */
     protected final ArrayList<Behaviour> behaviourList = new ArrayList<>();
 
+
+    protected int thirst;
+    protected int maxThirst;
+
     /**
      * Constructor to initialise a dinosaur to the adult age. Requires gender input
      *
@@ -55,16 +62,20 @@ public abstract class Dinosaur extends Actor {
      * @param hitPoints   the Actor's max hit points
      * @param gender      Gender of the dinosaur.
      */
-    public Dinosaur(String name, char displayChar, int hitPoints, Enum<Gender> gender) {
+    public Dinosaur(String name, char displayChar, int hitPoints, Enum<Gender> gender, int thirstMax) {
         // hitPoints here is used to initialise the character's max hp.
         // We will initialise the starting hp via another method.
         super(name, displayChar, hitPoints);
+        // Stats
         addCapability(gender);
         age = getAdultAge();
+        this.hitPoints = getStartingHP();
+        maxThirst = thirstMax;
+        thirst = getStartingThirst();
         // Insert all behaviour
         behaviourList.add(0, new WanderBehaviour());
         behaviourList.add(0, new BreedBehaviour());
-        this.hitPoints = getStartingHP();
+
     }
 
     /**
@@ -74,11 +85,12 @@ public abstract class Dinosaur extends Actor {
      * @param displayChar the character that will represent the Actor in the display
      * @param hitPoints   the Actor's starting hit points
      */
-    public Dinosaur(String name, char displayChar, int hitPoints) {
+    public Dinosaur(String name, char displayChar, int hitPoints, int thirstMax) {
         // hitPoints here is used to initialise the character's max hp.
         // We will initialise the starting hp via another method.
         super(name, displayChar, hitPoints);
 
+        // Stats
         Random random = new Random();
         boolean res = random.nextBoolean();
         Enum<Gender> gender;
@@ -92,6 +104,9 @@ public abstract class Dinosaur extends Actor {
         age = 0;
         this.hitPoints = getBabyStartingHP();
         addCapability(DinosaurStatus.BABY);
+        maxThirst = thirstMax;
+        thirst = getStartingThirst();
+
         // Insert all behaviour
         behaviourList.add(0, new WanderBehaviour());
         behaviourList.add(0, new BreedBehaviour());
@@ -204,6 +219,42 @@ public abstract class Dinosaur extends Actor {
      */
     public abstract int getEggHatchEcoPoint();
 
+    public abstract int getStartingThirst();
+
+    public void drink(int amountDrank) {
+        thirst += amountDrank;
+        thirst = Math.min(thirst, maxThirst);
+    }
+
+    private void decreaseThirst() {
+        thirst--;
+        thirst = Math.max(thirst, 0);
+    }
+
+    public int getThirstThreshold() {
+        return 40;
+    }
+
+    public boolean isThirsty() {
+        return (thirst < getThirstThreshold());
+    }
+
+    /**
+     * Is this Actor conscious?
+     * Returns true if the current Actor has positive hit points.
+     * Actors on zero hit points are deemed to be unconscious.
+     * <p>
+     * Depending on the game client, this status may be interpreted as either
+     * unconsciousness or death, or inflict some other kind of status.
+     *
+     * @return true if and only if hitPoints is positive.
+     */
+    @Override
+    public boolean isConscious() {
+        return (super.isConscious() && thirst > 0);
+    }
+
+    public abstract int getMaxDrinkAmount();
 
     /**
      * Allow the dinosaur to have its turn.
@@ -228,8 +279,9 @@ public abstract class Dinosaur extends Actor {
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
         // Turn-related attribute change
-        hitPoints--;
+        hurt(1);
         age++;
+        decreaseThirst();
         // Pregnancy Progression
         if (hasCapability(DinosaurStatus.PREGNANT)) {
             pregnantAge++;
@@ -239,12 +291,19 @@ public abstract class Dinosaur extends Actor {
             removeCapability(DinosaurStatus.BABY);
         }
 
+        Location here = map.locationOf(this);
+        for(Exit exit: here.getExits()){
+            if (exit.getDestination().getGround().hasCapability(WaterTileStatus.WATER_TRAVERSE)){
+                drink(getMaxDrinkAmount());
+            }
+        }
+
         // Check hunger
         // Makes sure to print it only once when it becomes hungry
         // When it is no longer hungry, it is indicated via enum so the hunger message is printed again
         if (isHungry()) {
             if (!(hasCapability(DinosaurStatus.HUNGRY))) {
-                Location here = map.locationOf(this);
+                here = map.locationOf(this);
                 display.println(String.format("%s at (%s,%s) is getting hungry!", name, here.x(), here.y()));
                 addCapability(DinosaurStatus.HUNGRY);
             }
@@ -254,11 +313,32 @@ public abstract class Dinosaur extends Actor {
             }
         }
 
-        // Check if starving to death
+        // Check thirsty
+        if (isThirsty()) {
+            if (!(hasCapability(DinosaurStatus.THIRSTY))) {
+                here = map.locationOf(this);
+                display.println(String.format("%s at (%s,%s) is getting thirsty!", name, here.x(), here.y()));
+                addCapability(DinosaurStatus.THIRSTY);
+            }
+        } else {
+            if (hasCapability(DinosaurStatus.THIRSTY)) {
+                removeCapability(DinosaurStatus.THIRSTY);
+            }
+        }
+
+        // Check if starving to death or thirsting to death
         if (!(isConscious())) {
             unConsciousElapsed++;
-            if (unConsciousElapsed >= getUnConsciousThreshold()) {
+            if (unConsciousElapsed >= getUnConsciousThreshold() && hitPoints == 0) {
                 return new DieFromHungerAction();
+            } else if (thirst == 0) {
+                if (((JurassicParkGameMap)map).isRain()) {
+                    drink(10);
+                    removeCapability(DinosaurStatus.THIRSTY);
+                } else if (unConsciousElapsed >= 15) {
+                    return new DieFromHungerAction();
+                }
+
             } else {
                 return new DoNothingAction();
             }

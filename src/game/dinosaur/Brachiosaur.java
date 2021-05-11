@@ -24,7 +24,7 @@ public class Brachiosaur extends HerbivoreDinosaur {
      * @param gender the gender this Brachiosaur should have.
      */
     public Brachiosaur(Enum<Gender> gender) {
-        super("Brachiosaur", 'b', 160, gender);
+        super("Brachiosaur", 'b', 160, gender, 200);
         addCapability(DinosaurStatus.LONG_NECK);
         addCapability(DinosaurStatus.BAD_DIGESTION);
         addCapability(DinosaurStatus.BIG_EATER_TREE);
@@ -37,7 +37,7 @@ public class Brachiosaur extends HerbivoreDinosaur {
      * Starts with 10 hp.
      */
     public Brachiosaur() {
-        super("Brachiosaur", 'b', 160);
+        super("Brachiosaur", 'b', 160, 200);
         addCapability(DinosaurStatus.LONG_NECK);
         addCapability(DinosaurStatus.BAD_DIGESTION);
         addCapability(DinosaurStatus.BIG_EATER_TREE);
@@ -147,5 +147,15 @@ public class Brachiosaur extends HerbivoreDinosaur {
     @Override
     public int getEggHatchEcoPoint() {
         return 1000;
+    }
+
+    @Override
+    public int getStartingThirst() {
+        return 100;
+    }
+
+    @Override
+    public int getMaxDrinkAmount() {
+        return 80;
     }
 }

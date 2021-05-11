@@ -26,8 +26,8 @@ public abstract class HerbivoreDinosaur extends Dinosaur {
      * @param hitPoints   Max HP of the dinosaur.
      * @param gender      Gender of the dinosaur.
      */
-    public HerbivoreDinosaur(String name, char displayChar, int hitPoints, Enum<Gender> gender) {
-        super(name, displayChar, hitPoints, gender);
+    public HerbivoreDinosaur(String name, char displayChar, int hitPoints, Enum<Gender> gender, int thirstMax) {
+        super(name, displayChar, hitPoints, gender, thirstMax);
         addCapability(DinosaurStatus.TEAM_HERBIVORE);
         //TODO: Add other behaviour here
         behaviourList.add(1, new HerbHungerBehaviour());
@@ -40,8 +40,8 @@ public abstract class HerbivoreDinosaur extends Dinosaur {
      * @param displayChar Character used to represent the dinosaur on the map.
      * @param hitPoints   Max HP of the dinosaur.
      */
-    public HerbivoreDinosaur(String name, char displayChar, int hitPoints) {
-        super(name, displayChar, hitPoints);
+    public HerbivoreDinosaur(String name, char displayChar, int hitPoints, int thirstMax) {
+        super(name, displayChar, hitPoints, thirstMax);
         addCapability(DinosaurStatus.TEAM_HERBIVORE);
         //TODO: Add other behaviour here
         behaviourList.add(1, new HerbHungerBehaviour());

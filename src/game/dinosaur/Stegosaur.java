@@ -26,7 +26,7 @@ public class Stegosaur extends HerbivoreDinosaur {
      * @param gender the gender this dinosaur should have.
      */
     public Stegosaur(Enum<Gender> gender) {
-        super("Stegosaur", 's', 100, gender);
+        super("Stegosaur", 's', 100, gender, 100);
         addCapability(DinosaurStatus.ALLOSAUR_CAN_ATTACK);
         addCapability(DinosaurStatus.SHORT_NECK);
     }
@@ -36,7 +36,7 @@ public class Stegosaur extends HerbivoreDinosaur {
      * Starts with 10 hp.
      */
     public Stegosaur() {
-        super("Stegosaur", 's', 100);
+        super("Stegosaur", 's', 100, 100);
         addCapability(DinosaurStatus.ALLOSAUR_CAN_ATTACK);
         addCapability(DinosaurStatus.SHORT_NECK);
     }
@@ -141,5 +141,15 @@ public class Stegosaur extends HerbivoreDinosaur {
     @Override
     public int getEggHatchEcoPoint() {
         return 100;
+    }
+
+    @Override
+    public int getStartingThirst() {
+        return 60;
+    }
+
+    @Override
+    public int getMaxDrinkAmount() {
+        return 30;
     }
 }

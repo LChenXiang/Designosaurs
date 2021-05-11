@@ -21,6 +21,8 @@ import java.util.List;
  */
 public class JurassicParkGameMap extends GameMap {
 
+    protected JurassicWorld world;
+
     /**
      * Constructor.
      *
@@ -81,6 +83,10 @@ public class JurassicParkGameMap extends GameMap {
                 }
             }
         }
+    }
+
+    public boolean isRain() {
+        return world.isRain();
     }
 
 }

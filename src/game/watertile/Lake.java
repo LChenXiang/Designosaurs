@@ -14,7 +14,7 @@ public class Lake extends WaterTile {
      * Constructor.
      */
     public Lake() {
-        super('~', 25, 5);
+        super('~', 25, 5, 25);
     }
 
     /**
@@ -33,7 +33,7 @@ public class Lake extends WaterTile {
     protected void checkFishGrowth() {
         double chance = Math.random();
         if (chance < 0.6){
-            fishCount += 1;
+            incrementFishCount();
         }
     }
 

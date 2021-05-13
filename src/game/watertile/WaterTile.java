@@ -27,14 +27,20 @@ public abstract class WaterTile extends Ground {
     protected int fishCount;
 
     /**
+     * Maximum amount of fish the tile can hold
+     */
+    protected int maxFishCount;
+
+    /**
      * Constructor.
      *
      * @param displayChar character to display for this type of terrain
      */
-    public WaterTile(char displayChar, int startingSip, int startingFish) {
+    public WaterTile(char displayChar, int startingSip, int startingFish, int maxFish) {
         super(displayChar);
         sipCapacity = startingSip;
         fishCount = startingFish;
+        maxFishCount = maxFish;
         addCapability(WaterTileStatus.WATER_TRAVERSE);
     }
 
@@ -75,6 +81,14 @@ public abstract class WaterTile extends Ground {
     public void decreaseFishCount(int count) {
         fishCount -= count;
         fishCount = Math.max(0, fishCount);
+    }
+
+    /**
+     * Increases fish count, according to the max capacity.
+     */
+    protected void incrementFishCount(){
+        fishCount++;
+        fishCount = Math.min(fishCount, maxFishCount);
     }
 
     /**

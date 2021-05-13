@@ -30,6 +30,7 @@ public abstract class WaterTile extends Ground {
         super(displayChar);
         sipCapacity = startingSip;
         fishCount = startingFish;
+        addCapability(WaterTileStatus.WATER_TRAVERSE);
     }
 
     protected abstract void increaseSipCapacity();

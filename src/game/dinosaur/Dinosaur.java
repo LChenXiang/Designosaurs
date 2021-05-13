@@ -292,18 +292,17 @@ public abstract class Dinosaur extends Actor {
         }
 
         Location here = map.locationOf(this);
-        for(Exit exit: here.getExits()){
-            if (exit.getDestination().getGround().hasCapability(WaterTileStatus.WATER_TRAVERSE)){
-                drink(getMaxDrinkAmount());
-            }
-        }
+//        for(Exit exit: here.getExits()){
+//            if (exit.getDestination().getGround().hasCapability(WaterTileStatus.WATER_TRAVERSE)){
+//                drink(getMaxDrinkAmount());
+//            }
+//        }
 
         // Check hunger
         // Makes sure to print it only once when it becomes hungry
         // When it is no longer hungry, it is indicated via enum so the hunger message is printed again
         if (isHungry()) {
             if (!(hasCapability(DinosaurStatus.HUNGRY))) {
-                here = map.locationOf(this);
                 display.println(String.format("%s at (%s,%s) is getting hungry!", name, here.x(), here.y()));
                 addCapability(DinosaurStatus.HUNGRY);
             }
@@ -316,7 +315,6 @@ public abstract class Dinosaur extends Actor {
         // Check thirsty
         if (isThirsty()) {
             if (!(hasCapability(DinosaurStatus.THIRSTY))) {
-                here = map.locationOf(this);
                 display.println(String.format("%s at (%s,%s) is getting thirsty!", name, here.x(), here.y()));
                 addCapability(DinosaurStatus.THIRSTY);
             }

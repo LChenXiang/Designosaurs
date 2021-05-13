@@ -8,6 +8,7 @@ import game.action.LayEggAction;
 import game.behaviour.Behaviour;
 import game.behaviour.BreedBehaviour;
 import game.behaviour.WanderBehaviour;
+import game.growable.Tree;
 import game.watertile.WaterTile;
 import game.watertile.WaterTileStatus;
 
@@ -222,22 +223,42 @@ public abstract class Dinosaur extends Actor {
      */
     public abstract int getEggHatchEcoPoint();
 
+    /**
+     *
+     * @return How much the dinosaur's thirst should start with
+     */
     public abstract int getStartingThirst();
 
+    /**
+     * Drinks water. Increases Thirst (Higher means less thirsty)
+     *
+     * @param amountDrank How much to drink
+     */
     public void drink(int amountDrank) {
         thirst += amountDrank;
         thirst = Math.min(thirst, maxThirst);
     }
 
+    /**
+     * Decreases the dinosaur's thirst
+     */
     private void decreaseThirst() {
         thirst--;
         thirst = Math.max(thirst, 0);
     }
 
+    /**
+     *
+     * @return At what point the dinosaur is considered thirsty (Universally shared across dinosaurs)
+     */
     public int getThirstThreshold() {
         return 40;
     }
 
+    /**
+     *
+     * @return Is the dinosaur thirsty
+     */
     public boolean isThirsty() {
         return (thirst < getThirstThreshold());
     }
@@ -360,6 +381,10 @@ public abstract class Dinosaur extends Actor {
             }
             if (flyCounter >= getMaxFlyingTile()){
                 removeCapability(DinosaurStatus.CAN_FLY);
+            }
+            // TODO: Improve this instead of using instanceof
+            if (here.getGround() instanceof Tree){
+                addCapability(DinosaurStatus.CAN_FLY);
             }
         }
 

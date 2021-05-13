@@ -53,6 +53,7 @@ public abstract class Dinosaur extends Actor {
 
     protected int thirst;
     protected int maxThirst;
+    protected int flyCounter;
 
     /**
      * Constructor to initialise a dinosaur to the adult age. Requires gender input
@@ -72,6 +73,7 @@ public abstract class Dinosaur extends Actor {
         this.hitPoints = getStartingHP();
         maxThirst = thirstMax;
         thirst = getStartingThirst();
+        flyCounter = 0;
         // Insert all behaviour
         behaviourList.add(0, new WanderBehaviour());
         behaviourList.add(0, new BreedBehaviour());
@@ -106,6 +108,7 @@ public abstract class Dinosaur extends Actor {
         addCapability(DinosaurStatus.BABY);
         maxThirst = thirstMax;
         thirst = getStartingThirst();
+        flyCounter = 0;
 
         // Insert all behaviour
         behaviourList.add(0, new WanderBehaviour());
@@ -243,18 +246,45 @@ public abstract class Dinosaur extends Actor {
      * Is this Actor conscious?
      * Returns true if the current Actor has positive hit points.
      * Actors on zero hit points are deemed to be unconscious.
+     * New Rule: Thirst too. If their thirst hits 0, they become unconscious (Dinosaur)
      * <p>
      * Depending on the game client, this status may be interpreted as either
      * unconsciousness or death, or inflict some other kind of status.
      *
-     * @return true if and only if hitPoints is positive.
+     * @return True if both HitPoints and Thirst are above 0
      */
     @Override
     public boolean isConscious() {
         return (super.isConscious() && thirst > 0);
     }
 
+    /**
+     *
+     * @return How much the dinosaur can drink in one go
+     */
     public abstract int getMaxDrinkAmount();
+
+    /**
+     * Code to run pregnancy check. Override the default one if a dinosaur
+     * has special pregnancy checks.
+     * @return Action to return, null if cannot lay egg
+     */
+    protected Action pregnancyLayEggCheck(){
+        if (hasCapability(DinosaurStatus.PREGNANT)) {
+            if (pregnantAge >= getPregnancyLength()) {
+                pregnantAge = 0;
+                return new LayEggAction(); // Placeholder
+            }
+        }
+        return null;
+    }
+
+    /**
+     * How long can the dinosaur fly for. Return 0 if cant fly.
+     *
+     * @return how long can the dinosaur for for.
+     */
+    public abstract int getMaxFlyingTile();
 
     /**
      * Allow the dinosaur to have its turn.
@@ -291,12 +321,8 @@ public abstract class Dinosaur extends Actor {
             removeCapability(DinosaurStatus.BABY);
         }
 
+        // To avoid repeated codes, to reference current location
         Location here = map.locationOf(this);
-//        for(Exit exit: here.getExits()){
-//            if (exit.getDestination().getGround().hasCapability(WaterTileStatus.WATER_TRAVERSE)){
-//                drink(getMaxDrinkAmount());
-//            }
-//        }
 
         // Check hunger
         // Makes sure to print it only once when it becomes hungry
@@ -324,19 +350,33 @@ public abstract class Dinosaur extends Actor {
             }
         }
 
+        // Flying dinosaur code
+        // TODO: Something that gives the dinosaur its can fly back
+        if (getMaxFlyingTile() != 0){
+            // TODO: IDK if increase when traversing or flying
+            // If we are still flying, increment the counter
+            if (hasCapability(DinosaurStatus.CAN_FLY)){
+                flyCounter++;
+            }
+            if (flyCounter >= getMaxFlyingTile()){
+                removeCapability(DinosaurStatus.CAN_FLY);
+            }
+        }
+
         // Check if starving to death or thirsting to death
         if (!(isConscious())) {
             unConsciousElapsed++;
             if (unConsciousElapsed >= getUnConsciousThreshold() && hitPoints == 0) {
                 return new DieFromHungerAction();
             } else if (thirst == 0) {
+                // If unconscious, and rain, revive them
                 if (((JurassicParkGameMap)map).isRain()) {
                     drink(10);
                     removeCapability(DinosaurStatus.THIRSTY);
                 } else if (unConsciousElapsed >= 15) {
+                    // Else they die
                     return new DieFromHungerAction();
                 }
-
             } else {
                 return new DoNothingAction();
             }
@@ -346,11 +386,9 @@ public abstract class Dinosaur extends Actor {
         }
 
         // Pregnancy egg laying code
-        if (hasCapability(DinosaurStatus.PREGNANT)) {
-            if (pregnantAge >= getPregnancyLength()) {
-                pregnantAge = 0;
-                return new LayEggAction(); // Placeholder
-            }
+        Action layEggAction = pregnancyLayEggCheck();
+        if (layEggAction != null){
+            return layEggAction;
         }
 
         // Handle multi-turn actions from behaviours

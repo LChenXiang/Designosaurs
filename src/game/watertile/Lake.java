@@ -19,4 +19,9 @@ public class Lake extends WaterTile {
             fishCount += 1;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Lake";
+    }
 }

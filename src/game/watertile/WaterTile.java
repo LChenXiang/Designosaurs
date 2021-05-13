@@ -49,6 +49,10 @@ public abstract class WaterTile extends Ground {
         fishCount = Math.max(0, fishCount);
     }
 
+    public void decreaseSipCount(){
+        sipCapacity--;
+    }
+
     /**
      * Override this to implement impassable terrain, or terrain that is only passable if conditions are met.
      * Checks if actor can traverse the lake (can fly)

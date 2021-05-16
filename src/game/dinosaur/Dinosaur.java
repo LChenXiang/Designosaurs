@@ -401,8 +401,12 @@ public abstract class Dinosaur extends Actor {
                 } else if (unConsciousElapsed >= 15) {
                     // Else they die
                     return new DieFromHungerAction();
+                } else {
+                    // Do nothing if unconscious from thirst
+                    return new DoNothingAction();
                 }
             } else {
+                // Do nothing if unconscious from hunger
                 return new DoNothingAction();
             }
         } else {

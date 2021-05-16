@@ -8,6 +8,7 @@ import game.growable.Growable;
  * closer to a Location with target Growable/Item, or does something when the actor reaches the Location
  *
  * @author Lin Chen Xiang
+ * @author NgYuKang
  * @see Behaviour
  * @see Actor
  * @see Growable
@@ -15,7 +16,8 @@ import game.growable.Growable;
  * @see Action
  * @see GameMap
  * @see Location
- * @since 03/05/2021
+ * @since 16/05/2021
+ * @version 1.1
  */
 
 public class GoToLocation implements Behaviour {
@@ -55,6 +57,17 @@ public class GoToLocation implements Behaviour {
     }
 
     /**
+     * Consturctor that takes in only a location.
+     *
+     * @param there Place to go
+     * @param action What to do afterwards
+     */
+    public GoToLocation(Location there, Action action){
+        this.there = there;
+        this.action = action;
+    }
+
+    /**
      * Constructor that takes in Item
      *
      * @param there  the Location of the Item
@@ -87,7 +100,7 @@ public class GoToLocation implements Behaviour {
                 } else {
                     flag = true;
                 }
-            } else {
+            } else if (item != null) {
                 // check if item still exists at that location
                 for (Item item : there.getItems()) {
                     if (item == this.item) {
@@ -97,6 +110,9 @@ public class GoToLocation implements Behaviour {
                         break;
                     }
                 }
+            } else {
+                // If we are only going to a location, no need for check
+                flag = true;
             }
             if (!flag) { // item doesn't exist, reset behaviour
                 return null;

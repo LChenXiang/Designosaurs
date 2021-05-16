@@ -7,6 +7,7 @@ import game.action.DieFromHungerAction;
 import game.action.LayEggAction;
 import game.behaviour.Behaviour;
 import game.behaviour.BreedBehaviour;
+import game.behaviour.ThirstBehaviour;
 import game.behaviour.WanderBehaviour;
 import game.growable.Tree;
 
@@ -54,9 +55,17 @@ public abstract class Dinosaur extends Actor {
      */
     protected final ArrayList<Behaviour> behaviourList = new ArrayList<>();
 
-
+    /**
+     * Used as water level, to know how thirsty a dinosaur is. 0 means very thirsty.
+     */
     protected int thirst;
+    /**
+     * Maximum level of thirst a dinosaur can have
+     */
     protected int maxThirst;
+    /**
+     * Used to keep track of flying "fuel"
+     */
     protected int flyCounter;
 
     /**
@@ -81,6 +90,7 @@ public abstract class Dinosaur extends Actor {
         // Insert all behaviour
         behaviourList.add(0, new WanderBehaviour());
         behaviourList.add(0, new BreedBehaviour());
+        behaviourList.add(1, new ThirstBehaviour());
 
     }
 
@@ -414,6 +424,7 @@ public abstract class Dinosaur extends Actor {
                 // If unconscious, and rain, revive them
                 if (((JurassicParkGameMap) map).isRain()) {
                     drink(10);
+                    display.println(this.toString() + " drinks for 10 water level from the rain.");
                 } else if (unConsciousThirstElapsed >= getThirstUnconsciousThreshold()) {
                     // Else they die
                     return new DieFromHungerAction();

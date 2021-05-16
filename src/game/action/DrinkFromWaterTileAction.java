@@ -8,8 +8,16 @@ import game.watertile.WaterTile;
 
 public class DrinkFromWaterTileAction extends Action {
 
+    /**
+     * The tile we are thinking from.
+     */
     private WaterTile waterTile;
 
+    /**
+     * Constructor.
+     *
+     * @param waterTile Tile to drink from
+     */
     public DrinkFromWaterTileAction(WaterTile waterTile) {
         this.waterTile = waterTile;
     }
@@ -23,14 +31,13 @@ public class DrinkFromWaterTileAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        if (waterTile.getSipCapacity() > 0){
+        if (waterTile.getSipCapacity() > 0) {
             waterTile.decreaseSipCount();
             Dinosaur dinosaur = ((Dinosaur) actor);
             dinosaur.drink(dinosaur.getMaxDrinkAmount());
-            return actor.toString() + "drinks from " + waterTile.toString() + "for " +
-                    dinosaur.getMaxDrinkAmount() + "" + "water level";
-        }
-        else {
+            return actor.toString() + " drinks from " + waterTile.toString() + " for " +
+                    dinosaur.getMaxDrinkAmount() + "" + " water level";
+        } else {
             return actor.toString() + "couldn't drink from " + waterTile.toString() +
                     " as it is already empty by the " + "time it got there";
         }

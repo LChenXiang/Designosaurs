@@ -53,7 +53,7 @@ public abstract class CarnivoreDinosaur extends Dinosaur {
         super(name, displayChar, hitPoints, thirstMax);
         attackedDinosaur = new HashMap<>();
         addCapability(DinosaurStatus.TEAM_CARNIVORE);
-        behaviourList.add(1, new CarniHungerBehaviour());
+        behaviourList.add(2, new CarniHungerBehaviour());
 
     }
 

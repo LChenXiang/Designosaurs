@@ -30,7 +30,7 @@ public abstract class HerbivoreDinosaur extends Dinosaur {
         super(name, displayChar, hitPoints, gender, thirstMax);
         addCapability(DinosaurStatus.TEAM_HERBIVORE);
         //TODO: Add other behaviour here
-        behaviourList.add(1, new HerbHungerBehaviour());
+        behaviourList.add(2, new HerbHungerBehaviour());
     }
 
     /**
@@ -44,7 +44,7 @@ public abstract class HerbivoreDinosaur extends Dinosaur {
         super(name, displayChar, hitPoints, thirstMax);
         addCapability(DinosaurStatus.TEAM_HERBIVORE);
         //TODO: Add other behaviour here
-        behaviourList.add(1, new HerbHungerBehaviour());
+        behaviourList.add(2, new HerbHungerBehaviour());
     }
 
 

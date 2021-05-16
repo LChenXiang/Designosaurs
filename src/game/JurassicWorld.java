@@ -57,12 +57,17 @@ public class JurassicWorld extends World {
         }
 
         // This loop is basically the whole game
+        // TODO: To Amos: Add turn related stuff (Challenge mode)
+        // TODO: To Amos: put menu for selecting mode here
+        // TODO: To Amos: add a new action that quits the game or something
         while (stillRunning()) {
             // Turn timer
             turnElapsed++;
 
             // Map processing
             GameMap playersMap = actorLocations.locationOf(player).map();
+            // Show current turn
+            display.println(String.format("Turn %s", turnElapsed));
             playersMap.draw(display);
 
             // Check rain

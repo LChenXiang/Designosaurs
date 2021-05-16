@@ -12,7 +12,9 @@ package game.dinosaur;
  * @see Dinosaur
  * @since 10/05/2021
  */
+// TODO: to Chen Xiang: Fix constructor, I added new stuff
 
+// TODO: to Chen xiang: Implement the new methods
 public class Pterodactyl extends CarnivoreDinosaur{
 
     public Pterodactyl(Enum<Gender> gender) {

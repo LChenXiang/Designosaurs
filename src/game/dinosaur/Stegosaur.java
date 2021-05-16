@@ -98,7 +98,7 @@ public class Stegosaur extends HerbivoreDinosaur {
      * @return How long can a Stegosaur be unconscious for.
      */
     @Override
-    public int getUnConsciousThreshold() {
+    public int getHungerUnConsciousThreshold() {
         return 20;
     }
 

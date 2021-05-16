@@ -9,8 +9,6 @@ import game.behaviour.Behaviour;
 import game.behaviour.BreedBehaviour;
 import game.behaviour.WanderBehaviour;
 import game.growable.Tree;
-import game.watertile.WaterTile;
-import game.watertile.WaterTileStatus;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -162,7 +160,7 @@ public abstract class Dinosaur extends Actor {
     /**
      * @return how long can this dinosaur be unconscious before it is considered dead.
      */
-    public abstract int getUnConsciousThreshold();
+    public abstract int getHungerUnConsciousThreshold();
 
     /**
      * @return how long does the pregnancy of this dinosaur last.
@@ -391,7 +389,7 @@ public abstract class Dinosaur extends Actor {
         // Check if starving to death or thirsting to death
         if (!(isConscious())) {
             unConsciousElapsed++;
-            if (unConsciousElapsed >= getUnConsciousThreshold() && hitPoints == 0) {
+            if (unConsciousElapsed >= getHungerUnConsciousThreshold() && hitPoints == 0) {
                 return new DieFromHungerAction();
             } else if (thirst == 0) {
                 // If unconscious, and rain, revive them

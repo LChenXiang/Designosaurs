@@ -104,7 +104,7 @@ public class Allosaur extends CarnivoreDinosaur {
      * @return How long can the Allosaur be unconscious for.
      */
     @Override
-    public int getUnConsciousThreshold() {
+    public int getHungerUnConsciousThreshold() {
         return 20;
     }
 

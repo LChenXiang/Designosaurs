@@ -54,7 +54,7 @@ public class Pterodactyl extends CarnivoreDinosaur{
     }
 
     @Override
-    public int getUnConsciousThreshold() {
+    public int getHungerUnConsciousThreshold() {
         return 0;
     }
 

@@ -104,7 +104,7 @@ public class Brachiosaur extends HerbivoreDinosaur {
      * @return How long until an unconscious Brachiosaur is considered dead.
      */
     @Override
-    public int getUnConsciousThreshold() {
+    public int getHungerUnConsciousThreshold() {
         return 15;
     }
 

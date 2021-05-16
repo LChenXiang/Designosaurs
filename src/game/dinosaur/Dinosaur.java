@@ -39,9 +39,14 @@ public abstract class Dinosaur extends Actor {
     private int pregnantAge = 0;
 
     /**
-     * Used to keep track how long a dinosaur has been unconscious.
+     * Used to keep track how long a dinosaur has been unconscious from hunger
      */
-    private int unConsciousElapsed = 0;
+    private int unConsciousHungerElapsed = 0;
+
+    /**
+     * Used to keep track of how long a dinosaur has been unconscious from thirst.
+     */
+    private int unConsciousThirstElapsed = 0;
 
     /**
      * List of behaviours the dinosaur can do.
@@ -196,7 +201,7 @@ public abstract class Dinosaur extends Actor {
      * The dinosaur will then only be placed onto the map, into the game
      * when the egg successfully hatches. If the egg doesn't hatch and gets
      * destroyed (not referenced anymore), so does the dinosaur.
-     *
+     * <p>
      * This will just run the second constructor, basically. Easier polymorphism.
      *
      * @return A new instance of this dinosaur
@@ -204,25 +209,21 @@ public abstract class Dinosaur extends Actor {
     public abstract Dinosaur getNewDinosaur();
 
     /**
-     *
      * @return How much HP does the corpse of this dinosaur heals
      */
     public abstract int getCorpseHealAmount();
 
     /**
-     *
      * @return How much this dinosaur's egg should cost.
      */
     public abstract int getEggPurchasePrice();
 
     /**
-     *
      * @return How much eco points are gained when a dinosaur of this kind hatches.
      */
     public abstract int getEggHatchEcoPoint();
 
     /**
-     *
      * @return How much the dinosaur's thirst should start with
      */
     public abstract int getStartingThirst();
@@ -246,7 +247,6 @@ public abstract class Dinosaur extends Actor {
     }
 
     /**
-     *
      * @return At what point the dinosaur is considered thirsty (Universally shared across dinosaurs)
      */
     public int getThirstThreshold() {
@@ -254,7 +254,6 @@ public abstract class Dinosaur extends Actor {
     }
 
     /**
-     *
      * @return Is the dinosaur thirsty
      */
     public boolean isThirsty() {
@@ -278,7 +277,6 @@ public abstract class Dinosaur extends Actor {
     }
 
     /**
-     *
      * @return How much the dinosaur can drink in one go
      */
     public abstract int getMaxDrinkAmount();
@@ -286,9 +284,10 @@ public abstract class Dinosaur extends Actor {
     /**
      * Code to run pregnancy check. Override the default one if a dinosaur
      * has special pregnancy checks.
+     *
      * @return Action to return, null if cannot lay egg
      */
-    protected Action pregnancyLayEggCheck(){
+    protected Action pregnancyLayEggCheck() {
         if (hasCapability(DinosaurStatus.PREGNANT)) {
             if (pregnantAge >= getPregnancyLength()) {
                 pregnantAge = 0;
@@ -304,6 +303,15 @@ public abstract class Dinosaur extends Actor {
      * @return how long can the dinosaur for for.
      */
     public abstract int getMaxFlyingTile();
+
+    /**
+     * Override this to give certain dinosaurs unique threshold.
+     *
+     * @return How long this dinosaur can be unconscious from thirst before dying
+     */
+    public int getThirstUnconsciousThreshold() {
+        return 15;
+    }
 
     /**
      * Allow the dinosaur to have its turn.
@@ -371,50 +379,62 @@ public abstract class Dinosaur extends Actor {
 
         // Flying dinosaur code
         // TODO: Something that gives the dinosaur its can fly back
-        if (getMaxFlyingTile() != 0){
+        if (getMaxFlyingTile() != 0) {
             // TODO: IDK if increase when traversing or flying
             // If we are still flying, increment the counter
-            if (hasCapability(DinosaurStatus.CAN_FLY)){
+            if (hasCapability(DinosaurStatus.CAN_FLY)) {
                 flyCounter++;
             }
-            if (flyCounter >= getMaxFlyingTile()){
+            if (flyCounter >= getMaxFlyingTile()) {
                 removeCapability(DinosaurStatus.CAN_FLY);
             }
             // TODO: Improve this instead of using instanceof
-            if (here.getGround() instanceof Tree){
+            if (here.getGround() instanceof Tree) {
                 addCapability(DinosaurStatus.CAN_FLY);
             }
         }
 
         // Check if starving to death or thirsting to death
         if (!(isConscious())) {
-            unConsciousElapsed++;
-            if (unConsciousElapsed >= getHungerUnConsciousThreshold() && hitPoints == 0) {
-                return new DieFromHungerAction();
-            } else if (thirst == 0) {
+            boolean doNothing = false;
+            // Check unconsciousness from hunger
+            if (hitPoints == 0) {
+                unConsciousHungerElapsed++;
+                // If reached threshold
+                if (unConsciousHungerElapsed >= getHungerUnConsciousThreshold()) {
+                    return new DieFromHungerAction();
+                } else {
+                    // Still unconscious, not yet dead
+                    doNothing = true;
+                }
+            }
+            // Check unconsciousness from thirst
+            if (thirst == 0) {
+                unConsciousThirstElapsed++;
                 // If unconscious, and rain, revive them
-                if (((JurassicParkGameMap)map).isRain()) {
+                if (((JurassicParkGameMap) map).isRain()) {
                     drink(10);
-                    removeCapability(DinosaurStatus.THIRSTY);
-                } else if (unConsciousElapsed >= 15) {
+                } else if (unConsciousThirstElapsed >= getThirstUnconsciousThreshold()) {
                     // Else they die
                     return new DieFromHungerAction();
                 } else {
-                    // Do nothing if unconscious from thirst
-                    return new DoNothingAction();
+                    // Still unconscious, not yet dead
+                    doNothing = true;
                 }
-            } else {
-                // Do nothing if unconscious from hunger
+            }
+            // If it is still unconscious from either hunger or thirst, do nothing
+            if (doNothing) {
                 return new DoNothingAction();
             }
         } else {
             // Keep resetting it to 0
-            unConsciousElapsed = 0;
+            unConsciousHungerElapsed = 0;
+            unConsciousThirstElapsed = 0;
         }
 
         // Pregnancy egg laying code
         Action layEggAction = pregnancyLayEggCheck();
-        if (layEggAction != null){
+        if (layEggAction != null) {
             return layEggAction;
         }
 

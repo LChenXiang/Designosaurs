@@ -83,8 +83,7 @@ public class ThirstBehaviour implements Behaviour {
         int[] closestDist = {Integer.MAX_VALUE, -1};
         // index 0 represents: the calculated distance
         // index 1 represents: -1 -> no food source
-        //                      0 -> found Growable to go to
-        //                      1 -> found Item to go to
+        //                      0 -> found Water to go to
 
         Enum<WaterTileStatus> capability = WaterTileStatus.WATER_TRAVERSE;
 

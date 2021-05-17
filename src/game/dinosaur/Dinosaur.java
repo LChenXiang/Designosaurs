@@ -323,44 +323,14 @@ public abstract class Dinosaur extends Actor {
         return 15;
     }
 
+
     /**
-     * Allow the dinosaur to have its turn.
-     * Will decrement its HP (hunger) and increment the age every turn.
-     * Will check if it's hungry and print suitable message.
-     * Will check if it has fainted from hunger, if yes, check if it has passed the game rule of 20 turns.
-     * If so, kill it with DieFromHungerAction (Could have been just implemented here to be honest)
-     * But letting death be handled by an action could be better.
-     * Will also run pregnancy related code. Lays egg if it is past/equal to incubation period.
-     * Will also check if the dinosaur is a baby, if yes, check if it has become an adult and adjust accordingly
-     * Finally, we will find something for the dinosaur to do via behaviour.
-     * This is done by looping through an ArrayList of behaviours, where the position
-     * indicates the priority of the behaviour. Being at the front means highest priority.
-     * If there's no good action to find from the behaviours, just do nothing
+     * Prints hunger or thirst message when hungry or thirsty.
      *
-     * @param actions    collection of possible Actions for this Actor
-     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
-     * @param map        the map containing the Actor
-     * @param display    the I/O object to which messages may be written
-     * @return Action to take during this turn, defaults to DoNothingAction if can't find any.
+     * @param display the I/O object to which messages may be written
+     * @param here    the location of the dinosaur
      */
-    @Override
-    public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-        // Turn-related attribute change
-        hurt(1);
-        age++;
-        decreaseThirst();
-        // Pregnancy Progression
-        if (hasCapability(DinosaurStatus.PREGNANT)) {
-            pregnantAge++;
-        }
-        // Remove baby status if adult age
-        if (hasCapability(DinosaurStatus.BABY) && (age >= getAdultAge())) {
-            removeCapability(DinosaurStatus.BABY);
-        }
-
-        // To avoid repeated codes, to reference current location
-        Location here = map.locationOf(this);
-
+    private void hungerThirstMessage(Display display, Location here) {
         // Check hunger
         // Makes sure to print it only once when it becomes hungry
         // When it is no longer hungry, it is indicated via enum so the hunger message is printed again
@@ -386,6 +356,55 @@ public abstract class Dinosaur extends Actor {
                 removeCapability(DinosaurStatus.THIRSTY);
             }
         }
+    }
+
+    /**
+     * Does operation related to attribute that happens every turn, like decreasing thirst and hunger.
+     */
+    protected void attributeCheck() {
+        // Turn-related attribute change
+        hurt(1);
+        age++;
+        decreaseThirst();
+        // Pregnancy Progression
+        if (hasCapability(DinosaurStatus.PREGNANT)) {
+            pregnantAge++;
+        }
+        // Remove baby status if adult age
+        if (hasCapability(DinosaurStatus.BABY) && (age >= getAdultAge())) {
+            removeCapability(DinosaurStatus.BABY);
+        }
+    }
+
+    /**
+     * Allow the dinosaur to have its turn.
+     * Will decrement its HP (hunger) and increment the age every turn.
+     * Will check if it's hungry and print suitable message.
+     * Will check if it has fainted from hunger, if yes, check if it has passed the game rule of 20 turns.
+     * If so, kill it with DieFromHungerAction (Could have been just implemented here to be honest)
+     * But letting death be handled by an action could be better.
+     * Will also run pregnancy related code. Lays egg if it is past/equal to incubation period.
+     * Will also check if the dinosaur is a baby, if yes, check if it has become an adult and adjust accordingly
+     * Finally, we will find something for the dinosaur to do via behaviour.
+     * This is done by looping through an ArrayList of behaviours, where the position
+     * indicates the priority of the behaviour. Being at the front means highest priority.
+     * If there's no good action to find from the behaviours, just do nothing
+     *
+     * @param actions    collection of possible Actions for this Actor
+     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+     * @param map        the map containing the Actor
+     * @param display    the I/O object to which messages may be written
+     * @return Action to take during this turn, defaults to DoNothingAction if can't find any.
+     */
+    @Override
+    public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+        attributeCheck();
+
+        // To avoid repeated codes, to reference current location
+        Location here = map.locationOf(this);
+
+        // Check hunger and thirst and print message
+        hungerThirstMessage(display, here);
 
         // Flying dinosaur code
         // TODO: Something that gives the dinosaur its can fly back
@@ -465,4 +484,5 @@ public abstract class Dinosaur extends Actor {
         // Stuck? Too bad! Just do nothing. Probably starve to death though.
         return new DoNothingAction();
     }
+
 }

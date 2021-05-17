@@ -427,7 +427,7 @@ public abstract class Dinosaur extends Actor {
         if (!(isConscious())) {
             boolean doNothing = false;
             // Check unconsciousness from hunger
-            if (hitPoints == 0) {
+            if (hitPoints <= 0) {
                 unConsciousHungerElapsed++;
                 // If reached threshold
                 if (unConsciousHungerElapsed >= getHungerUnConsciousThreshold()) {
@@ -438,12 +438,13 @@ public abstract class Dinosaur extends Actor {
                 }
             }
             // Check unconsciousness from thirst
-            if (thirst == 0) {
+            if (thirst <= 0) {
                 unConsciousThirstElapsed++;
                 // If unconscious, and rain, revive them
                 if (((JurassicParkGameMap) map).isRain()) {
                     drink(10);
                     display.println(this.toString() + " drinks for 10 water level from the rain.");
+                    unConsciousThirstElapsed = 0;
                 } else if (unConsciousThirstElapsed >= getThirstUnconsciousThreshold()) {
                     // Else they die
                     return new DieFromHungerAction();

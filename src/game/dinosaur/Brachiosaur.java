@@ -167,13 +167,4 @@ public class Brachiosaur extends HerbivoreDinosaur {
         return 80;
     }
 
-    /**
-     * How long can the dinosaur fly for. Return 0 if cant fly.
-     *
-     * @return how long can the dinosaur for for.
-     */
-    @Override
-    public int getMaxFlyingTile() {
-        return 0;
-    }
 }

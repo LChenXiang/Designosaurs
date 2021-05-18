@@ -87,11 +87,17 @@ public abstract class Dinosaur extends Actor {
         maxThirst = thirstMax;
         thirst = getStartingThirst();
         flyCounter = 0;
+
         // Insert all behaviour
         behaviourList.add(0, new WanderBehaviour());
         behaviourList.add(0, new BreedBehaviour());
         behaviourList.add(1, new ThirstBehaviour());
 
+        // Fly
+        if (getMaxFlyingTile() > 0){
+            addCapability(DinosaurStatus.CAN_FLY);
+            // TODO: Add go back to tree behaviour
+        }
     }
 
     /**
@@ -127,6 +133,13 @@ public abstract class Dinosaur extends Actor {
         // Insert all behaviour
         behaviourList.add(0, new WanderBehaviour());
         behaviourList.add(0, new BreedBehaviour());
+        behaviourList.add(1, new ThirstBehaviour());
+
+        // Fly
+        if (getMaxFlyingTile() > 0){
+            addCapability(DinosaurStatus.CAN_FLY);
+            // TODO: Add go back to tree behaviour
+        }
     }
 
     /**
@@ -309,10 +322,14 @@ public abstract class Dinosaur extends Actor {
 
     /**
      * How long can the dinosaur fly for. Return 0 if cant fly.
+     * Override this and give value above 0 to allow a certain dinosaur to fly.
+     * Default will be 0 to not let dinosaurs fly.
      *
      * @return how long can the dinosaur for for.
      */
-    public abstract int getMaxFlyingTile();
+    public int getMaxFlyingTile(){
+        return 0;
+    }
 
     /**
      * Override this to give certain dinosaurs unique threshold.

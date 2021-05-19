@@ -54,7 +54,7 @@ public class DieFromNaturalCausesAction extends Action {
             drop.execute(actor, map);
         map.removeActor(actor);
 
-        return actor + " died from " + cause + ".";
+        return actor + " " + cause + ".";
     }
 
     /**
@@ -65,6 +65,6 @@ public class DieFromNaturalCausesAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " died from " + cause + ".";
+        return actor + " " + cause + ".";
     }
 }

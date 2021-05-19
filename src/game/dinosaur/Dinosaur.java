@@ -452,7 +452,7 @@ public abstract class Dinosaur extends Actor {
                 unConsciousHungerElapsed++;
                 // If reached threshold
                 if (unConsciousHungerElapsed >= getHungerUnConsciousThreshold()) {
-                    return new DieFromNaturalCausesAction("hunger");
+                    return new DieFromNaturalCausesAction("starved to death");
                 } else {
                     // Still unconscious, not yet dead
                     doNothing = true;
@@ -468,7 +468,7 @@ public abstract class Dinosaur extends Actor {
                     unConsciousThirstElapsed = 0;
                 } else if (unConsciousThirstElapsed >= getThirstUnconsciousThreshold()) {
                     // Else they die
-                    return new DieFromNaturalCausesAction("thirst");
+                    return new DieFromNaturalCausesAction("died from thirst");
                 } else {
                     // Still unconscious, not yet dead
                     doNothing = true;

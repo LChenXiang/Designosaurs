@@ -435,6 +435,39 @@ public abstract class Dinosaur extends Actor {
         // Check hunger and thirst and print message
         hungerThirstMessage(display, here);
 
+        // Flying dinosaur code
+        // TODO: Something that gives the dinosaur its can fly back
+        if (getMaxFlyingTile() != 0) {
+            // TODO: IDK if increase when traversing or flying
+            // If we are still flying, increment the counter
+            if (hasCapability(DinosaurStatus.CAN_FLY)) {
+                flyCounter++;
+            }
+            // Flying dinosaur reached its flying limit, can't fly until it reaches a tree
+            if (flyCounter >= getMaxFlyingTile() && hasCapability(DinosaurStatus.CAN_FLY)) {
+                removeCapability(DinosaurStatus.CAN_FLY);
+            }
+            // Flying dinosaur no longer flying for some reason
+            if (!hasCapability(DinosaurStatus.CAN_FLY)) {
+                // Landed in a Lake and drowned, unfortunate
+                if (here.getGround().hasCapability(WaterTileStatus.WATER_TRAVERSE)) {
+                    return new DieFromNaturalCausesAction("drowned");
+                }
+                // Landed on the ground
+                else {
+                    addCapability(DinosaurStatus.ON_LAND);
+                }
+            }
+
+            // TODO: Improve this instead of using instanceof
+            // if on a tall growable, reset flycounter and allow actor to fly
+            if (here.getGround().hasCapability(GrowableStatus.TALL)) {
+                addCapability(DinosaurStatus.CAN_FLY);
+                removeCapability(DinosaurStatus.ON_LAND);
+                flyCounter = 0;
+            }
+        }
+
         // Check if starving to death or thirsting to death
         if (!(isConscious())) {
             // flying dinosaur is unconscious, no longer flying
@@ -479,38 +512,7 @@ public abstract class Dinosaur extends Actor {
             unConsciousThirstElapsed = 0;
         }
 
-        // Flying dinosaur code
-        // TODO: Something that gives the dinosaur its can fly back
-        if (getMaxFlyingTile() != 0) {
-            // TODO: IDK if increase when traversing or flying
-            // If we are still flying, increment the counter
-            if (hasCapability(DinosaurStatus.CAN_FLY)) {
-                flyCounter++;
-            }
-            // Flying dinosaur reached its flying limit, can't fly until it reaches a tree
-            if (flyCounter >= getMaxFlyingTile() && hasCapability(DinosaurStatus.CAN_FLY)) {
-                removeCapability(DinosaurStatus.CAN_FLY);
-            }
-            // Flying dinosaur no longer flying for some reason
-            if (!hasCapability(DinosaurStatus.CAN_FLY)) {
-                // Landed in a Lake and drowned, unfortunate
-                if (!here.getGround().hasCapability(WaterTileStatus.WATER_TRAVERSE)) {
-                    return new DieFromNaturalCausesAction("drowned");
-                }
-                // Landed on the ground
-                else {
-                    addCapability(DinosaurStatus.ON_LAND);
-                }
-            }
 
-            // TODO: Improve this instead of using instanceof
-            // if on a tall growable, reset flycounter and allow actor to fly
-            if (here.getGround().hasCapability(GrowableStatus.TALL)) {
-                addCapability(DinosaurStatus.CAN_FLY);
-                removeCapability(DinosaurStatus.ON_LAND);
-                flyCounter = 0;
-            }
-        }
 
         // Pregnancy egg laying code
         Action layEggAction = pregnancyLayEggCheck();

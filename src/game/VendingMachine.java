@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.*;
 import game.action.BuyItemAction;
 import game.dinosaur.Allosaur;
 import game.dinosaur.Brachiosaur;
+import game.dinosaur.Pterodactyl;
 import game.dinosaur.Stegosaur;
 import game.items.*;
 
@@ -48,6 +49,7 @@ public class VendingMachine extends Ground {
         sellableItem.add(new Egg(new Stegosaur()));
         sellableItem.add(new Egg(new Allosaur()));
         sellableItem.add(new Egg(new Brachiosaur()));
+        sellableItem.add(new Egg(new Pterodactyl()));
         sellableItem.add(new HerbivoreMealKit());
         sellableItem.add(new CarnivoreMealKit());
     }

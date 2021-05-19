@@ -141,14 +141,6 @@ public class Pterodactyl extends CarnivoreDinosaur{
     }
 
     /**
-     * @return Starting Thirst of any Pterodactyl
-     */
-    @Override
-    public int getStartingThirst() {
-        return 60;
-    }
-
-    /**
      * @return How much a Pterodactyl can drink in one turn
      */
     @Override

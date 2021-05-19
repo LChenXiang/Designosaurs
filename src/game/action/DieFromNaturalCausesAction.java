@@ -6,7 +6,7 @@ import game.dinosaur.Dinosaur;
 import game.items.Corpse;
 
 /**
- * Special Action that shows a Dinosaur starving to death.
+ * Special Action that shows a Dinosaur starving to death, or dying from dehydration
  *
  * @author Lin Chen Xiang
  * @see Actor
@@ -20,6 +20,10 @@ public class DieFromNaturalCausesAction extends Action {
 
     private String cause;
 
+    /**
+     * Constructor
+     * @param cause String that describes how actor died
+     */
     public DieFromNaturalCausesAction(String cause) {
         this.cause = cause;
     }
@@ -28,7 +32,7 @@ public class DieFromNaturalCausesAction extends Action {
      * Removes Actor and creates a Corpse
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
-     * @return description that actor died from hunger
+     * @return description that actor died from hunger or thirst
      */
 
     @Override
@@ -56,11 +60,11 @@ public class DieFromNaturalCausesAction extends Action {
     /**
      *
      * @param actor The actor performing the action.
-     * @return description that dinosaur died from hunger
+     * @return description that dinosaur died from hunger or thirst
      */
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " starved to death.";
+        return actor + " died from " + cause + ".";
     }
 }

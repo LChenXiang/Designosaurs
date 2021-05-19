@@ -11,6 +11,7 @@ import game.behaviour.ThirstBehaviour;
 import game.behaviour.WanderBehaviour;
 import game.growable.GrowableStatus;
 import game.growable.Tree;
+import game.watertile.WaterTileStatus;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -438,7 +439,7 @@ public abstract class Dinosaur extends Actor {
             }
             if (flyCounter >= getMaxFlyingTile() && hasCapability(DinosaurStatus.CAN_FLY)) {
                 removeCapability(DinosaurStatus.CAN_FLY);
-                if (!here.canActorEnter(this)) {
+                if (!here.getGround().hasCapability(WaterTileStatus.WATER_TRAVERSE)) {
                     return new DieFromNaturalCausesAction("drowned");
                 }
                 addCapability(DinosaurStatus.ON_LAND);

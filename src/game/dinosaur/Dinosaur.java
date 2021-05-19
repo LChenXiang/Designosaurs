@@ -450,6 +450,9 @@ public abstract class Dinosaur extends Actor {
                 removeCapability(DinosaurStatus.ON_LAND);
                 flyCounter = 0;
             }
+            else {
+                addCapability(DinosaurStatus.ON_LAND);
+            }
         }
 
         // Check if starving to death or thirsting to death

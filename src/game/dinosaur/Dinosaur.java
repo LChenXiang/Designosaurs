@@ -3,7 +3,7 @@ package game.dinosaur;
 import edu.monash.fit2099.engine.*;
 import game.JurassicParkGameMap;
 import game.action.AttackAction;
-import game.action.DieFromHungerAction;
+import game.action.DieFromNaturalCausesAction;
 import game.action.LayEggAction;
 import game.behaviour.Behaviour;
 import game.behaviour.BreedBehaviour;
@@ -452,7 +452,7 @@ public abstract class Dinosaur extends Actor {
                 unConsciousHungerElapsed++;
                 // If reached threshold
                 if (unConsciousHungerElapsed >= getHungerUnConsciousThreshold()) {
-                    return new DieFromHungerAction();
+                    return new DieFromNaturalCausesAction("hunger");
                 } else {
                     // Still unconscious, not yet dead
                     doNothing = true;
@@ -468,7 +468,7 @@ public abstract class Dinosaur extends Actor {
                     unConsciousThirstElapsed = 0;
                 } else if (unConsciousThirstElapsed >= getThirstUnconsciousThreshold()) {
                     // Else they die
-                    return new DieFromHungerAction();
+                    return new DieFromNaturalCausesAction("thirst");
                 } else {
                     // Still unconscious, not yet dead
                     doNothing = true;

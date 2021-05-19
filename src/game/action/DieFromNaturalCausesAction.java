@@ -16,7 +16,13 @@ import game.items.Corpse;
  * @since 03/05/2021
  */
 
-public class DieFromHungerAction extends Action {
+public class DieFromNaturalCausesAction extends Action {
+
+    private String cause;
+
+    public DieFromNaturalCausesAction(String cause) {
+        this.cause = cause;
+    }
 
     /**
      * Removes Actor and creates a Corpse
@@ -44,7 +50,7 @@ public class DieFromHungerAction extends Action {
             drop.execute(actor, map);
         map.removeActor(actor);
 
-        return actor + " starved to death.";
+        return actor + " died from " + cause + ".";
     }
 
     /**

@@ -14,7 +14,7 @@ import edu.monash.fit2099.engine.*;
  * @see Location
  * @since 03/05/2021
  */
-public class FollowBehaviour implements Behaviour {
+public class FollowBehaviour extends MovingBehaviour {
 
 	/**
 	 * Target we are following
@@ -33,7 +33,7 @@ public class FollowBehaviour implements Behaviour {
 	 * Constructor.
 	 *
 	 * @param subject the Actor to follow
-	 * @param action the Action to be done when reached target
+	 * @param action  the Action to be done when reached target
 	 */
 	public FollowBehaviour(Actor subject, Action action) {
 		this.target = subject;
@@ -44,13 +44,13 @@ public class FollowBehaviour implements Behaviour {
 	 * Decides the current Action for this Actor
 	 *
 	 * @param actor the Actor acting
-	 * @param map the GameMap containing the Actor
+	 * @param map   the GameMap containing the Actor
 	 * @return MoveActorAction if Actor has not reached target, or action if Actor reached target
 	 */
 
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
-		if(!map.contains(target) || !map.contains(actor))
+		if (!map.contains(target) || !map.contains(actor))
 			return null;
 
 		Location here = map.locationOf(actor);
@@ -66,33 +66,23 @@ public class FollowBehaviour implements Behaviour {
 					return (new MoveActorAction(destination, exit.getName()) {
 						@Override
 						public Action getNextAction() { // override next action as current action to chain follow
-							return self.getAction(actor,map);}
+							return self.getAction(actor, map);
+						}
 					});
 				}
 			}
 		}
 
-		if (currentDistance>1) {
+		if (currentDistance > 1) {
 			// actor not beside target, continue to follow
 			return (new DoNothingAction() {
 				@Override
 				public Action getNextAction() { // override next action as current action to chain follow
-					return self.getAction(actor,map);}
+					return self.getAction(actor, map);
+				}
 			});
-		}
-
-		else
+		} else
 			return action; // actor is already beside target, do action
 	}
-
-	/**
-	 * Compute the Manhattan distance between two locations.
-	 *
-	 * @param a the first location
-	 * @param b the first location
-	 * @return the number of steps between a and b if you only move in the four cardinal directions.
-	 */
-	private int distance(Location a, Location b) {
-		return Math.abs(a.x() - b.x()) + Math.abs(a.y() - b.y());
-	}
 }
+

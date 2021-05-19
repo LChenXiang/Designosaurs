@@ -9,6 +9,7 @@ import game.behaviour.Behaviour;
 import game.behaviour.BreedBehaviour;
 import game.behaviour.ThirstBehaviour;
 import game.behaviour.WanderBehaviour;
+import game.growable.GrowableStatus;
 import game.growable.Tree;
 
 import java.util.ArrayList;
@@ -435,12 +436,19 @@ public abstract class Dinosaur extends Actor {
             if (hasCapability(DinosaurStatus.CAN_FLY)) {
                 flyCounter++;
             }
-            if (flyCounter >= getMaxFlyingTile()) {
+            if (flyCounter >= getMaxFlyingTile() && hasCapability(DinosaurStatus.CAN_FLY)) {
                 removeCapability(DinosaurStatus.CAN_FLY);
+                if (!here.canActorEnter(this)) {
+                    return new DieFromNaturalCausesAction("drowned");
+                }
+                addCapability(DinosaurStatus.ON_LAND);
             }
             // TODO: Improve this instead of using instanceof
-            if (here.getGround() instanceof Tree) {
+            // if on a tall growable, reset flycounter and allow actor to fly
+            if (here.getGround().hasCapability(GrowableStatus.TALL)) {
                 addCapability(DinosaurStatus.CAN_FLY);
+                removeCapability(DinosaurStatus.ON_LAND);
+                flyCounter = 0;
             }
         }
 

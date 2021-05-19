@@ -149,14 +149,6 @@ public class Brachiosaur extends HerbivoreDinosaur {
         return 1000;
     }
 
-    /**
-     *
-     * @return How much the dinosaur's thirst should start with
-     */
-    @Override
-    public int getStartingThirst() {
-        return 100;
-    }
 
     /**
      *

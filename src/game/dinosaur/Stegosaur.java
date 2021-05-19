@@ -145,15 +145,6 @@ public class Stegosaur extends HerbivoreDinosaur {
 
     /**
      *
-     * @return How much the dinosaur's thirst should start with
-     */
-    @Override
-    public int getStartingThirst() {
-        return 60;
-    }
-
-    /**
-     *
      * @return How much the dinosaur can drink in one go
      */
     @Override

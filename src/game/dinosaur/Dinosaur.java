@@ -247,9 +247,13 @@ public abstract class Dinosaur extends Actor {
     public abstract int getEggHatchEcoPoint();
 
     /**
+     * Override this to give custom starting thirst other than the default 60
+     *
      * @return How much the dinosaur's thirst should start with
      */
-    public abstract int getStartingThirst();
+    public int getStartingThirst(){
+        return 60;
+    }
 
     /**
      * Drinks water. Increases Thirst (Higher means less thirsty)

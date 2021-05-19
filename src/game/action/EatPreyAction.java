@@ -40,8 +40,15 @@ public class EatPreyAction extends AttackAction {
         String result;
 
         // check if actor and target are correct types
-        if (!(target.hasCapability(DinosaurStatus.ALLOSAUR_CAN_ATTACK))) {
+        if (!(target.hasCapability(DinosaurStatus.ALLOSAUR_CAN_ATTACK)) || !(target.hasCapability(DinosaurStatus.ON_LAND))) {
             return actor + " cannot attack " + target;
+        }
+
+        if (target.hasCapability(DinosaurStatus.SMALL_BODY)) {
+            actor.heal(Integer.MAX_VALUE);
+            result = actor + " swallowed " + target;
+            map.removeActor(target);
+            return result;
         }
 
         // Allosaur tries attacking target

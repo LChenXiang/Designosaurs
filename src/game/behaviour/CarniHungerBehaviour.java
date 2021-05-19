@@ -57,7 +57,8 @@ public class CarniHungerBehaviour implements HungerBehaviour {
             for (Exit exit : here.getExits()) {
                 Location destination = exit.getDestination();
                 // found prey, immediately attack if havent attack before
-                if (destination.containsAnActor() && destination.getActor().hasCapability(DinosaurStatus.ALLOSAUR_CAN_ATTACK)) {
+                if (destination.containsAnActor() && destination.getActor().hasCapability(DinosaurStatus.ALLOSAUR_CAN_ATTACK)
+                        && destination.getActor().hasCapability(DinosaurStatus.ON_LAND)) {
                     // false if Allosaur already attacked this Dinosaur within 20 turns, true otherwise
                     boolean canAttack = ((CarnivoreDinosaur)actor).canAttack((Dinosaur) destination.getActor());
                     // if canAttack is true means not attacked before
@@ -111,7 +112,8 @@ public class CarniHungerBehaviour implements HungerBehaviour {
                 // current tile
                 there = map.at(x, y);
                 // if found potential prey
-                if (there.containsAnActor() && there.getActor().hasCapability(DinosaurStatus.ALLOSAUR_CAN_ATTACK)) {
+                if (there.containsAnActor() && there.getActor().hasCapability(DinosaurStatus.ALLOSAUR_CAN_ATTACK)
+                        && there.getActor().hasCapability(DinosaurStatus.ON_LAND)) {
                     // false if Allosaur already attacked this Dinosaur within 20 turns, true otherwise
                     boolean canAttack = ((CarnivoreDinosaur)dinosaur).canAttack((Dinosaur) there.getActor());
                     // if canAttack is true means not attacked before

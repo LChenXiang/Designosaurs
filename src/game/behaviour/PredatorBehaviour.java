@@ -48,7 +48,9 @@ public class PredatorBehaviour implements Behaviour {
             Location destination = exit.getDestination();
 
             // if this exit contains an Actor that can be attacked by Allosaur
-            if (destination.containsAnActor() && destination.getActor().hasCapability(DinosaurStatus.ALLOSAUR_CAN_ATTACK)) {
+            if (destination.containsAnActor()
+                    && destination.getActor().hasCapability(DinosaurStatus.ALLOSAUR_CAN_ATTACK)
+                    && destination.getActor().hasCapability(DinosaurStatus.ON_LAND)) {
 
                 // false if Allosaur already attacked this Dinosaur within 20 turns, true otherwise
                 boolean canAttack = ((CarnivoreDinosaur)actor).canAttack((Dinosaur) destination.getActor());

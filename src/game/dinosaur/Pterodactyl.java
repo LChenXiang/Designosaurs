@@ -25,6 +25,8 @@ public class Pterodactyl extends CarnivoreDinosaur{
      */
     public Pterodactyl(Enum<Gender> gender) {
         super("Pterodactyl", 'P', 100, gender, 100);
+        addCapability(DinosaurStatus.ALLOSAUR_CAN_ATTACK);
+        addCapability(DinosaurStatus.SMALL_BODY);
     }
 
     /**
@@ -34,6 +36,8 @@ public class Pterodactyl extends CarnivoreDinosaur{
      */
     public Pterodactyl() {
         super("Pterodactyl", 'P', 100, 100);
+        addCapability(DinosaurStatus.ALLOSAUR_CAN_ATTACK);
+        addCapability(DinosaurStatus.SMALL_BODY);
     }
 
     /**

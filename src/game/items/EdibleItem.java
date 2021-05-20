@@ -8,11 +8,17 @@ import game.PortableItem;
  * Represents a food item.
  *
  * @author NgYuKang, Amos Leong Zheng Khang
- * @version 1.0
+ * @author Lin Chen Xiang
+ * @version 1.1
  * @see PortableItem
  * @since 05/05/2021
  */
 public abstract class EdibleItem extends PortableItem {
+
+    /**
+     * Default hp for all edible items set to 1
+     */
+    private int hitPoints = 1;
 
     /**
      * Constructor.
@@ -34,5 +40,19 @@ public abstract class EdibleItem extends PortableItem {
      * @return heal amount
      */
     public abstract int getHealAmount(Actor actor);
+
+    /**
+     * @return current "hp" of this item
+     */
+    int getItemHitPoints() {
+        return hitPoints;
+    }
+
+    /**
+     * @param healAmount amount of "hp" eaten by actor to be decreased in hitpoints
+     */
+    void decreaseHitPoints(int healAmount) {
+        hitPoints -= healAmount;
+    }
 
 }

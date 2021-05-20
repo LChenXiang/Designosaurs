@@ -38,12 +38,14 @@ public class EatPreyAction extends AttackAction {
 
         String[] output;
         String result;
+        Enum<DinosaurStatus> capability = ((CarnivoreDinosaur) actor).getAttackableEnum();
 
         // check if actor and target are correct types
-        if (!(target.hasCapability(DinosaurStatus.ALLOSAUR_CAN_ATTACK)) || !(target.hasCapability(DinosaurStatus.ON_LAND))) {
+        if (!(target.hasCapability(capability)) || !(target.hasCapability(DinosaurStatus.ON_LAND))) {
             return actor + " cannot attack " + target;
         }
 
+        // if target has a small body, actor can eat it whole and heal fully without missing
         if (target.hasCapability(DinosaurStatus.SMALL_BODY)) {
             actor.heal(Integer.MAX_VALUE);
             result = actor + " swallowed " + target;

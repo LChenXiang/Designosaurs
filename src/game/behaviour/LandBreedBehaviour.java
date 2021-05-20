@@ -7,19 +7,16 @@ import game.dinosaur.DinosaurStatus;
 import game.dinosaur.Gender;
 
 /**
- * Class that decides whether an actor is ready to breed and find a breed partner
+ * Class that decides whether a ground type actor is ready to breed and find a breed partner within a certain radius
  *
  * @author Lin Chen Xiang
  * @see BreedBehaviour
- * @see Actor
- * @see Action
+ * @see FollowBehaviour
+ * @see BreedAction
  * @see Location
  * @see Dinosaur
  * @see DinosaurStatus
  * @see Gender
- * @see FollowBehaviour
- * @see BreedAction
- * @see GameMap
  * @since 03/05/2021
  */
 
@@ -71,7 +68,9 @@ public class LandBreedBehaviour extends BreedBehaviour {
             }
         }
 
-        for (int r=2; r<=3; r++) {
+        // Set radius for land actors to detect a breed partner
+        int MAX_RADIUS = 3;
+        for (int r=2; r<=MAX_RADIUS; r++) {
             action = findPartnerInRadius(here, r, dinosaur, gender, map);
             if (action!=null) { // findPartnerInRadius returns moveactoraction
                 return action;
@@ -84,7 +83,7 @@ public class LandBreedBehaviour extends BreedBehaviour {
 
     /**
      * Check if this tile has a suitable partner
-     *
+     * For Dinosaurs who cannot fly
      * @param there Location of this tile
      * @param dinosaur the Dinosaur finding a partner
      * @param map World map

@@ -1,27 +1,35 @@
 package game.items;
 
 import edu.monash.fit2099.engine.Actor;
+import game.dinosaur.DinosaurStatus;
 
 /**
  * Represents a corpse.
  * Our version of corpse will not rot in inventory. We treat inventory as a portable fridge.
  *
  * @author NgYuKang, Amos Leong Zheng Khang
- * @version 1.0
+ * @author Lin Chen Xiang
+ * @version 1.1
  * @see PerishableFoodItem
  * @since 05/05/2021
  */
 public class Corpse extends PerishableFoodItem {
 
     /**
-     * How much the corpse can heal. Taken from dinosaur, since it varies.
+     * "HitPoints" of a Corpse. Determines how much an actor can eat from this Corpse based on its HitPoints left.
      */
-    private final int healAmount;
+    private int CARCASS_HP;
 
+    /**
+     * Constructor
+     * @param name name of the actor corpse
+     * @param rotTime time taken for this corpse to rot
+     * @param healAmount the total HP of this corpse
+     */
     public Corpse(String name, int rotTime, int healAmount) {
         super(name, 'X', rotTime);
         addCapability(ItemStats.CARNIVORE_CAN_EAT);
-        this.healAmount = healAmount;
+        this.CARCASS_HP = healAmount;
     }
 
     /**
@@ -30,7 +38,21 @@ public class Corpse extends PerishableFoodItem {
      */
     @Override
     public int getHealAmount(Actor actor) {
-        return healAmount;
+        if (actor.hasCapability(DinosaurStatus.SMALL_BODY)) {
+            return 10;
+        }
+        else {
+            return CARCASS_HP;
+        }
     }
 
+    @Override
+    int getItemHitPoints() {
+        return CARCASS_HP;
+    }
+
+    @Override
+    void decreaseHitPoints(int healAmount) {
+        CARCASS_HP -= healAmount;
+    }
 }

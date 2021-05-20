@@ -10,6 +10,7 @@ package game.watertile;
  * @since 13/05/2021
  */
 public enum WaterTileStatus {
-    WATER_TRAVERSE
+    WATER_TRAVERSE,
+    RAIN
 }
 

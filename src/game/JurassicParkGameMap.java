@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.GroundFactory;
 import edu.monash.fit2099.engine.Location;
 import game.dinosaur.Dinosaur;
 import game.growable.GrowableStatus;
+import game.watertile.WaterTileStatus;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
  */
 public class JurassicParkGameMap extends GameMap {
 
-    private boolean rain;
+//    private boolean rain;
     private int turnElapsed;
 
     /**
@@ -94,24 +95,46 @@ public class JurassicParkGameMap extends GameMap {
      */
     @Override
     public void tick() {
-        rain = false;
+        removeRainEnum();
         turnElapsed++;
         if (turnElapsed % 10 == 0){
             double chance = Math.random();
             if (chance < 0.8){
-                rain = true;
+                addRainEnum();
             }
         }
         super.tick();
     }
 
     /**
-     *
-     * @return Whether or not it is raining
+     * Adds rain enum to all grounds.
      */
-    public boolean isRain() {
-        return rain;
+    private void addRainEnum(){
+        for (int y : heights) {
+            for (int x : widths) {
+                this.at(x, y).getGround().addCapability(WaterTileStatus.RAIN);
+            }
+        }
     }
+
+    /**
+     * Removes rain enum to all grounds.
+     */
+    private void removeRainEnum(){
+        for (int y : heights) {
+            for (int x : widths) {
+                this.at(x, y).getGround().removeCapability(WaterTileStatus.RAIN);
+            }
+        }
+    }
+
+//    /**
+//     *
+//     * @return Whether or not it is raining
+//     */
+//    public boolean isRain() {
+//        return rain;
+//    }
 
     /**
      *

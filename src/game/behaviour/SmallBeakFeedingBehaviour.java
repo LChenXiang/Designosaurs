@@ -4,9 +4,18 @@ import edu.monash.fit2099.engine.*;
 import game.action.EatItemAction;
 import game.dinosaur.Dinosaur;
 import game.dinosaur.DinosaurStatus;
+import game.items.EdibleItem;
 
 /**
  * Special Behaviour class that allows small dinosaurs to keep eating the same item for multiple turns
+ *
+ * @author Lin Chen Xiang
+ * @see Actor
+ * @see EdibleItem
+ * @see DinosaurStatus
+ * @see Location
+ * @see GameMap
+ * @since 20/05/2021
  */
 
 public class SmallBeakFeedingBehaviour implements Behaviour{
@@ -15,6 +24,10 @@ public class SmallBeakFeedingBehaviour implements Behaviour{
      * The item to be eaten for multiple turns
      */
     private Item item;
+
+    /**
+     * Used to override getNextAction to action chaining
+     */
     private Behaviour self = this;
 
     /**

@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Location;
 import game.dinosaur.Dinosaur;
+import game.dinosaur.Gender;
 
 public class FlyingBreedBehaviour extends BreedBehaviour {
     @Override
@@ -13,7 +14,7 @@ public class FlyingBreedBehaviour extends BreedBehaviour {
     }
 
     @Override
-    Action hasPartner(Location there, Dinosaur dinosaur, GameMap map) {
+    Action hasPartner(Location there, Dinosaur dinosaur, Gender targetGender, GameMap map) {
         return null;
     }
 }

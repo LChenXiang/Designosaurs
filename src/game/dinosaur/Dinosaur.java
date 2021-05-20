@@ -5,10 +5,7 @@ import game.JurassicParkGameMap;
 import game.action.AttackAction;
 import game.action.DieFromNaturalCausesAction;
 import game.action.LayEggAction;
-import game.behaviour.Behaviour;
-import game.behaviour.BreedBehaviour;
-import game.behaviour.ThirstBehaviour;
-import game.behaviour.WanderBehaviour;
+import game.behaviour.*;
 import game.growable.GrowableStatus;
 import game.growable.Tree;
 import game.watertile.WaterTileStatus;
@@ -144,6 +141,8 @@ public abstract class Dinosaur extends Actor {
         if (getMaxFlyingTile() > 0){
             addCapability(DinosaurStatus.CAN_FLY);
             // TODO: Add go back to tree behaviour
+            // only goes to tree if no current goal or chained action
+            behaviourList.add(0, new GoToTallGrowableBehaviour());
         }
         else {
             addCapability(DinosaurStatus.ON_LAND);

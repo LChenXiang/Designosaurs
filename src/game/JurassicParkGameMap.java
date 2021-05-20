@@ -128,15 +128,8 @@ public class JurassicParkGameMap extends GameMap {
         }
     }
 
-//    /**
-//     *
-//     * @return Whether or not it is raining
-//     */
-//    public boolean isRain() {
-//        return rain;
-//    }
-
     /**
+     *  This is probably not going to be used, but is here regardless.
      *
      * @return How much turn has elapsed for this map. Should be same for all maps.
      */

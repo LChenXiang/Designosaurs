@@ -44,14 +44,14 @@ public abstract class EdibleItem extends PortableItem {
     /**
      * @return current "hp" of this item
      */
-    int getItemHitPoints() {
+    public int getItemHitPoints() {
         return hitPoints;
     }
 
     /**
      * @param healAmount amount of "hp" eaten by actor to be decreased in hitpoints
      */
-    void decreaseHitPoints(int healAmount) {
+    public void decreaseHitPoints(int healAmount) {
         hitPoints -= healAmount;
     }
 

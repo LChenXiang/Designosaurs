@@ -30,7 +30,7 @@ public class EatItemAction extends Action {
     }
 
     /**
-     * Heals actor based on item's heal points and removes item from map.
+     * Heals actor based on item's heal points and removes item from map if it is fully eaten.
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
      * @return description about actor eating the item
@@ -40,11 +40,14 @@ public class EatItemAction extends Action {
 
         int healPoints = edibleItem.getHealAmount(actor);
         actor.heal(healPoints);
+        edibleItem.decreaseHitPoints(healPoints);
 
         String result = actor + " eats " + edibleItem + " and heals for " + healPoints + " hitpoints.";
 
-        Location here = map.locationOf(actor);
-        here.removeItem(edibleItem);
+        if (edibleItem.getItemHitPoints() <= 0) {
+            Location here = map.locationOf(actor);
+            here.removeItem(edibleItem);
+        }
 
         return result;
     }

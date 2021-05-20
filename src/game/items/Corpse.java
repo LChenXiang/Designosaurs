@@ -27,7 +27,7 @@ public class Corpse extends PerishableFoodItem {
      * @param healAmount the total HP of this corpse
      */
     public Corpse(String name, int rotTime, int healAmount) {
-        super(name, 'X', rotTime);
+        super(name+" corpse", 'X', rotTime);
         addCapability(ItemStats.CARNIVORE_CAN_EAT);
         this.CARCASS_HP = healAmount;
     }
@@ -50,7 +50,7 @@ public class Corpse extends PerishableFoodItem {
      * @return current hitpoints of this Corpse
      */
     @Override
-    int getItemHitPoints() {
+    public int getItemHitPoints() {
         return CARCASS_HP;
     }
 
@@ -58,7 +58,7 @@ public class Corpse extends PerishableFoodItem {
      * @param healAmount amount of "hp" eaten by actor to be decreased in hitpoints for this Corpse
      */
     @Override
-    void decreaseHitPoints(int healAmount) {
+    public void decreaseHitPoints(int healAmount) {
         CARCASS_HP -= healAmount;
     }
 }

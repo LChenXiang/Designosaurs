@@ -1,7 +1,9 @@
 package game.behaviour;
 
 import edu.monash.fit2099.engine.*;
+import game.dinosaur.DinosaurStatus;
 import game.growable.Growable;
+import game.items.ItemStats;
 
 /**
  * A class that figures out a MoveAction that will move the actor one step
@@ -123,6 +125,29 @@ public class GoToLocation extends MovingBehaviour {
 
         Location here = map.locationOf(actor);
 
+        // actor is at goal
+        if (here.x() == there.x() && here.y() == there.y()) {
+
+            if (item != null && item.hasCapability(ItemStats.MULTI_TURN_EATING)) {
+
+                if (actor.hasCapability(DinosaurStatus.CAN_FLY)) {
+                    for (Exit exit : here.getExits()) {
+                        // there is something around the goal, flying dinosaur cannot land
+                        if (exit.getDestination().containsAnActor()) {
+                            return (new DoNothingAction() {
+                                @Override
+                                public Action getNextAction() { // override next action as current action to hover on the item
+                                    return self.getAction(actor, map);
+                                }
+                            });
+                        }
+                    }
+                }
+
+            }
+            return action; // actor is already at target, do action
+        }
+
         int currentDistance = distance(here, there); // no change
         for (Exit exit : here.getExits()) {
             Location destination = exit.getDestination();
@@ -139,16 +164,7 @@ public class GoToLocation extends MovingBehaviour {
                 }
             }
         }
-        if (currentDistance > 1) {
-            // actor still not at goal, continue moving towards it
-            return (new DoNothingAction() {
-                @Override
-                public Action getNextAction() { // override next action as current action continue moving
-                    return self.getAction(actor, map);
-                }
-            });
-        } else
-            return action; // actor is already beside target, do action
+        return null;
     }
 }
 

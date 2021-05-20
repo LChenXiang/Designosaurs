@@ -52,12 +52,13 @@ public class CarniHungerBehaviour implements HungerBehaviour {
         if (actor.hasCapability(DinosaurStatus.TEAM_CARNIVORE)  && ((Dinosaur) actor).isHungry()) {
 
             Location here = map.locationOf(actor);
+            Enum<DinosaurStatus> capability = ((CarnivoreDinosaur) actor).getAttackableEnum();
 
             // check surroundings if there is food source
             for (Exit exit : here.getExits()) {
                 Location destination = exit.getDestination();
                 // found prey, immediately attack if havent attack before
-                if (destination.containsAnActor() && destination.getActor().hasCapability(DinosaurStatus.ALLOSAUR_CAN_ATTACK)
+                if (destination.containsAnActor() && destination.getActor().hasCapability(capability)
                         && destination.getActor().hasCapability(DinosaurStatus.ON_LAND)) {
                     // false if Allosaur already attacked this Dinosaur within 20 turns, true otherwise
                     boolean canAttack = ((CarnivoreDinosaur)actor).canAttack((Dinosaur) destination.getActor());
@@ -96,6 +97,7 @@ public class CarniHungerBehaviour implements HungerBehaviour {
     @Override
     public Action findFood(Location here, Actor dinosaur, GameMap map) {
 
+        Enum<DinosaurStatus> capability = ((CarnivoreDinosaur) dinosaur).getAttackableEnum();
         Behaviour startMoving; // FollowBehaviour/GoToLocation
         Location there; // targeted location
         Location currentClosest = here; // default set to location of dinosaur
@@ -112,7 +114,7 @@ public class CarniHungerBehaviour implements HungerBehaviour {
                 // current tile
                 there = map.at(x, y);
                 // if found potential prey
-                if (there.containsAnActor() && there.getActor().hasCapability(DinosaurStatus.ALLOSAUR_CAN_ATTACK)
+                if (there.containsAnActor() && there.getActor().hasCapability(capability)
                         && there.getActor().hasCapability(DinosaurStatus.ON_LAND)) {
                     // false if Allosaur already attacked this Dinosaur within 20 turns, true otherwise
                     boolean canAttack = ((CarnivoreDinosaur)dinosaur).canAttack((Dinosaur) there.getActor());

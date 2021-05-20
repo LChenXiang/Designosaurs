@@ -17,6 +17,7 @@ public enum DinosaurStatus {
     LONG_NECK,
     BAD_DIGESTION,
     ALLOSAUR_CAN_ATTACK,
+    PTERODACTYL_CAN_ATTACK,
     SMALL_BODY,
     STOMP_BUSH,
     BABY,

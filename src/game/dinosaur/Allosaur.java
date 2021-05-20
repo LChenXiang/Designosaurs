@@ -169,4 +169,12 @@ public class Allosaur extends CarnivoreDinosaur {
         return 30;
     }
 
+    /**
+     * @return the Enum that allows Allosaur to attack another Dinosaur
+     */
+    @Override
+    public Enum<DinosaurStatus> getAttackableEnum() {
+        return DinosaurStatus.ALLOSAUR_CAN_ATTACK;
+    }
+
 }

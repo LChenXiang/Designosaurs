@@ -167,6 +167,14 @@ public class Pterodactyl extends CarnivoreDinosaur{
     }
 
     /**
+     * @return the Enum that allows Pterodactyl to attack another Dinosaur
+     */
+    @Override
+    public Enum<DinosaurStatus> getAttackableEnum() {
+        return DinosaurStatus.PTERODACTYL_CAN_ATTACK;
+    }
+
+    /**
      * Describes what happens when Pterodactyl is traversing across this Lake tile.
      * Prints a description if Pterodactyl ate fish, drank water, or both
      * @param waterTile the Lake that the Pterodactyl is on

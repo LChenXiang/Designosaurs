@@ -58,6 +58,11 @@ public abstract class CarnivoreDinosaur extends Dinosaur {
     }
 
     /**
+     * @return the Enum that allows this Dinosaur to attack another Dinosaur
+     */
+    public abstract Enum<DinosaurStatus> getAttackableEnum();
+
+    /**
      * Generates action that other actors can do to this carnivore dinosaur
      *
      * @param otherActor the Actor that might be performing attack

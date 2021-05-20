@@ -105,65 +105,65 @@ public class LandBreedBehaviour extends BreedBehaviour {
      * @param map World map
      * @return null if no partner found in radius, follow if found partner (moveactoraction)
      */
-    public Action findPartnerInRadius(Location here, int radius, Dinosaur dinosaur, GameMap map) {
-
-        int counterX;
-        int counterY = radius;
-        Location there;
-        Action follow;
-
-        // diameter
-        int length = radius*2;
-
-        // go through each row if radius starting from here.y()+radius
-        for (int i=0; i<=length; i++) {
-
-            // start x at here.x()-radius
-            counterX = radius*-1;
-
-            // if at first or last row of radius, go through all tiles
-            if (counterY == radius || counterY == (radius*-1)) {
-                // go through all tiles of that row starting at (radius*-1, counterY)
-                for (int j=0; j<=length; j++) {
-                    // see if current tile is accessible
-                    try {
-                        there = map.at(here.x() + counterX, here.y() + counterY);
-                    }
-                    catch(ArrayIndexOutOfBoundsException e) {
-                        continue;
-                    }
-                    follow = hasPartner(there, dinosaur, map); // check if has partner
-                    if (follow!=null) {// not null, return the action
-                        return follow;
-                    }
-
-                    counterX++; // no partner at this tile, go to next
-                }
-            }
-                // in between first and last row of radius
-            else {
-                // go through first and last column of this row
-                for (int j=0; j<=length; j+=length) {
-                    counterX += j; // 1st counterX = radius*-1, 2nd counterX = radius
-                    // see if current tile is accessible
-                    try {
-                        there = map.at(here.x() + counterX, here.y() + counterY);
-                    }
-                    catch(ArrayIndexOutOfBoundsException e) {
-                        continue;
-                    }
-                    follow = hasPartner(there, dinosaur, map); // check if has partner
-                    if (follow!=null) { // not null, return the action
-                        return follow;
-                    }
-                }
-            }
-
-            counterY--; // no partner at this row, decrement
-        }
-
-        return null; // no partner found in radius
-    }
+//    public Action findPartnerInRadius(Location here, int radius, Dinosaur dinosaur, GameMap map) {
+//
+//        int counterX;
+//        int counterY = radius;
+//        Location there;
+//        Action follow;
+//
+//        // diameter
+//        int length = radius*2;
+//
+//        // go through each row if radius starting from here.y()+radius
+//        for (int i=0; i<=length; i++) {
+//
+//            // start x at here.x()-radius
+//            counterX = radius*-1;
+//
+//            // if at first or last row of radius, go through all tiles
+//            if (counterY == radius || counterY == (radius*-1)) {
+//                // go through all tiles of that row starting at (radius*-1, counterY)
+//                for (int j=0; j<=length; j++) {
+//                    // see if current tile is accessible
+//                    try {
+//                        there = map.at(here.x() + counterX, here.y() + counterY);
+//                    }
+//                    catch(ArrayIndexOutOfBoundsException e) {
+//                        continue;
+//                    }
+//                    follow = hasPartner(there, dinosaur, map); // check if has partner
+//                    if (follow!=null) {// not null, return the action
+//                        return follow;
+//                    }
+//
+//                    counterX++; // no partner at this tile, go to next
+//                }
+//            }
+//                // in between first and last row of radius
+//            else {
+//                // go through first and last column of this row
+//                for (int j=0; j<=length; j+=length) {
+//                    counterX += j; // 1st counterX = radius*-1, 2nd counterX = radius
+//                    // see if current tile is accessible
+//                    try {
+//                        there = map.at(here.x() + counterX, here.y() + counterY);
+//                    }
+//                    catch(ArrayIndexOutOfBoundsException e) {
+//                        continue;
+//                    }
+//                    follow = hasPartner(there, dinosaur, map); // check if has partner
+//                    if (follow!=null) { // not null, return the action
+//                        return follow;
+//                    }
+//                }
+//            }
+//
+//            counterY--; // no partner at this row, decrement
+//        }
+//
+//        return null; // no partner found in radius
+//    }
 
     /**
      * Check if this tile has a suitable partner
@@ -173,6 +173,7 @@ public class LandBreedBehaviour extends BreedBehaviour {
      * @param map World map
      * @return null if no suitable partner, follow.getAction if found partner
      */
+    @Override
     public Action hasPartner(Location there, Dinosaur dinosaur, GameMap map) {
 
         Behaviour follow;
@@ -201,21 +202,6 @@ public class LandBreedBehaviour extends BreedBehaviour {
             }
         }
         return null; // no partner found
-    }
-
-    /**
-     * Dinosaur has a 70% chance of wanting to breed
-     * @return 0.7 which is the chance of wanting to breed
-     */
-    public double breedChance() {return 0.7;}
-
-    /**
-     * See whether Dinosaur feels like breeding
-     * @return true if Dinosaur wants to breed, false otherwise
-     */
-    public boolean wantsToBreed() {
-        double chance = Math.random();
-        return chance < breedChance();
     }
 
 }

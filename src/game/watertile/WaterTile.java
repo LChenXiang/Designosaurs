@@ -96,6 +96,7 @@ public abstract class WaterTile extends Ground {
      */
     public void decreaseSipCount(){
         sipCapacity--;
+        sipCapacity = Math.max(0, sipCapacity);
     }
 
     /**

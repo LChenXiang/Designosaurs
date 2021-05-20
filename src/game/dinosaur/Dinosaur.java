@@ -260,7 +260,7 @@ public abstract class Dinosaur extends Actor {
      * @return How much the dinosaur's thirst should start with
      */
     public int getStartingThirst(){
-        return 60;
+        return 5;
     }
 
     /**

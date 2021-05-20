@@ -46,11 +46,17 @@ public class Corpse extends PerishableFoodItem {
         }
     }
 
+    /**
+     * @return current hitpoints of this Corpse
+     */
     @Override
     int getItemHitPoints() {
         return CARCASS_HP;
     }
 
+    /**
+     * @param healAmount amount of "hp" eaten by actor to be decreased in hitpoints for this Corpse
+     */
     @Override
     void decreaseHitPoints(int healAmount) {
         CARCASS_HP -= healAmount;

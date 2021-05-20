@@ -29,6 +29,7 @@ public class Corpse extends PerishableFoodItem {
     public Corpse(String name, int rotTime, int healAmount) {
         super(name+" corpse", 'X', rotTime);
         addCapability(ItemStats.CARNIVORE_CAN_EAT);
+        addCapability(ItemStats.MULTI_TURN_EATING);
         this.CARCASS_HP = healAmount;
     }
 

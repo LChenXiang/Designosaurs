@@ -12,4 +12,5 @@ public enum ItemStats {
     CARNIVORE_CAN_EAT,
     HERBIVORE_CAN_EAT,
     IS_WEAPON,
+    MULTI_TURN_EATING
 }

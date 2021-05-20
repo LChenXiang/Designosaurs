@@ -99,7 +99,7 @@ public class JurassicParkGameMap extends GameMap {
         turnElapsed++;
         if (turnElapsed % 10 == 0){
             double chance = Math.random();
-            if (chance < 0.8){
+            if (chance < 0.2){
                 addRainEnum();
             }
         }

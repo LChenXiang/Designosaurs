@@ -73,7 +73,7 @@ public class CarniHungerBehaviour implements HungerBehaviour {
                         // found food, immediately eat
                         if (item.hasCapability(ItemStats.CARNIVORE_CAN_EAT)) {
                             if (item.hasCapability(ItemStats.MULTI_TURN_EATING) && actor.hasCapability(DinosaurStatus.SMALL_BODY)) {
-                                Behaviour eat = new SmallBeakFeedingBehaviour();
+                                Behaviour eat = new SmallBeakFeedingBehaviour(item);
                                 Behaviour goToItem = new GoToLocation(destination, eat.getAction(actor, map));
                                 return goToItem.getAction(actor, map);
                             }

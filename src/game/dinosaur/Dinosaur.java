@@ -87,16 +87,19 @@ public abstract class Dinosaur extends Actor {
 
         // Insert all behaviour
         behaviourList.add(0, new WanderBehaviour());
-        behaviourList.add(0, new LandBreedBehaviour());
-        behaviourList.add(1, new ThirstBehaviour());
+        behaviourList.add(0, new ThirstBehaviour());
 
         // Fly
         if (getMaxFlyingTile() > 0){
             addCapability(DinosaurStatus.CAN_FLY);
             // TODO: Add go back to tree behaviour
+            behaviourList.add(0, new FlyingBreedBehaviour());
+            // only goes to tree if no current goal or chained action
+            behaviourList.add(0, new GoToTallGrowableBehaviour());
         }
         else {
             addCapability(DinosaurStatus.ON_LAND);
+            behaviourList.add(0, new LandBreedBehaviour());
         }
     }
 
@@ -132,18 +135,19 @@ public abstract class Dinosaur extends Actor {
 
         // Insert all behaviour
         behaviourList.add(0, new WanderBehaviour());
-        behaviourList.add(0, new LandBreedBehaviour());
-        behaviourList.add(1, new ThirstBehaviour());
+        behaviourList.add(0, new ThirstBehaviour());
 
         // Fly
         if (getMaxFlyingTile() > 0){
             addCapability(DinosaurStatus.CAN_FLY);
             // TODO: Add go back to tree behaviour
+            behaviourList.add(0, new FlyingBreedBehaviour());
             // only goes to tree if no current goal or chained action
             behaviourList.add(0, new GoToTallGrowableBehaviour());
         }
         else {
             addCapability(DinosaurStatus.ON_LAND);
+            behaviourList.add(0, new LandBreedBehaviour());
         }
     }
 
@@ -520,6 +524,11 @@ public abstract class Dinosaur extends Actor {
         // Handle multi-turn actions from behaviours
         if ((lastAction != null) && (lastAction.getNextAction() != null)) {
             return lastAction.getNextAction();
+        }
+
+        // actor is waiting for its partner to arrive so they can breed
+        if (hasCapability(DinosaurStatus.WANTS_TO_BREED)) {
+            return new DoNothingAction();
         }
 
         // If passed everything, find something to do

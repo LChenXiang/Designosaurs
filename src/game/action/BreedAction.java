@@ -3,6 +3,7 @@ package game.action;
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
+import game.behaviour.LandBreedBehaviour;
 import game.dinosaur.DinosaurStatus;
 import game.dinosaur.Gender;
 
@@ -12,7 +13,7 @@ import game.dinosaur.Gender;
  * @author Lin Chen Xiang
  * @see Actor
  * @see Action
- * @see game.behaviour.BreedBehaviour
+ * @see LandBreedBehaviour
  * @see DinosaurStatus
  * @see Gender
  * @see GameMap

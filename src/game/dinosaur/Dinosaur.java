@@ -1,13 +1,11 @@
 package game.dinosaur;
 
 import edu.monash.fit2099.engine.*;
-import game.JurassicParkGameMap;
 import game.action.AttackAction;
 import game.action.DieFromNaturalCausesAction;
 import game.action.LayEggAction;
 import game.behaviour.*;
 import game.growable.GrowableStatus;
-import game.growable.Tree;
 import game.watertile.WaterTileStatus;
 
 import java.util.ArrayList;
@@ -89,7 +87,7 @@ public abstract class Dinosaur extends Actor {
 
         // Insert all behaviour
         behaviourList.add(0, new WanderBehaviour());
-        behaviourList.add(0, new BreedBehaviour());
+        behaviourList.add(0, new LandBreedBehaviour());
         behaviourList.add(1, new ThirstBehaviour());
 
         // Fly
@@ -134,7 +132,7 @@ public abstract class Dinosaur extends Actor {
 
         // Insert all behaviour
         behaviourList.add(0, new WanderBehaviour());
-        behaviourList.add(0, new BreedBehaviour());
+        behaviourList.add(0, new LandBreedBehaviour());
         behaviourList.add(1, new ThirstBehaviour());
 
         // Fly

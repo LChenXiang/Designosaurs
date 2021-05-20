@@ -490,7 +490,7 @@ public abstract class Dinosaur extends Actor {
             if (thirst <= 0) {
                 unConsciousThirstElapsed++;
                 // If unconscious, and rain, revive them
-                if (((JurassicParkGameMap) map).isRain()) {
+                if (here.getGround().hasCapability(WaterTileStatus.RAIN)) {
                     drink(10);
                     display.println(this.toString() + " drinks for 10 water level from the rain.");
                     unConsciousThirstElapsed = 0;

@@ -96,6 +96,7 @@ public abstract class WaterTile extends Ground {
      */
     public void decreaseSipCount(){
         sipCapacity--;
+        sipCapacity = Math.max(0, sipCapacity);
     }
 
     /**
@@ -117,10 +118,8 @@ public abstract class WaterTile extends Ground {
      */
     @Override
     public void tick(Location location) {
-        if (location.map() instanceof JurassicParkGameMap) {
-            if (((JurassicParkGameMap) location.map()).isRain()) {
-                increaseSipCapacity();
-            }
+        if (hasCapability(WaterTileStatus.RAIN)) {
+            increaseSipCapacity();
         }
         checkFishGrowth();
     }

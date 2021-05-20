@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.GroundFactory;
 import edu.monash.fit2099.engine.Location;
 import game.dinosaur.Dinosaur;
 import game.growable.GrowableStatus;
+import game.watertile.WaterTileStatus;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,7 +22,8 @@ import java.util.List;
  */
 public class JurassicParkGameMap extends GameMap {
 
-    protected JurassicWorld world;
+//    private boolean rain;
+    private int turnElapsed;
 
     /**
      * Constructor.
@@ -74,6 +76,9 @@ public class JurassicParkGameMap extends GameMap {
         return new JurassicParkLocation(this, x, y);
     }
 
+    /**
+     * Used to grow all the bushes at the start
+     */
     private void initialBushGrowth() {
         for (int y : heights) {
             for (int x : widths) {
@@ -85,8 +90,50 @@ public class JurassicParkGameMap extends GameMap {
         }
     }
 
-    public boolean isRain() {
-        return world.isRain();
+    /**
+     * Called once per turn, so that maps can experience the passage of time.
+     */
+    @Override
+    public void tick() {
+        removeRainEnum();
+        turnElapsed++;
+        if (turnElapsed % 10 == 0){
+            double chance = Math.random();
+            if (chance < 0.2){
+                addRainEnum();
+            }
+        }
+        super.tick();
     }
 
+    /**
+     * Adds rain enum to all grounds.
+     */
+    private void addRainEnum(){
+        for (int y : heights) {
+            for (int x : widths) {
+                this.at(x, y).getGround().addCapability(WaterTileStatus.RAIN);
+            }
+        }
+    }
+
+    /**
+     * Removes rain enum to all grounds.
+     */
+    private void removeRainEnum(){
+        for (int y : heights) {
+            for (int x : widths) {
+                this.at(x, y).getGround().removeCapability(WaterTileStatus.RAIN);
+            }
+        }
+    }
+
+    /**
+     *  This is probably not going to be used, but is here regardless.
+     *
+     * @return How much turn has elapsed for this map. Should be same for all maps.
+     */
+    public int getTurnElapsed() {
+        return turnElapsed;
+    }
 }

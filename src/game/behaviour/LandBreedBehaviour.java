@@ -23,6 +23,11 @@ import game.dinosaur.Gender;
 public class LandBreedBehaviour extends BreedBehaviour {
 
     /**
+     * Set radius for ground actors to find a partner within
+     */
+    private final int MAX_RADIUS = 3;
+
+    /**
      * Goes through each radius to check for suitable breeding partner, then do action if found
      *
      * @param actor the Actor acting
@@ -69,7 +74,6 @@ public class LandBreedBehaviour extends BreedBehaviour {
         }
 
         // Set radius for land actors to detect a breed partner
-        int MAX_RADIUS = 3;
         for (int r=2; r<=MAX_RADIUS; r++) {
             action = findPartnerInRadius(here, r, dinosaur, gender, map);
             if (action!=null) { // findPartnerInRadius returns moveactoraction

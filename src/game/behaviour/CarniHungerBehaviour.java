@@ -54,6 +54,13 @@ public class CarniHungerBehaviour implements HungerBehaviour {
             Location here = map.locationOf(actor);
             Enum<DinosaurStatus> capability = ((CarnivoreDinosaur) actor).getAttackableEnum();
 
+            // check if it is standing on food
+            for (Item item : here.getItems()) {
+                // found food, immediately eat
+                if (item.hasCapability(ItemStats.CARNIVORE_CAN_EAT)) {
+                    return new EatItemAction(item);
+                }
+            }
             // check surroundings if there is food source
             for (Exit exit : here.getExits()) {
                 Location destination = exit.getDestination();

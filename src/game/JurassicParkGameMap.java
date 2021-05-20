@@ -21,7 +21,8 @@ import java.util.List;
  */
 public class JurassicParkGameMap extends GameMap {
 
-    protected JurassicWorld world;
+    private boolean rain;
+    private int turnElapsed;
 
     /**
      * Constructor.
@@ -74,6 +75,9 @@ public class JurassicParkGameMap extends GameMap {
         return new JurassicParkLocation(this, x, y);
     }
 
+    /**
+     * Used to grow all the bushes at the start
+     */
     private void initialBushGrowth() {
         for (int y : heights) {
             for (int x : widths) {
@@ -85,8 +89,35 @@ public class JurassicParkGameMap extends GameMap {
         }
     }
 
-    public boolean isRain() {
-        return world.isRain();
+    /**
+     * Called once per turn, so that maps can experience the passage of time.
+     */
+    @Override
+    public void tick() {
+        rain = false;
+        turnElapsed++;
+        if (turnElapsed % 10 == 0){
+            double chance = Math.random();
+            if (chance < 0.8){
+                rain = true;
+            }
+        }
+        super.tick();
     }
 
+    /**
+     *
+     * @return Whether or not it is raining
+     */
+    public boolean isRain() {
+        return rain;
+    }
+
+    /**
+     *
+     * @return How much turn has elapsed for this map. Should be same for all maps.
+     */
+    public int getTurnElapsed() {
+        return turnElapsed;
+    }
 }

@@ -19,6 +19,24 @@ import game.growable.GrowableStatus;
 public class GoToTallGrowableBehaviour extends MovingBehaviour implements Behaviour {
 
     /**
+     * Optional action to do when reached Growable, default set to null
+     */
+    private Action action = null;
+
+    /**
+     * Empty Constructor
+     */
+    public GoToTallGrowableBehaviour() {}
+
+    /**
+     * Constructor if there is Action to be done when reached Growable
+     * @param action the action to do when at Growable
+     */
+    public GoToTallGrowableBehaviour(Action action) {
+        this.action = action;
+    }
+
+    /**
      * Scans the entire map to find the closest Tall Growable to go to, if actor is on land
      * @param actor the Actor acting
      * @param map the GameMap containing the Actor
@@ -50,7 +68,7 @@ public class GoToTallGrowableBehaviour extends MovingBehaviour implements Behavi
             }
             if (closestDistance < Integer.MAX_VALUE) {
                 // actor is just moving to that Location, doesn't do anything else when reaching there
-                Behaviour startMoving = new GoToLocation(currentClosest, null);
+                Behaviour startMoving = new GoToLocation(currentClosest, action);
                 // start moving towards Location
                 return startMoving.getAction(actor, map);
             }

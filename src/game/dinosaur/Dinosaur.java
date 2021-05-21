@@ -91,7 +91,7 @@ public abstract class Dinosaur extends Actor {
 
         // Fly
         if (getMaxFlyingTile() > 0){
-            addCapability(DinosaurStatus.CAN_FLY);
+            addCapability(DinosaurStatus.FLYING);
             // TODO: Add go back to tree behaviour
             behaviourList.add(0, new FlyingBreedBehaviour());
             // only goes to tree if no current goal or chained action
@@ -139,7 +139,7 @@ public abstract class Dinosaur extends Actor {
 
         // Fly
         if (getMaxFlyingTile() > 0){
-            addCapability(DinosaurStatus.CAN_FLY);
+            addCapability(DinosaurStatus.FLYING);
             // TODO: Add go back to tree behaviour
             behaviourList.add(0, new FlyingBreedBehaviour());
             // only goes to tree if no current goal or chained action
@@ -441,15 +441,15 @@ public abstract class Dinosaur extends Actor {
         if (getMaxFlyingTile() != 0) {
             // TODO: IDK if increase when traversing or flying
             // If we are still flying, increment the counter
-            if (hasCapability(DinosaurStatus.CAN_FLY)) {
+            if (hasCapability(DinosaurStatus.FLYING)) {
                 flyCounter++;
             }
             // Flying dinosaur reached its flying limit, can't fly until it reaches a tree
-            if (flyCounter >= getMaxFlyingTile() && hasCapability(DinosaurStatus.CAN_FLY)) {
-                removeCapability(DinosaurStatus.CAN_FLY);
+            if (flyCounter >= getMaxFlyingTile() && hasCapability(DinosaurStatus.FLYING)) {
+                removeCapability(DinosaurStatus.FLYING);
             }
             // Flying dinosaur no longer flying for some reason
-            if (!hasCapability(DinosaurStatus.CAN_FLY)) {
+            if (!hasCapability(DinosaurStatus.FLYING)) {
                 // Landed in a Lake and drowned, unfortunate
                 if (here.getGround().hasCapability(WaterTileStatus.WATER_TRAVERSE)) {
                     return new DieFromNaturalCausesAction("drowned");
@@ -463,7 +463,7 @@ public abstract class Dinosaur extends Actor {
             // TODO: Improve this instead of using instanceof
             // if on a tall growable, reset flycounter and allow actor to fly
             if (here.getGround().hasCapability(GrowableStatus.TALL)) {
-                addCapability(DinosaurStatus.CAN_FLY);
+                addCapability(DinosaurStatus.FLYING);
                 removeCapability(DinosaurStatus.ON_LAND);
                 flyCounter = 0;
             }
@@ -472,8 +472,8 @@ public abstract class Dinosaur extends Actor {
         // Check if starving to death or thirsting to death
         if (!(isConscious())) {
             // flying dinosaur is unconscious, no longer flying
-            if (hasCapability(DinosaurStatus.CAN_FLY)) {
-                removeCapability(DinosaurStatus.CAN_FLY);
+            if (hasCapability(DinosaurStatus.FLYING)) {
+                removeCapability(DinosaurStatus.FLYING);
             }
             boolean doNothing = false;
             // Check unconsciousness from hunger

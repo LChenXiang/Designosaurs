@@ -130,7 +130,7 @@ public class GoToLocation extends MovingBehaviour {
 
             if (item != null && item.hasCapability(ItemStats.MULTI_TURN_EATING)) {
 
-                if (actor.hasCapability(DinosaurStatus.CAN_FLY)) {
+                if (actor.hasCapability(DinosaurStatus.FLYING)) {
                     for (Exit exit : here.getExits()) {
                         // there is something around the goal, flying dinosaur cannot land
                         if (exit.getDestination().containsAnActor()) {

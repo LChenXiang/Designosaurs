@@ -48,8 +48,8 @@ public class SmallBeakFeedingBehaviour implements Behaviour{
     public Action getAction(Actor actor, GameMap map) {
 
         // flying dinosaur must land to eat
-        if (actor.hasCapability(DinosaurStatus.CAN_FLY)) {
-            actor.removeCapability(DinosaurStatus.CAN_FLY);
+        if (actor.hasCapability(DinosaurStatus.FLYING)) {
+            actor.removeCapability(DinosaurStatus.FLYING);
             actor.addCapability(DinosaurStatus.ON_LAND);
         }
 

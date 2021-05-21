@@ -3,7 +3,6 @@ package game.watertile;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Ground;
 import edu.monash.fit2099.engine.Location;
-import game.JurassicParkGameMap;
 import game.dinosaur.DinosaurStatus;
 
 /**
@@ -108,7 +107,7 @@ public abstract class WaterTile extends Ground {
      */
     @Override
     public boolean canActorEnter(Actor actor) {
-        return actor.hasCapability(DinosaurStatus.CAN_FLY);
+        return actor.hasCapability(DinosaurStatus.FLYING);
     }
 
     /**

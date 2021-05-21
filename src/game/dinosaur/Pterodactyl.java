@@ -220,7 +220,7 @@ public class Pterodactyl extends CarnivoreDinosaur{
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
         Location here = map.locationOf(this);
-        if (hasCapability(DinosaurStatus.CAN_FLY) && here.getGround().hasCapability(WaterTileStatus.WATER_TRAVERSE)) {
+        if (hasCapability(DinosaurStatus.FLYING) && here.getGround().hasCapability(WaterTileStatus.WATER_TRAVERSE)) {
             traverseLake((WaterTile) here.getGround());
         }
         return super.playTurn(actions, lastAction, map, display);

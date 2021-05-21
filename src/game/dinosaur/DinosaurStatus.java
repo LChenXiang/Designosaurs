@@ -27,6 +27,7 @@ public enum DinosaurStatus {
     HUNGRY,
     WANTS_TO_BREED,
     CAN_FLY,
+    FLYING,
     ON_LAND,
     THIRSTY
 

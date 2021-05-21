@@ -23,7 +23,7 @@ public abstract class MealKit extends EdibleItem implements Purchasable{
 
     @Override
     public int getHealAmount(Actor actor) {
-        return Integer.MAX_VALUE;
+        return 99999;
     }
 
 }

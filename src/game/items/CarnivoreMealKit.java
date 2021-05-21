@@ -17,6 +17,7 @@ public class CarnivoreMealKit extends MealKit {
      */
     public CarnivoreMealKit() {
         super("Carnivore Meal Kit", 'c');
+        addCapability(ItemStats.CARNIVORE_CAN_EAT);
     }
 
     /**

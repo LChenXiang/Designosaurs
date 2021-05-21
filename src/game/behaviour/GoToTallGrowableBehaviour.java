@@ -45,33 +45,37 @@ public class GoToTallGrowableBehaviour extends MovingBehaviour implements Behavi
     @Override
     public Action getAction(Actor actor, GameMap map) {
 
-        if (actor.hasCapability(DinosaurStatus.ON_LAND)) {
-            Location here = map.locationOf(actor);
-            Location there;
-            Location currentClosest = here;  // set current location of actor as default
-            int distance;
-            int closestDistance = Integer.MAX_VALUE;
-            // start scanning map
-            for (int y : map.getYRange()) {
-                for (int x : map.getXRange()) {
-                    there = map.at(x, y);
-                    // found Tall Growable
-                    if (there.getGround().hasCapability(GrowableStatus.TALL)) {
-                        distance = distance(here, there);
-                        // nearer than previously found Growable, set this as current closest Location
-                        if (distance < closestDistance) {
-                            closestDistance = distance;
-                            currentClosest = there;
-                        }
+        // if actor is still flying and has no objective, don't use this behaviour
+        if (actor.hasCapability(DinosaurStatus.FLYING)) {
+            if (action == null) {
+                return null;
+            }
+        }
+        Location here = map.locationOf(actor);
+        Location there;
+        Location currentClosest = here;  // set current location of actor as default
+        int distance;
+        int closestDistance = Integer.MAX_VALUE;
+        // start scanning map
+        for (int y : map.getYRange()) {
+            for (int x : map.getXRange()) {
+                there = map.at(x, y);
+                // found Tall Growable
+                if (there.getGround().hasCapability(GrowableStatus.TALL)) {
+                    distance = distance(here, there);
+                    // nearer than previously found Growable, set this as current closest Location
+                    if (distance < closestDistance) {
+                        closestDistance = distance;
+                        currentClosest = there;
                     }
                 }
             }
-            if (closestDistance < Integer.MAX_VALUE) {
-                // actor is just moving to that Location, doesn't do anything else when reaching there
-                Behaviour startMoving = new GoToLocation(currentClosest, action);
-                // start moving towards Location
-                return startMoving.getAction(actor, map);
-            }
+        }
+        if (closestDistance < Integer.MAX_VALUE) {
+            // actor is just moving to that Location, doesn't do anything else when reaching there
+            Behaviour startMoving = new GoToLocation(currentClosest, action);
+            // start moving towards Location
+            return startMoving.getAction(actor, map);
         }
 
         // actor is still flying, or did not find any of such Growable

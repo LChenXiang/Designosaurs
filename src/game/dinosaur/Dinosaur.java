@@ -91,6 +91,7 @@ public abstract class Dinosaur extends Actor {
 
         // Fly
         if (getMaxFlyingTile() > 0){
+            addCapability(DinosaurStatus.CAN_FLY);
             addCapability(DinosaurStatus.FLYING);
             // TODO: Add go back to tree behaviour
             behaviourList.add(0, new FlyingBreedBehaviour());

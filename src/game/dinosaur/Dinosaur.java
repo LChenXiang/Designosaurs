@@ -66,6 +66,11 @@ public abstract class Dinosaur extends Actor {
     protected int flyCounter;
 
     /**
+     * Used to keep track of number of turns pass while waiting for something
+     */
+    protected int turnsWaited;
+
+    /**
      * Constructor to initialise a dinosaur to the adult age. Requires gender input
      *
      * @param name        the name of the Actor
@@ -84,6 +89,7 @@ public abstract class Dinosaur extends Actor {
         maxThirst = thirstMax;
         thirst = getStartingThirst();
         flyCounter = 0;
+        turnsWaited = 0;
 
         // Insert all behaviour
         behaviourList.add(0, new WanderBehaviour());
@@ -133,6 +139,7 @@ public abstract class Dinosaur extends Actor {
         maxThirst = thirstMax;
         thirst = getStartingThirst();
         flyCounter = 0;
+        turnsWaited = 0;
 
         // Insert all behaviour
         behaviourList.add(0, new WanderBehaviour());
@@ -361,6 +368,14 @@ public abstract class Dinosaur extends Actor {
         return 15;
     }
 
+    /**
+     * Override to set a custom waiting cap for certain dinosaurs
+     * @return Number of turns a Dinosaur is willing to spend to wait for something
+     */
+    public int getWaitingPatience() {
+        return 7;
+    }
+
 
     /**
      * Prints hunger or thirst message when hungry or thirsty.
@@ -536,7 +551,16 @@ public abstract class Dinosaur extends Actor {
 
         // actor is waiting for its partner to arrive so they can breed
         if (hasCapability(DinosaurStatus.WANTS_TO_BREED)) {
-            return new DoNothingAction();
+            // actor continues to wait
+            if (turnsWaited <= getWaitingPatience()) {
+                turnsWaited++;
+                return new DoNothingAction();
+            }
+            // actor ran out of patience and left
+            else {
+                turnsWaited = 0;
+                removeCapability(DinosaurStatus.WANTS_TO_BREED);
+            }
         }
 
         // If passed everything, find something to do

@@ -1,5 +1,6 @@
 package game;
 
+import edu.monash.fit2099.engine.Exit;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.GroundFactory;
 import edu.monash.fit2099.engine.Location;
@@ -136,4 +137,84 @@ public class JurassicParkGameMap extends GameMap {
     public int getTurnElapsed() {
         return turnElapsed;
     }
+
+    /**
+     *
+     * @param direction the integer that represents N S E or W
+     * @return the String that represents which direction to enter the other map
+     */
+    public String getMovingMapDirectionString(int direction){
+        String ret="";
+        switch(direction){
+            case 8:
+                ret = "North to the other map";
+                break;
+            case 4:
+                ret = "West to the other map";
+                break;
+            case 6:
+                ret = "East to the other map";
+                break;
+            case 2:
+                ret = "South to the other map";
+                break;
+        }
+        return ret;
+    }
+
+    /**
+     *
+     * @param otherMap the other map to enter
+     * @param directionFromHere integer that represents the direction to enter other map from
+     */
+    public void addConnectingGameMap(GameMap otherMap, int directionFromHere){
+        int xAxisHere;
+        int yAxisHere;
+        int xAxisThere;
+        int yAxisThere;
+        int hereGoThere;
+        int thereGoHere;
+        if (directionFromHere == 8 || directionFromHere == 2){
+            if (directionFromHere == 8){
+                yAxisHere = 0;
+                yAxisThere = otherMap.getYRange().max();
+                hereGoThere = 8;
+                thereGoHere = 2;
+            } else {
+                yAxisHere = getYRange().max();
+                yAxisThere = 0;
+                hereGoThere = 4;
+                thereGoHere = 8;
+            }
+            for(int x:getXRange()){
+                if (otherMap.getXRange().contains(x)){
+                    Location here = at(x,yAxisHere);
+                    Location there = otherMap.at(x, yAxisThere);
+                    here.addExit(new Exit(getMovingMapDirectionString(hereGoThere), there, String.valueOf(hereGoThere)));
+                    there.addExit(new Exit(getMovingMapDirectionString(thereGoHere), here, String.valueOf(thereGoHere)));
+                }
+            }
+        } else if (directionFromHere == 4 || directionFromHere == 6){
+            if (directionFromHere == 4){
+                xAxisHere = 0;
+                xAxisThere = otherMap.getXRange().max();
+                hereGoThere = 4;
+                thereGoHere = 6;
+            } else {
+                xAxisHere = getXRange().max();
+                xAxisThere = 0;
+                hereGoThere = 6;
+                thereGoHere = 4;
+            }
+            for(int y:getYRange()){
+                if (otherMap.getXRange().contains(y)){
+                    Location here = at(xAxisHere,y);
+                    Location there = otherMap.at(xAxisThere, y);
+                    here.addExit(new Exit(getMovingMapDirectionString(hereGoThere), there, String.valueOf(hereGoThere)));
+                    there.addExit(new Exit(getMovingMapDirectionString(thereGoHere), here, String.valueOf(thereGoHere)));
+                }
+            }
+        }
+    }
+
 }

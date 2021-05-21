@@ -51,6 +51,10 @@ public class  BreedAction extends Action {
         if (target.hasCapability(DinosaurStatus.WANTS_TO_BREED)) {
             target.removeCapability(DinosaurStatus.WANTS_TO_BREED);
         }
+        else {
+            result += target + " no longer wants to be with " + actor + ".";
+            return result;
+        }
 
         if (actor.hasCapability(Gender.FEMALE)) {
             result += actor + " is ";

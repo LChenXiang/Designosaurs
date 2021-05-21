@@ -47,6 +47,11 @@ public class  BreedAction extends Action {
 
         String result=actor + " mates with " + target + System.lineSeparator();
 
+        // remove the WANTS_TO_BREED enum so target will do something next turn instead of staying in place
+        if (target.hasCapability(DinosaurStatus.WANTS_TO_BREED)) {
+            target.removeCapability(DinosaurStatus.WANTS_TO_BREED);
+        }
+
         if (actor.hasCapability(Gender.FEMALE)) {
             result += actor + " is ";
             if (actor.hasCapability(DinosaurStatus.PREGNANT)) {

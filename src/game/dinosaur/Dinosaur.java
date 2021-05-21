@@ -139,6 +139,7 @@ public abstract class Dinosaur extends Actor {
 
         // Fly
         if (getMaxFlyingTile() > 0){
+            addCapability(DinosaurStatus.CAN_FLY);
             addCapability(DinosaurStatus.FLYING);
             // TODO: Add go back to tree behaviour
             behaviourList.add(0, new FlyingBreedBehaviour());
@@ -323,11 +324,17 @@ public abstract class Dinosaur extends Actor {
      *
      * @return Action to return, null if cannot lay egg
      */
-    protected Action pregnancyLayEggCheck() {
+    protected Action pregnancyLayEggCheck(GameMap map) {
         if (hasCapability(DinosaurStatus.PREGNANT)) {
             if (pregnantAge >= getPregnancyLength()) {
                 pregnantAge = 0;
-                return new LayEggAction(); // Placeholder
+                // if is flying dinosaur, go to tall growable first before laying egg
+                if (hasCapability(DinosaurStatus.CAN_FLY)) {
+                    Behaviour goToLocation = new GoToTallGrowableBehaviour(new LayEggAction());
+                    return goToLocation.getAction(this, map);
+                }
+                // else return just lay egg on the ground
+                return new LayEggAction();
             }
         }
         return null;
@@ -516,7 +523,7 @@ public abstract class Dinosaur extends Actor {
 
 
         // Pregnancy egg laying code
-        Action layEggAction = pregnancyLayEggCheck();
+        Action layEggAction = pregnancyLayEggCheck(map);
         if (layEggAction != null) {
             return layEggAction;
         }

@@ -16,7 +16,7 @@ import edu.monash.fit2099.engine.GameMap;
 public class QuitGameAction extends Action {
 
     /**
-     * Perform the Action.
+     * Performs the quit game action.
      *
      * @param actor The actor performing the action.
      * @param map   The map the actor is on.

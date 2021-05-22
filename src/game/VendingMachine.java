@@ -38,7 +38,7 @@ public class VendingMachine extends Ground {
 
     /**
      * Constructor. Insert items into the arraylist here to sell them.
-     * When creating an item to sell, make sure to implement Purchasble and its method.
+     * When creating an item to sell, make sure to implement Purchasable and its method.
      * Extend Portable/Edible/Weapon/Perishable as deem fit.
      */
     public VendingMachine() {

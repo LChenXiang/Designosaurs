@@ -27,7 +27,7 @@ public class Pterodactyl extends CarnivoreDinosaur{
      * Constructor for an adult Pterodactyl with a set gender
      * Pterodactyls is shown as 'P' on map and has max HP and thirst of 100
      * Spawns with 50 HP and 60 Thirst
-     * @param gender
+     * @param gender Gender to initialise the Pterodactyl with
      */
     public Pterodactyl(Enum<Gender> gender) {
         super("Pterodactyl", 'P', 100, gender, 100);

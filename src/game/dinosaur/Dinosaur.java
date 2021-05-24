@@ -77,6 +77,7 @@ public abstract class Dinosaur extends Actor {
      * @param displayChar the character that will represent the Actor in the display
      * @param hitPoints   the Actor's max hit points
      * @param gender      Gender of the dinosaur.
+     * @param thirstMax   Maximum thirst the dinosaur should have
      */
     public Dinosaur(String name, char displayChar, int hitPoints, Enum<Gender> gender, int thirstMax) {
         // hitPoints here is used to initialise the character's max hp.
@@ -116,6 +117,7 @@ public abstract class Dinosaur extends Actor {
      * @param name        the name of the Actor
      * @param displayChar the character that will represent the Actor in the display
      * @param hitPoints   the Actor's starting hit points
+     * @param thirstMax   Maximum thirst the dinosaur should have
      */
     public Dinosaur(String name, char displayChar, int hitPoints, int thirstMax) {
         // hitPoints here is used to initialise the character's max hp.
@@ -330,6 +332,7 @@ public abstract class Dinosaur extends Actor {
      * Code to run pregnancy check. Override the default one if a dinosaur
      * has special pregnancy checks.
      *
+     * @param map The map the dinosaur is on
      * @return Action to return, null if cannot lay egg
      */
     protected Action pregnancyLayEggCheck(GameMap map) {

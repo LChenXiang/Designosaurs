@@ -25,6 +25,7 @@ public abstract class HerbivoreDinosaur extends Dinosaur {
      * @param displayChar Character used to represent the dinosaur on the map.
      * @param hitPoints   Max HP of the dinosaur.
      * @param gender      Gender of the dinosaur.
+     * @param thirstMax   Maximum thirst the dinosaur should have
      */
     public HerbivoreDinosaur(String name, char displayChar, int hitPoints, Enum<Gender> gender, int thirstMax) {
         super(name, displayChar, hitPoints, gender, thirstMax);
@@ -39,6 +40,7 @@ public abstract class HerbivoreDinosaur extends Dinosaur {
      * @param name        Name of the dinosaur.
      * @param displayChar Character used to represent the dinosaur on the map.
      * @param hitPoints   Max HP of the dinosaur.
+     * @param thirstMax   Maximum thirst the dinosaur should have
      */
     public HerbivoreDinosaur(String name, char displayChar, int hitPoints, int thirstMax) {
         super(name, displayChar, hitPoints, thirstMax);
